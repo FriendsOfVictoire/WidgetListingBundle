@@ -1,0 +1,25 @@
+{% block body %}
+
+{#
+   _   _   _   _   _   _   _
+  / \ / \ / \ / \ / \ / \ / \
+ ( C ) o ) m ) m ) o ) n ) s )
+  \_/ \_/ \_/ \_/ \_/ \_/ \_/
+
+#}
+
+<div class="widget" id="widget-{{widget.id}}">
+{% block actions %}{{cms_widget_actions(widget)}}{% endblock actions %}
+
+{% block content %}
+{#Booya ! Replace this default rendering by your own logic#}
+<ul>
+{% for item in widget.items %}
+    {% include "VictoireListBundle:Commons:Widget/list/showItem.html.twig" %}
+{% endfor %}
+</ul>
+{#Enjoy !#}
+{% endblock content %}
+</div>
+
+{% endblock body %}
