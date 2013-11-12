@@ -31,7 +31,7 @@ protected $container;
     {
         $widget = new WidgetList();
         $widget->setPage($page);
-        $widget->setslot($slot);
+        $widget->setSlot($slot);
 
         return $widget;
     }

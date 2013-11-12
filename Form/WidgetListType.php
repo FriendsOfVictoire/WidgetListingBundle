@@ -24,12 +24,12 @@ class WidgetListType extends WidgetType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         //choose form mode
-        if ($this->entity === null) {
+        if ($this->entity_name === null) {
             //if no entity is given, we generate the static form
             $builder
 
                 ->add('items', 'collection', array(
-                        'type' => new WidgetListItemType($this->entity, $this->class, $options['widget']),
+                        'type' => new WidgetListItemType($this->entity_name, $this->namespace, $options['widget']),
                         'allow_add' => true,
                         'by_reference' => false,
                         "attr" =>array('id' => 'static')
@@ -49,14 +49,14 @@ class WidgetListType extends WidgetType
                 ->add('slot', 'hidden')
 
                 ->add('fields', 'widget_fields', array(
-                    "class" => $this->class,
+                    "namespace" => $this->namespace,
                     "widget" => $options['widget']
                 ))
                 ->add('items', 'collection', array(
-                        'type' => new WidgetListItemType($this->entity, $this->class, $options['widget']),
+                        'type' => new WidgetListItemType($this->entity_name, $this->namespace, $options['widget']),
                         'allow_add' => true,
                         'by_reference' => false,
-                        "attr" =>array('id' => $this->entity)
+                        "attr" =>array('id' => $this->entity_name)
                     ))
 
                 //
