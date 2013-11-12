@@ -54,7 +54,7 @@ class WidgetListController extends Controller
                 $widget->setEntity($proxy);
                 $widget->setBusinessEntitiesName($entityName);
                 foreach ($fields as $field => $entityField) {
-                    $widget->{'set' . $field}($entity->{'get' . $entityField}());
+                    $widget->{'set' . ucfirst($field)}($entity->{'get' . ucfirst($entityField)}());
                 }
                 // and render each of them
                 $widgetsHtml[$entityId] = $this->get('widget_listitem_manager')->render($widget);

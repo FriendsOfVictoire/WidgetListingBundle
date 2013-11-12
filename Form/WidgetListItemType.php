@@ -10,15 +10,15 @@ use Victoire\CmsBundle\Form\WidgetType;
 class WidgetListItemType extends AbstractType
 {
 
-    protected $entity;
-    protected $class;
+    protected $entity_name;
+    protected $namespace;
     protected $widget;
 
-    public function __construct($entity, $class, $widget)
+    public function __construct($entity_name, $namespace, $widget)
     {
-        $this->class = $class;
-        $this->entity = $entity;
-        $this->widget = $widget;
+        $this->namespace   = $namespace;
+        $this->entity_name = $entity_name;
+        $this->widget      = $widget;
     }
 
     /**
@@ -31,17 +31,18 @@ class WidgetListItemType extends AbstractType
 
 
         //choose form mode
-        if ($this->entity === null) {
+        if ($this->entity_name === null) {
             //if no entity is given, we generate the static form
             $builder
                 ->add('list', null,
                     array(
                         "label" => "",
-                        "attr" => array('class' => "hide")
+                        "attr"  => array('class' => "hide")
                     )
                 )
                 ->add('title')
-                ->add('description');
+                ->add('description')
+                ;
         } else {
             //else, WidgetType class will embed a EntityProxyType for given entity
             $builder
@@ -49,13 +50,13 @@ class WidgetListItemType extends AbstractType
                 ->add('list', null,
                     array(
                         "label" => "",
-                        "attr" => array('class' => "hide")
+                        "attr"  => array('class' => "hide")
                     )
                 )
                 ->add('entity', 'entity_proxy', array(
-                    "entity" => $this->entity,
-                    "class" => $this->class,
-                    "widget" => $this->widget
+                    "entity_name" => $this->entity_name,
+                    "namespace"   => $this->namespace,
+                    "widget"      => $this->widget
             ));
         }
 
