@@ -30,7 +30,7 @@ class WidgetListController extends Controller
      */
     public function showAction(Request $request)
     {
-        $form = $request->request->get('appventus_venatorcmsbundle_widgetlisttype');
+        $form = $request->request->get('appventus_victoirecmsbundle_widgetlisttype');
 
         $widgetsHtml = array();
         $fields = $form['fields'];

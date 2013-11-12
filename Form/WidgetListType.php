@@ -82,6 +82,6 @@ class WidgetListType extends WidgetType
      */
     public function getName()
     {
-        return 'appventus_venatorcmsbundle_widgetlisttype';
+        return 'appventus_victoirecmsbundle_widgetlisttype';
     }
 }
