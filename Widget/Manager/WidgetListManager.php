@@ -46,7 +46,8 @@ protected $container;
         return $this->container->get('victoire_templating')->render(
             "VictoireListBundle:Widget:list/show.html.twig",
             array(
-                "widget" => $widget
+                "widget" => $widget,
+                "items" => $widget->getItems()
             )
         );
     }
@@ -54,7 +55,7 @@ protected $container;
     /**
      * render WidgetList form
      * @param Form           $form
-     * @param WidgetList $widget
+     * @param WidgetList     $widget
      * @param BusinessEntity $entity
      * @return form
      */
@@ -75,8 +76,8 @@ protected $container;
     /**
      * create a form with given widget
      * @param WidgetList $widget
-     * @param string         $entityName
-     * @param string         $namespace
+     * @param string     $entityName
+     * @param string     $namespace
      * @return $form
      */
     public function buildForm($widget, $entityName = null, $namespace = null)
@@ -89,7 +90,7 @@ protected $container;
     /**
      * create form new for WidgetList
      * @param Form           $form
-     * @param WidgetList $widget
+     * @param WidgetList     $widget
      * @param string         $slot
      * @param Page           $page
      * @param string         $entity

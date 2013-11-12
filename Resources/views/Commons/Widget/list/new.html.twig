@@ -10,7 +10,7 @@
 #}
 <div id="widget-{{slot}}" class="add-widget">
 {% block form %}
-    <form method="POST" class="add-widget-form" id="{{form.items.vars.attr.id}}" action="{{path('victoire_cms_widget_create', {'page': page.id,'slot':slot, 'type':'list', 'entity': entity} )}}">
+    <form method="POST" class="add-widget-form add-list-widget-form" id="{{form.items.vars.attr.id}}" action="{{path('victoire_cms_widget_create', {'page': page.id,'slot':slot, 'type':'list', 'entity': entity} )}}">
     {#Replace this default rendering by your own form#}
 
     {% if form.items.vars.attr.id != 'static' %}
@@ -35,80 +35,12 @@
 </div>
 
 <script type="text/javascript">
-    {% if form.items.vars.attr.id != 'static' %}
-      jQuery(document).ready(function() {
-
-          // Disable entity select when we submit the form
-          $('form#{{form.items.vars.attr.id}}').on('submit', function(e){
-              $('select.add_{{form.items.vars.attr.id}}_link').prop('disabled', true);
-          });
-
-          // Add an item to the list
-          $('select.add_{{form.items.vars.attr.id}}_link').on('change', function(e) {
-            e.preventDefault();
-            if ($('select.add_{{form.items.vars.attr.id}}_link option:selected').val() != '') {
-
-              url = "{{path('victoire_list_widget_show')}}";
-              data = $('select.add_{{form.items.vars.attr.id}}_link').parents('form').serialize();
-              ajaxUpdateListItems(url, data, function (response) {
-                    $('ul#{{form.items.vars.attr.id}}-list').html(response);
-                    sortWidgetListItems("{{form.items.vars.attr.id}}-list");
-                    $('select.add_{{form.items.vars.attr.id}}_link option:selected').remove();
-              });
-            }
-          });
-          // refresh list items when we change selected fields
-          $('div#{{form.items.vars.attr.id}} div#appventus_venatorcmsbundle_widgetlisttype_fields_control_group select').each(function(e){
-            $(this).on('change', function(e){
-              e.preventDefault();
-              $('select.add_{{form.items.vars.attr.id}}_link').prop('disabled', true);
-
-              url = "{{path('victoire_list_widget_show')}}";
-              data = $('select.add_{{form.items.vars.attr.id}}_link').parents('form').serialize();
-              ajaxUpdateListItems(url, data, function (response) {
-                  $('ul#{{form.items.vars.attr.id}}-list').html(response);
-                  sortWidgetListItems("{{form.items.vars.attr.id}}-list");
-              });
-
-              $('select.add_{{form.items.vars.attr.id}}_link').prop('disabled', false);
-
-            });
-          });
-
-      });
-    {% else %}
-      var collectionHolder = $('ul.items');
-
-      // ajoute un lien « add a item »
-      var $addItemLink = $('<a href="#" class="add_item_link">Ajouter un item</a>');
-      var $newLinkLi = $('<li></li>').append($addItemLink);
-
-      jQuery(document).ready(function() {
-          // ajoute l'ancre « ajouter un item » et li à la balise ul
-          collectionHolder.append($newLinkLi);
-
-          $addItemLink.on('click', function(e) {
-              // empêche le lien de créer un « # » dans l'URL
-              e.preventDefault();
-
-              // ajoute un nouveau formulaire item (voir le prochain bloc de code)
-              addItemForm(collectionHolder, $newLinkLi);
-          });
-      });
-
-      function addItemForm(collectionHolder, $newLinkLi) {
-        // Récupère l'élément ayant l'attribut data-prototype comme expliqué plus tôt
-        var prototype = collectionHolder.attr('data-prototype');
-
-        // Remplace '__name__' dans le HTML du prototype par un nombre basé sur
-        // la longueur de la collection courante
-        var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
-
-        // Affiche le formulaire dans la page dans un li, avant le lien "ajouter un tag"
-        var $newFormLi = $('<li></li>').append(newForm);
-        $newLinkLi.before($newFormLi);
-    }
-
-    {% endif %}
+    $(document).ready(function(){
+        {% if form.items.vars.attr.id != 'static' %}
+            initListWidgetForm("{{form.items.vars.attr.id}}");
+        {% else %}
+            initStaticListWidgetForm("{{form.items.vars.attr.id}}");
+        {% endif %}
+    });
   </script>
 {% endblock body %}
