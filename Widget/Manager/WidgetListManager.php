@@ -1,10 +1,11 @@
 <?php
-
 namespace Victoire\ListBundle\Widget\Manager;
-
 
 use Victoire\ListBundle\Form\WidgetListType;
 use Victoire\ListBundle\Entity\WidgetList;
+use Victoire\CmsBundle\Event±WidgetQueryEvent;
+use Victoire\CmsBundle\VictoireCmsEvents;
+use Victoire\CmsBundle\Event\WidgetQueryEvent;
 
 class WidgetListManager
 {
@@ -43,11 +44,31 @@ protected $container;
      */
     public function render($widget)
     {
+
+
+        $listId = $this->container->get('request')->query->get('filter')['list'];
+        $dispatcher = $this->container->get('event_dispatcher');
+
+        $itemsQueryBuilder = $this->container->get('doctrine.orm.entity_manager')
+             ->createQueryBuilder()
+             ->select('item')
+             ->from('VictoireListBundle:WidgetListItem', 'item')
+             ->join('item.list', 'list')
+             ->where('list.id = :list')
+             ->setParameter('list', $listId);
+
+
+        $dispatcher->dispatch(VictoireCmsEvents::WIDGET_POST_QUERY, new WidgetQueryEvent($widget, $itemsQueryBuilder, $this->container->get('request')));
+
+        $items = $itemsQueryBuilder
+                 ->getQuery()
+                 ->getResult();
+
         return $this->container->get('victoire_templating')->render(
             "VictoireListBundle:Widget:list/show.html.twig",
             array(
                 "widget" => $widget,
-                "items" => $widget->getItems()
+                "items" => $items
             )
         );
     }
