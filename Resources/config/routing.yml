@@ -2,3 +2,5 @@
 victoire_list_widget_show:
     pattern:   /widgetlist/show
     defaults:  { _controller: VictoireListBundle:WidgetList:show }
+    options:
+        expose: true
