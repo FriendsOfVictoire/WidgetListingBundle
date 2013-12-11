@@ -9,7 +9,7 @@
 #}
 
 <div class="widget widget-list" id="widget-{{widget.id}}">
-{% block actions %}{{cms_widget_actions(widget)}}{% endblock actions %}
+{% block actions %}{{cms_widget_actions(widget, page)}}{% endblock actions %}
 
 {% block content %}
 {#Booya ! Replace this default rendering by your own logic#}

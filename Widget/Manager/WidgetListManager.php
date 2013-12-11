@@ -42,7 +42,7 @@ protected $container;
      *
      * @return widget show
      */
-    public function render($widget)
+    public function render($widget, $page)
     {
 
 
@@ -68,7 +68,8 @@ protected $container;
             "VictoireListBundle:Widget:list/show.html.twig",
             array(
                 "widget" => $widget,
-                "items" => $items
+                "items" => $items,
+                "page" => $page
             )
         );
     }
