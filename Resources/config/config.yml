@@ -6,9 +6,3 @@ victoire_cms:
         listitem:
             class: "Victoire\\ListBundle\\Entity\\WidgetListItem"
             name: listitem
-
-jms_translation:
-    configs:
-        victoire_list_bundle:
-            dirs: ["@VictoireListBundle"]
-            output_dir: "@VictoireListBundle/Resources/translations"
