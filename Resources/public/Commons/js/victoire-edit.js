@@ -9,26 +9,26 @@ function initListWidgetForm(id){
     $('select.add_' + id + '_link').on('change', function(e) {
         e.preventDefault();
         if ($('select.add_' + id + '_link option:selected').val() != '') {
-            url = Routing.generate('victoire_list_widget_show');
+            url = Routing.generate('victoire_listing_widget_show');
             data = $('select.add_' + id + '_link').parents('form').serialize();
             ajaxUpdateListItems(url, data, function (response) {
-                $('ul#' + id + '-list').html(response);
-                sortWidgetListItems(id + '-list');
+                $('ul#' + id + '-listing').html(response);
+                sortWidgetListItems(id + '-listing');
                 $('select.add_' + id + '_link option:selected').remove();
             });
         }
     });
     // refresh list items when we change selected fields
-    $('div#' + id + ' div#appventus_victoirecmsbundle_widgetlisttype_fields_control_group select').each(function(e){
+    $('div#' + id + ' div#appventus_victoirecmsbundle_widgetlistingtype_fields_control_group select').each(function(e){
         $(this).on('change', function(e){
             e.preventDefault();
             $('select.add_' + id + '_link').prop('disabled', true);
 
-            url = Routing.generate('victoire_list_widget_show');
+            url = Routing.generate('victoire_listing_widget_show');
             data = $('select.add_' + id + '_link').parents('form').serialize();
             ajaxUpdateListItems(url, data, function (response) {
-            $('ul#' + id + '-list').html(response);
-            sortWidgetListItems(id + '-list');
+            $('ul#' + id + '-listing').html(response);
+            sortWidgetListItems(id + '-listing');
             });
 
             $('select.add_' + id + '_link').prop('disabled', false);
@@ -86,7 +86,7 @@ function ajaxUpdateListItems(url, data, successCallback){
 
 }
 
-$(document).on('click', '.remove-widget-list-item', function(e) {
+$(document).on('click', '.remove-widget-listing-item', function(e) {
     e.preventDefault();
     id     = $(this).parent().data('id');
     entityName   = $(this).parent().data('entity-name');

@@ -1,5 +1,5 @@
 <?php
-namespace Victoire\ListBundle\Controller;
+namespace Victoire\ListingBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -8,19 +8,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Victoire\ListBundle\Entity\WidgetListItem;
+use Victoire\ListingBundle\Entity\WidgetListingItem;
 use Victoire\CmsBundle\Cached\Entity\EntityProxy;
 
 
 /**
- * Widget list controller
+ * Widget listing controller
  *
  */
-class WidgetListController extends Controller
+class WidgetListingController extends Controller
 {
 
     /**
-     * This method is used in ajax to show list items when a list is created
+     * This method is used in ajax to show list items when a listing is created
      *
      * @param Request $request
      * @return Response The renderig of posted items
@@ -30,12 +30,12 @@ class WidgetListController extends Controller
      */
     public function showAction(Request $request)
     {
-        $form = $request->request->get('appventus_victoirecmsbundle_widgetlisttype');
+        $form = $request->request->get('appventus_victoirecmsbundle_widgetlistingtype');
 
         $widgetsHtml = array();
         $fields = $form['fields'];
         if (array_key_exists('items', $form)) {
-            // for each items added to the list
+            // for each items added to the listing
             foreach ($form['items'] as $entityId => $item) {
 
                 $item = $item['entity'];
@@ -48,7 +48,7 @@ class WidgetListController extends Controller
                 $entity = $this->get('doctrine.orm.entity_manager')->getRepository($class)->findOneById($id);
 
                 // build the ListItem
-                $widget = new WidgetListItem();
+                $widget = new WidgetListingItem();
                 $proxy = new EntityProxy();
                 $proxy->{'set' . $entityName}($entity);
                 $widget->setEntity($proxy);
@@ -57,11 +57,11 @@ class WidgetListController extends Controller
                     $widget->{'set' . ucfirst($field)}($entity->{'get' . ucfirst($entityField)}());
                 }
                 // and render each of them
-                $widgetsHtml[$entityId] = $this->get('widget_listitem_manager')->render($widget);
+                $widgetsHtml[$entityId] = $this->get('widget_listingitem_manager')->render($widget);
             }
 
         }
-        // print_r($widgetsHtml);exit;
+
         ksort($widgetsHtml);
 
         array_push($widgetsHtml, $widgetsHtml['__name__']);

@@ -1,18 +1,18 @@
 <?php
 
-namespace Victoire\ListBundle\Entity;
+namespace Victoire\ListingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\CmsBundle\Annotations as VIC;
 use Victoire\CmsBundle\Entity\Widget;
 
 /**
- * WidgetListItem
+ * WidgetListingItem
  *
- * @ORM\Table("cms_widget_list_item")
+ * @ORM\Table("cms_widget_listing_item")
  * @ORM\Entity
  */
-class WidgetListItem extends Widget
+class WidgetListingItem extends Widget
 {
 
     /**
@@ -43,11 +43,11 @@ class WidgetListItem extends Widget
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="WidgetList", inversedBy="items")
-     * @ORM\JoinColumn(name="list_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="WidgetListing", inversedBy="items")
+     * @ORM\JoinColumn(name="listing_id", referencedColumnName="id", onDelete="CASCADE")
      *
      */
-    private $list;
+    private $listing;
 
 
     /**
@@ -59,7 +59,9 @@ class WidgetListItem extends Widget
      **/
     public function __get($name)
     {
-        return $this->getEntity()->getReferedValue($this->getList()->getBusinessEntitiesName(), $name);
+        if ($this->getEntity()) {
+            return $this->getEntity()->getReferedValue($this->getListing()->getBusinessEntitiesName(), $name);
+        }
     }
 
     /**
@@ -72,7 +74,7 @@ class WidgetListItem extends Widget
     public function __isset($name)
     {
         if (array_key_exists($name, get_class_vars(get_class($this)))) {
-            if ($this->getList() && $this->getList()->getBusinessEntitiesName()) {
+            if ($this->getListing() && $this->getListing()->getBusinessEntitiesName()) {
                 return true;
             }
         }
@@ -86,14 +88,14 @@ class WidgetListItem extends Widget
      */
     public function getFields()
     {
-        return $this->getList()->getFields();
+        return $this->getListing()->getFields();
     }
 
     /**
      * Set title
      *
      * @param string $title
-     * @return WidgetListItem
+     * @return WidgetListingItem
      */
     public function setTitle($title)
     {
@@ -116,7 +118,7 @@ class WidgetListItem extends Widget
      * Set description
      *
      * @param string $description
-     * @return WidgetListItem
+     * @return WidgetListingItem
      */
     public function setDescription($description)
     {
@@ -135,26 +137,26 @@ class WidgetListItem extends Widget
         return $this->description;
     }
     /**
-     * Set list
+     * Set listing
      *
-     * @param string $list
-     * @return WidgetListItem
+     * @param string $listing
+     * @return WidgetListingItem
      */
-    public function setList($list)
+    public function setListing($listing)
     {
-        $this->list = $list;
+        $this->listing = $listing;
 
         return $this;
     }
 
     /**
-     * Get list
+     * Get listing
      *
      * @return string
      */
-    public function getList()
+    public function getListing()
     {
-        return $this->list;
+        return $this->listing;
     }
 
 

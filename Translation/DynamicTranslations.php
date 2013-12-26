@@ -1,5 +1,5 @@
 <?php
-namespace Victoire\ListBundle\Translation;
+namespace Victoire\ListingBundle\Translation;
 
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
@@ -14,7 +14,7 @@ class DynamicTranslations implements TranslationContainerInterface
     public static function getTranslationMessages()
     {
         return array(
-            new Message('widget.list.new.action.label'),
+            new Message('widget.listing.new.action.label'),
         );
     }
 }

@@ -1,23 +1,23 @@
 <?php
-namespace Victoire\ListBundle\Entity;
+namespace Victoire\ListingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\CmsBundle\Entity\Widget;
 
 /**
- * WidgetList
+ * WidgetListing
  *
- * @ORM\Table("cms_widget_list")
+ * @ORM\Table("cms_widget_listing")
  * @ORM\Entity
  */
-class WidgetList extends Widget
+class WidgetListing extends Widget
 {
 
 
     /**
      * @var string
      *
-     * @ORM\OneToMany(targetEntity="WidgetListItem", mappedBy="list", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="WidgetListingItem", mappedBy="listing", cascade={"persist"})
      * @ORM\OrderBy({"position" = "ASC"})
      *
      */
@@ -35,12 +35,12 @@ class WidgetList extends Widget
      * Set items
      *
      * @param array $items
-     * @return WidgetList
+     * @return WidgetListing
      */
     public function setItems($items)
     {
         foreach ($items as $item) {
-            $item->setList($this);
+            $item->setListing($this);
         }
         $this->items = $items;
 
@@ -49,12 +49,12 @@ class WidgetList extends Widget
     /**
      * Add items
      *
-     * @param \Victoire\ListBundle\Entity\WidgetListItem $items
-     * @return WidgetList
+     * @param \Victoire\ListingBundle\Entity\WidgetListingItem $items
+     * @return WidgetListing
      */
-    public function addItem(\Victoire\ListBundle\Entity\WidgetListItem $item)
+    public function addItem(\Victoire\ListingBundle\Entity\WidgetListingItem $item)
     {
-        $item->setList($this);
+        $item->setListing($this);
         $this->items[] = $item;
 
         return $this;
@@ -63,9 +63,9 @@ class WidgetList extends Widget
     /**
      * Remove items
      *
-     * @param \Victoire\ListBundle\Entity\WidgetListItem $items
+     * @param \Victoire\ListingBundle\Entity\WidgetListingItem $items
      */
-    public function removeItem(\Victoire\ListBundle\Entity\WidgetListItem $items)
+    public function removeItem(\Victoire\ListingBundle\Entity\WidgetListingItem $items)
     {
         $this->items->removeElement($items);
     }

@@ -10,7 +10,7 @@
 #}
 <div id="widget-{{slot}}" class="add-widget">
 {% block form %}
-    <form method="POST" class="add-widget-form add-list-widget-form" id="{{form.items.vars.attr.id}}" action="{{path('victoire_cms_widget_create', {'page': page.id,'slot':slot, 'type':'list', 'entity': entity} )}}">
+    <form method="POST" class="add-widget-form add-listing-widget-form" id="{{form.items.vars.attr.id}}" action="{{path('victoire_cms_widget_create', {'page': page.id,'slot':slot, 'type':'listing', 'entity': entity} )}}">
     {#Replace this default rendering by your own form#}
 
     {% if form.items.vars.attr.id != 'static' %}
@@ -18,7 +18,7 @@
         {{ block('form_widget') }}
 
             {{ form_widget(form.items.vars.prototype.entity)|raw }}
-      <ul id="{{form.items.vars.attr.id}}-list"></ul>
+      <ul id="{{form.items.vars.attr.id}}-listing"></ul>
     {% else %}
       <ul class="items" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
       {{form_row(form.items)}}

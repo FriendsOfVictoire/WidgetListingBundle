@@ -9,24 +9,24 @@
       <trans-unit id="da39a3ee5e6b4b0d3255bfef95601890afd80709" resname="">
         <source></source>
         <target state="new"></target>
-        <jms:reference-file line="39">ListBundle/Form/WidgetListItemType.php</jms:reference-file>
-        <jms:reference-file line="52">ListBundle/Form/WidgetListItemType.php</jms:reference-file>
-        <jms:reference-file line="45">ListBundle/Form/WidgetListType.php</jms:reference-file>
+        <jms:reference-file line="39">ListingBundle/Form/WidgetListingItemType.php</jms:reference-file>
+        <jms:reference-file line="52">ListingBundle/Form/WidgetListingItemType.php</jms:reference-file>
+        <jms:reference-file line="45">ListingBundle/Form/WidgetListingType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4fd0653c4f2aef3b19a3c145bbdc5f4740715a09" resname="cancel">
         <source>Annuler</source>
         <target state="new">Annuler</target>
-        <jms:reference-file line="36">Widget/list/edit.html.twig</jms:reference-file>
-        <jms:reference-file line="31">Widget/list/new.html.twig</jms:reference-file>
+        <jms:reference-file line="36">Widget/listing/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="31">Widget/listing/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7a85f4764bbd6daf1c3545efbbf0f279a6dc0beb" resname="ok">
         <source>Ok</source>
         <target state="new">Ok</target>
-        <jms:reference-file line="35">Widget/list/edit.html.twig</jms:reference-file>
-        <jms:reference-file line="30">Widget/list/new.html.twig</jms:reference-file>
+        <jms:reference-file line="35">Widget/listing/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="30">Widget/listing/new.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="910b1d053d7881577dd1c2537dadf3b92ad36f98" resname="widget.list.new.action.label">
-        <source>widget.list.new.action.label</source>
+      <trans-unit id="910b1d053d7881577dd1c2537dadf3b92ad36f98" resname="widget.listing.new.action.label">
+        <source>widget.listing.new.action.label</source>
         <target>Liste</target>
       </trans-unit>
     </body>

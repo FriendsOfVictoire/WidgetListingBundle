@@ -1,15 +1,15 @@
 <?php
-namespace Victoire\ListBundle\Widget\Manager;
+namespace Victoire\ListingBundle\Widget\Manager;
 
-use Victoire\ListBundle\Form\WidgetListType;
-use Victoire\ListBundle\Entity\WidgetList;
+use Victoire\ListingBundle\Form\WidgetListingType;
+use Victoire\ListingBundle\Entity\WidgetListing;
 use Victoire\CmsBundle\Event±WidgetQueryEvent;
 use Victoire\CmsBundle\VictoireCmsEvents;
 use Victoire\CmsBundle\Event\WidgetQueryEvent;
 
-class WidgetListManager
+class WidgetListingManager
 {
-protected $container;
+    protected $container;
 
     /**
      * constructor
@@ -22,7 +22,7 @@ protected $container;
     }
 
     /**
-     * create a new WidgetList
+     * create a new WidgetListing
      * @param Page   $page
      * @param string $slot
      *
@@ -30,14 +30,14 @@ protected $container;
      */
     public function newWidget($page, $slot)
     {
-        $widget = new WidgetList();
+        $widget = new WidgetListing();
         $widget->setPage($page);
         $widget->setSlot($slot);
 
         return $widget;
     }
     /**
-     * render the WidgetList
+     * render the WidgetListing
      * @param Widget $widget
      *
      * @return widget show
@@ -46,16 +46,16 @@ protected $container;
     {
 
 
-        $listId = $this->container->get('request')->query->get('filter')['list'];
+        $listingId = $this->container->get('request')->query->get('filter')['listing'];
         $dispatcher = $this->container->get('event_dispatcher');
 
         $itemsQueryBuilder = $this->container->get('doctrine.orm.entity_manager')
              ->createQueryBuilder()
              ->select('item')
-             ->from('VictoireListBundle:WidgetListItem', 'item')
-             ->join('item.list', 'list')
-             ->where('list.id = :list')
-             ->setParameter('list', $listId);
+             ->from('VictoireListingBundle:WidgetListingItem', 'item')
+             ->join('item.listing', 'listing')
+             ->where('listing.id = :listing')
+             ->setParameter('listing', $listingId);
 
 
         $dispatcher->dispatch(VictoireCmsEvents::WIDGET_POST_QUERY, new WidgetQueryEvent($widget, $itemsQueryBuilder, $this->container->get('request')));
@@ -65,7 +65,7 @@ protected $container;
                  ->getResult();
 
         return $this->container->get('victoire_templating')->render(
-            "VictoireListBundle:Widget:list/show.html.twig",
+            "VictoireListingBundle:Widget:listing/show.html.twig",
             array(
                 "widget" => $widget,
                 "items" => $items
@@ -74,9 +74,9 @@ protected $container;
     }
 
     /**
-     * render WidgetList form
+     * render WidgetListing  form
      * @param Form           $form
-     * @param WidgetList     $widget
+     * @param WidgetListing  $widget
      * @param BusinessEntity $entity
      * @return form
      */
@@ -84,7 +84,7 @@ protected $container;
     {
 
         return $this->container->get('victoire_templating')->render(
-            "VictoireListBundle:Widget:list/edit.html.twig",
+            "VictoireListingBundle:Widget:listing/edit.html.twig",
             array(
                 "widget" => $widget,
                 'form'   => $form->createView(),
@@ -96,22 +96,22 @@ protected $container;
 
     /**
      * create a form with given widget
-     * @param WidgetList $widget
-     * @param string     $entityName
-     * @param string     $namespace
+     * @param WidgetListing $widget
+     * @param string        $entityName
+     * @param string        $namespace
      * @return $form
      */
     public function buildForm($widget, $entityName = null, $namespace = null)
     {
-        $form = $this->container->get('form.factory')->create(new WidgetListType($entityName, $namespace), $widget);
+        $form = $this->container->get('form.factory')->create(new WidgetListingType($entityName, $namespace), $widget);
 
         return $form;
     }
 
     /**
-     * create form new for WidgetList
+     * create form new for WidgetListing
      * @param Form           $form
-     * @param WidgetList     $widget
+     * @param WidgetListing  $widget
      * @param string         $slot
      * @param Page           $page
      * @param string         $entity
@@ -122,7 +122,7 @@ protected $container;
     {
 
         return $this->container->get('victoire_templating')->render(
-            "VictoireListBundle:Widget:list/new.html.twig",
+            "VictoireListingBundle:Widget:listing/new.html.twig",
             array(
                 "widget"          => $widget,
                 'form'            => $form->createView(),

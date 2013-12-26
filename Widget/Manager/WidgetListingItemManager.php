@@ -1,9 +1,9 @@
 <?php
-namespace Victoire\ListBundle\Widget\Manager;
+namespace Victoire\ListingBundle\Widget\Manager;
 
-use Victoire\ListBundle\Entity\WidgetListItem;
+use Victoire\ListingBundle\Entity\WidgetListingItem;
 
-class WidgetListItemManager
+class WidgetListingItemManager
 {
 
     protected $container;
@@ -20,16 +20,16 @@ class WidgetListItemManager
 
     /**
      * render the item
-     * @param WidgetListItem $widget
+     * @param WidgetListingItem $widget
      *
      * @return widget show
      */
-    public function render(WidgetListItem $widget)
+    public function render(WidgetListingItem $widget)
     {
         $entity = $widget->getEntity()->{'get' . $widget->getBusinessEntitiesName()}();
 
         return $this->container->get('victoire_templating')->render(
-            "VictoireListBundle:Widget:list/showItem.html.twig",
+            "VictoireListingBundle:Widget:listing/showItem.html.twig",
             array(
                 "item" => $widget,
                 "preview_mode" => true,

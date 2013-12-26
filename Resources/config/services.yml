@@ -1,19 +1,19 @@
 services:
-    victoire_cms.twig.widget_list_manager:
-        class: Victoire\ListBundle\Widget\Manager\WidgetListManager
+    victoire_cms.twig.widget_listing_manager:
+        class: Victoire\ListingBundle\Widget\Manager\WidgetListingManager
         arguments: [@service_container]
 
-    widget_list_manager:
-        alias: victoire_cms.twig.widget_list_manager
+    widget_listing_manager:
+        alias: victoire_cms.twig.widget_listing_manager
 
-    victoire_cms.twig.widget_listitem_manager:
-        class: Victoire\ListBundle\Widget\Manager\WidgetListItemManager
+    victoire_cms.twig.widget_listingitem_manager:
+        class: Victoire\ListingBundle\Widget\Manager\WidgetListingItemManager
         arguments: [@service_container]
 
-    widget_listitem_manager:
-        alias: victoire_cms.twig.widget_listitem_manager
+    widget_listingitem_manager:
+        alias: victoire_cms.twig.widget_listingitem_manager
 
-    widget_list.routing_loader:
-        class: Victoire\ListBundle\Routing\WidgetListLoader
+    widget_listing.routing_loader:
+        class: Victoire\ListingBundle\Routing\WidgetListingLoader
         tags:
             - { name: routing.loader }
