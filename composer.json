@@ -1,8 +1,8 @@
 {
-    "name": "victoire/list-bundle",
+    "name": "victoire/listing-bundle",
     "type": "symfony-bundle",
-    "description": "Victoire Cms List component",
-    "keywords": ["cms", "victoire", "list"],
+    "description": "Victoire Cms Listing component",
+    "keywords": ["cms", "victoire", "listing"],
     "homepage": "http://appventus.com",
     "license": "MIT",
     "authors": [
@@ -18,10 +18,10 @@
         "victoire/cms-bundle"                : "1.0.*@dev"
     },
     "autoload": {
-        "psr-0": { "Victoire\\ListBundle": "" }
+        "psr-0": { "Victoire\\ListingBundle": "" }
     },
     "minimum-stability": "dev",
 
 
-    "target-dir": "Victoire/ListBundle"
+    "target-dir": "Victoire/ListingBundle"
 }

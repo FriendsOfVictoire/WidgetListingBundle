@@ -1,5 +1,5 @@
 <?php
-namespace Victoire\ListBundle\Form;
+namespace Victoire\ListingBundle\Form;
 
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\AbstractType;
@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Victoire\CmsBundle\Form\WidgetType;
 
-class WidgetListItemType extends AbstractType
+class WidgetListingItemType extends AbstractType
 {
 
     protected $entity_name;
@@ -34,7 +34,7 @@ class WidgetListItemType extends AbstractType
         if ($this->entity_name === null) {
             //if no entity is given, we generate the static form
             $builder
-                ->add('list', null,
+                ->add('listing', null,
                     array(
                         "label" => "",
                         "attr"  => array('class' => "hide")
@@ -47,7 +47,7 @@ class WidgetListItemType extends AbstractType
             //else, WidgetType class will embed a EntityProxyType for given entity
             $builder
                 ->add('position')
-                ->add('list', null,
+                ->add('listing', null,
                     array(
                         "label" => "",
                         "attr"  => array('class' => "hide")
@@ -74,7 +74,7 @@ class WidgetListItemType extends AbstractType
         // parent::setDefaultOptions($resolver);
 
         $resolver->setDefaults(array(
-            'data_class' => 'Victoire\ListBundle\Entity\WidgetListItem',
+            'data_class' => 'Victoire\ListingBundle\Entity\WidgetListingItem',
             'widget' => null,
         ));
     }
@@ -85,6 +85,6 @@ class WidgetListItemType extends AbstractType
      */
     public function getName()
     {
-        return 'list_items';
+        return 'listing_items';
     }
 }

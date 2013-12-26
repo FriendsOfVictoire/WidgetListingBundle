@@ -1,8 +1,8 @@
 victoire_cms:
     widgets:
-        list:
-            class: "Victoire\\ListBundle\\Entity\\WidgetList"
-            name: list
-        listitem:
-            class: "Victoire\\ListBundle\\Entity\\WidgetListItem"
-            name: listitem
+        listing:
+            class: "Victoire\\ListingBundle\\Entity\\WidgetListing"
+            name: listing
+        listingitem:
+            class: "Victoire\\ListingBundle\\Entity\\WidgetListingItem"
+            name: listingitem

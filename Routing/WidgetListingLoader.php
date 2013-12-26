@@ -1,17 +1,17 @@
 <?php
-namespace Victoire\ListBundle\Routing;
+namespace Victoire\ListingBundle\Routing;
 
 
 use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Routing\RouteCollection;
 
-class WidgetListLoader extends Loader
+class WidgetListingLoader extends Loader
 {
     public function load($resource, $type = null)
     {
         $collection = new RouteCollection();
 
-        $resource = '@VictoireListBundle/Resources/config/routing.yml';
+        $resource = '@VictoireListingBundle/Resources/config/routing.yml';
         $type = 'yaml';
 
         $importedRoutes = $this->import($resource, $type);
