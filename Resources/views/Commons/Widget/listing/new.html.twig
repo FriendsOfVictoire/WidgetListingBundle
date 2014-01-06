@@ -1,17 +1,6 @@
+{% extends 'VictoireCmsBundle:Widget:new.html.twig' %}
 
-{% block body %}
-
-{#
-   _   _   _   _   _   _   _
-  / \ / \ / \ / \ / \ / \ / \
- ( C ) o ) m ) m ) o ) n ) s )
-  \_/ \_/ \_/ \_/ \_/ \_/ \_/
-
-#}
-<div id="widget-{{slot}}" class="add-widget">
 {% block form %}
-    <form method="POST" class="add-widget-form add-listing-widget-form" id="{{form.items.vars.attr.id}}" action="{{path('victoire_cms_widget_create', {'page': page.id,'slot':slot, 'type':'listing', 'entity': entity} )}}">
-    {#Replace this default rendering by your own form#}
 
     {% if form.items.vars.attr.id != 'static' %}
       {{form_row(form.fields)}}
@@ -26,13 +15,6 @@
     {% endif %}
 
     {{form_rest(form)}}
-{% block submit %}
-    <input type="submit" value="{{ 'ok'|trans|desc('Ok') }}" />
-    <a class="btn" class="cancel" onclick="cancelWidget(this);">{{ 'cancel'|trans|desc('Annuler') }}</a>
-{% endblock submit %}
-    </form>
-{% endblock form %}
-</div>
 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -43,4 +25,4 @@
         {% endif %}
     });
   </script>
-{% endblock body %}
+{% endblock form %}
