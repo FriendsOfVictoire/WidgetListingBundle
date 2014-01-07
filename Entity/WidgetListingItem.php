@@ -60,7 +60,7 @@ class WidgetListingItem extends Widget
     public function __get($name)
     {
         if ($this->getEntity()) {
-            return $this->getEntity()->getReferedValue($this->getListing()->getBusinessEntitiesName(), $name);
+            return $this->getEntity()->getReferedValue($this->getListing()->getBusinessEntityName(), $name);
         }
     }
 
@@ -74,7 +74,7 @@ class WidgetListingItem extends Widget
     public function __isset($name)
     {
         if (array_key_exists($name, get_class_vars(get_class($this)))) {
-            if ($this->getListing() && $this->getListing()->getBusinessEntitiesName()) {
+            if ($this->getListing() && $this->getListing()->getBusinessEntityName()) {
                 return true;
             }
         }

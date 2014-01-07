@@ -26,7 +26,7 @@ class WidgetListingItemManager
      */
     public function render(WidgetListingItem $widget)
     {
-        $entity = $widget->getEntity()->{'get' . $widget->getBusinessEntitiesName()}();
+        $entity = $widget->getEntity()->{'get' . $widget->getBusinessEntityName()}();
 
         return $this->container->get('victoire_templating')->render(
             "VictoireListingBundle:Widget:listing/showItem.html.twig",
@@ -35,7 +35,7 @@ class WidgetListingItemManager
                 "preview_mode" => true,
                 "entity_name" => $entity->__toString(),
                 "entity_id" => $entity->getId(),
-                "entity" => $widget->getBusinessEntitiesName(),
+                "entity" => $widget->getBusinessEntityName(),
             )
         );
     }
