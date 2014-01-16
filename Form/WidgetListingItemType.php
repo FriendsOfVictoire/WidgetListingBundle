@@ -74,8 +74,9 @@ class WidgetListingItemType extends AbstractType
         // parent::setDefaultOptions($resolver);
 
         $resolver->setDefaults(array(
-            'data_class' => 'Victoire\ListingBundle\Entity\WidgetListingItem',
-            'widget' => null,
+            'data_class'         => 'Victoire\ListingBundle\Entity\WidgetListingItem',
+            'widget'             => null,
+            'translation_domain' => 'victoire'
         ));
     }
 
