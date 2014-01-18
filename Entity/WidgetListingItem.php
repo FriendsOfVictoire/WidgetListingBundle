@@ -49,6 +49,10 @@ class WidgetListingItem extends Widget
      */
     private $listing;
 
+    /**
+     * @ORM\Column(name="position", type="integer")
+     */
+    private $position = 0;
 
     /**
      * if __isset returns true, returns linked entity value
@@ -159,7 +163,23 @@ class WidgetListingItem extends Widget
         return $this->listing;
     }
 
+    /**
+     * Get position
+     *
+     * @return integer
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
 
-
+    /**
+     * Set position
+     *
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
 
 }

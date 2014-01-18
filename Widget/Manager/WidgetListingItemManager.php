@@ -29,7 +29,7 @@ class WidgetListingItemManager
         $entity = $widget->getEntity()->{'get' . $widget->getBusinessEntityName()}();
 
         return $this->container->get('victoire_templating')->render(
-            "VictoireListingBundle:Widget:listing/showItem.html.twig",
+            "VictoireListingBundle::showItem.html.twig",
             array(
                 "item" => $widget,
                 "preview_mode" => true,
