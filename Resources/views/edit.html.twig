@@ -7,7 +7,7 @@
             {{ form_widget(form.items.vars.prototype.entity)|raw }}
         <ul id="{{form.items.vars.attr.id}}-listing">
             {% for item in form.items %}
-                {% include "VictoireListingBundle:Commons:showItem.html.twig" with {'item': item.vars.data, 'entity_name': form.items.vars.attr.id, 'entity_id': item.vars.data.entity.id, 'entity': item.vars.data} %}
+                {% include "VictoireListingBundle::showItem.html.twig" with {'item': item.vars.data, 'entity_name': form.items.vars.attr.id, 'entity_id': item.vars.data.entity.id, 'entity': item.vars.data} %}
             {% endfor %}
         </ul>
     {% else %}
