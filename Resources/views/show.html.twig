@@ -8,14 +8,14 @@
 
 #}
 
-<div class="widget widget-listing" id="widget-{{widget.id}}">
+<div class="vic-widget vic-widget-listing" id="widget-{{widget.id}}">
 {% block actions %}{{cms_widget_actions(widget)}}{% endblock actions %}
 
 {% block content %}
 {#Booya ! Replace this default rendering by your own logic#}
 <ul>
 {% for item in items %}
-    {% include "VictoireListingBundle:Commons:Widget/listing/showItem.html.twig" %}
+    {% include "VictoireListingBundle::showItem.html.twig" %}
 {% endfor %}
 </ul>
 {#Enjoy !#}

@@ -71,8 +71,9 @@ class WidgetListingType extends WidgetType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Victoire\ListingBundle\Entity\WidgetListing',
-            'widget' => 'listingitem'
+            'data_class'         => 'Victoire\ListingBundle\Entity\WidgetListing',
+            'widget'             => 'listingitem',
+            'translation_domain' => 'victoire'
         ));
     }
 

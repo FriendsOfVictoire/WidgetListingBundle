@@ -49,6 +49,10 @@ class WidgetListingItem extends Widget
      */
     private $listing;
 
+    /**
+     * @ORM\Column(name="position", type="integer")
+     */
+    private $position = 0;
 
     /**
      * if __isset returns true, returns linked entity value
@@ -60,7 +64,7 @@ class WidgetListingItem extends Widget
     public function __get($name)
     {
         if ($this->getEntity()) {
-            return $this->getEntity()->getReferedValue($this->getListing()->getBusinessEntitiesName(), $name);
+            return $this->getEntity()->getReferedValue($this->getListing()->getBusinessEntityName(), $name);
         }
     }
 
@@ -74,7 +78,7 @@ class WidgetListingItem extends Widget
     public function __isset($name)
     {
         if (array_key_exists($name, get_class_vars(get_class($this)))) {
-            if ($this->getListing() && $this->getListing()->getBusinessEntitiesName()) {
+            if ($this->getListing() && $this->getListing()->getBusinessEntityName()) {
                 return true;
             }
         }
@@ -159,7 +163,23 @@ class WidgetListingItem extends Widget
         return $this->listing;
     }
 
+    /**
+     * Get position
+     *
+     * @return integer
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
 
-
+    /**
+     * Set position
+     *
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
 
 }

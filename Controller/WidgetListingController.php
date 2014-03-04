@@ -52,7 +52,7 @@ class WidgetListingController extends Controller
                 $proxy = new EntityProxy();
                 $proxy->{'set' . $entityName}($entity);
                 $widget->setEntity($proxy);
-                $widget->setBusinessEntitiesName($entityName);
+                $widget->setBusinessEntityName($entityName);
                 foreach ($fields as $field => $entityField) {
                     $widget->{'set' . ucfirst($field)}($entity->{'get' . ucfirst($entityField)}());
                 }

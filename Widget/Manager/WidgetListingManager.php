@@ -65,7 +65,7 @@ class WidgetListingManager
                  ->getResult();
 
         return $this->container->get('victoire_templating')->render(
-            "VictoireListingBundle:Widget:listing/show.html.twig",
+            "VictoireListingBundle::show.html.twig",
             array(
                 "widget" => $widget,
                 "items" => $items
@@ -84,7 +84,7 @@ class WidgetListingManager
     {
 
         return $this->container->get('victoire_templating')->render(
-            "VictoireListingBundle:Widget:listing/edit.html.twig",
+            "VictoireListingBundle::edit.html.twig",
             array(
                 "widget" => $widget,
                 'form'   => $form->createView(),
@@ -122,7 +122,7 @@ class WidgetListingManager
     {
 
         return $this->container->get('victoire_templating')->render(
-            "VictoireListingBundle:Widget:listing/new.html.twig",
+            "VictoireListingBundle::new.html.twig",
             array(
                 "widget"          => $widget,
                 'form'            => $form->createView(),

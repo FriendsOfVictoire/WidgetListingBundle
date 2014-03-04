@@ -1,0 +1,21 @@
+{% extends 'VictoireCmsBundle:Widget:edit.html.twig' %}
+
+{% block form %}
+    {% if form.items.vars.attr.id != 'static' %}
+      {{form_row(form.fields)}}
+        {{ block('form_widget') }}
+            {{ form_widget(form.items.vars.prototype.entity)|raw }}
+        <ul id="{{form.items.vars.attr.id}}-listing">
+            {% for item in form.items %}
+                {% include "VictoireListingBundle::showItem.html.twig" with {'item': item.vars.data, 'entity_name': form.items.vars.attr.id, 'entity_id': item.vars.data.entity.id, 'entity': item.vars.data} %}
+            {% endfor %}
+        </ul>
+    {% else %}
+    <ul class="items" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
+        {{form_row(form.items)}}
+    </ul>
+    {% endif %}
+    {% do form.items.setRendered %}
+    {{form_row(form)}}
+    {{form_rest(form)}}
+{% endblock form %}
