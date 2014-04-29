@@ -14,23 +14,13 @@ use Victoire\CmsBundle\Entity\Widget;
  */
 class WidgetListingItem extends Widget
 {
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
      * @VIC\ReceiverProperty("textable")
      */
-    private $title;
+    protected $title;
 
     /**
      * @var string
@@ -38,7 +28,7 @@ class WidgetListingItem extends Widget
      * @ORM\Column(name="description", type="text", nullable=true)
      * @VIC\ReceiverProperty("textable")
      */
-    private $description;
+    protected $description;
 
     /**
      * @var string
@@ -47,12 +37,12 @@ class WidgetListingItem extends Widget
      * @ORM\JoinColumn(name="listing_id", referencedColumnName="id", onDelete="CASCADE")
      *
      */
-    private $listing;
+    protected $listing;
 
     /**
      * @ORM\Column(name="position", type="integer")
      */
-    private $position = 0;
+    protected $position = 0;
 
     /**
      * if __isset returns true, returns linked entity value
@@ -176,10 +166,10 @@ class WidgetListingItem extends Widget
     /**
      * Set position
      *
+     * @param integer The position
      */
     public function setPosition($position)
     {
         $this->position = $position;
     }
-
 }
