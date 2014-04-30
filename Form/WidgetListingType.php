@@ -31,6 +31,7 @@ class WidgetListingType extends WidgetType
                 ->add('items', 'collection', array(
                         'type' => new WidgetListingItemType($this->entity_name, $this->namespace, $options['widget']),
                         'allow_add' => true,
+                        'widget_add_btn' => null,
                         'by_reference' => false,
                         "attr" =>array('id' => 'static')
                     ))
@@ -55,6 +56,7 @@ class WidgetListingType extends WidgetType
                 ->add('items', 'collection', array(
                         'type' => new WidgetListingItemType($this->entity_name, $this->namespace, $options['widget']),
                         'allow_add' => true,
+                        'widget_add_btn' => null,
                         'by_reference' => false,
                         "attr" =>array('id' => $this->entity_name)
                     ))
