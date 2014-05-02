@@ -1,20 +1,7 @@
 {% extends 'VictoireCmsBundle:Widget:new.html.twig' %}
 
-{% block form %}
-
-    {% if form.items.vars.attr.id != 'static' %}
-      {{form_row(form.fields)}}
-        {{ block('form_widget') }}
-
-            {{ form_widget(form.items.vars.prototype.entity)|raw }}
-      <ul id="{{form.items.vars.attr.id}}-listing"></ul>
-    {% else %}
-      <ul class="items" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
-      {{form_row(form.items)}}
-    </ul>
-    {% endif %}
-
-    {{form_rest(form)}}
+{% block form_picker %}
+{{ parent() }}
 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -25,4 +12,4 @@
         {% endif %}
     });
   </script>
-{% endblock form %}
+{% endblock form_picker %}

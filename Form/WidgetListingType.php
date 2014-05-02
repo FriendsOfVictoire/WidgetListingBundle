@@ -39,7 +39,6 @@ class WidgetListingType extends WidgetType
                 ;
         } else {
             //else, WidgetType class will embed a EntityProxyType for given entity
-
             $builder
                 ->add('page', null,
                     array(
@@ -61,6 +60,8 @@ class WidgetListingType extends WidgetType
                         "attr" =>array('id' => $this->entity_name)
                     ))
 
+                ->add('query')
+                ->add('businessClass')
                 //
                 ;
         }
