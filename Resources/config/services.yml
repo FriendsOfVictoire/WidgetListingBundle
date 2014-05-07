@@ -5,6 +5,8 @@ services:
 
     widget_listing_manager:
         alias: victoire_core.twig.widget_listing_manager
+    widget_list_manager:
+        alias: victoire_core.twig.widget_listing_manager
 
     victoire_core.twig.widget_listingitem_manager:
         class: Victoire\ListingBundle\Widget\Manager\WidgetListingItemManager
