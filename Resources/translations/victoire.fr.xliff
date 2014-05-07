@@ -10,6 +10,10 @@
         <source></source>
         <target state="new"></target>
       </trans-unit>
+      <trans-unit id="77ff90fd1a56d5dee1b0d3e83155d275172b73a8" resname="modal.form.widget.type.listing.label">
+        <source>modal.form.widget.type.listing.label</source>
+        <target>Widget Liste</target>
+      </trans-unit>
       <trans-unit id="910b1d053d7881577dd1c2537dadf3b92ad36f98" resname="widget.list.new.action.label">
         <source>widget.list.new.action.label</source>
         <target>Liste</target>

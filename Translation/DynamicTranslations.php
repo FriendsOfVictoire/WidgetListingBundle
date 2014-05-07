@@ -15,6 +15,7 @@ class DynamicTranslations implements TranslationContainerInterface
     {
         return array(
             new Message('widget.list.new.action.label', 'victoire'),
+            new Message('modal.form.widget.type.listing.label', 'victoire')
         );
     }
 }
