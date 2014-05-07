@@ -12,8 +12,6 @@ use Victoire\Bundle\CoreBundle\Entity\Widget;
  */
 class WidgetListing extends Widget
 {
-
-
     /**
      * @var string
      *
@@ -21,7 +19,7 @@ class WidgetListing extends Widget
      * @ORM\OrderBy({"position" = "ASC"})
      *
      */
-    private $items;
+    protected $items;
 
     /**
      * Constructor
@@ -46,6 +44,7 @@ class WidgetListing extends Widget
 
         return $this;
     }
+
     /**
      * Add items
      *
