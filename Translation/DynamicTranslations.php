@@ -14,7 +14,7 @@ class DynamicTranslations implements TranslationContainerInterface
     public static function getTranslationMessages()
     {
         return array(
-            new Message('widget.listing.new.action.label'),
+            new Message('widget.list.new.action.label', 'victoire'),
         );
     }
 }
