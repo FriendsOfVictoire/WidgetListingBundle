@@ -19,7 +19,7 @@ function initListWidgetForm(id){
         }
     });
     // refresh list items when we change selected fields
-    $('div#' + id + ' div#appventus_victoirecmsbundle_widgetlistingtype_fields_control_group select').each(function(e){
+    $('div#' + id + ' div#appventus_victoireCoreBundle_widgetlistingtype_fields_control_group select').each(function(e){
         $(this).on('change', function(e){
             e.preventDefault();
             $('select.add_' + id + '_link').prop('disabled', true);

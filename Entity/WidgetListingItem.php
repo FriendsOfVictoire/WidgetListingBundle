@@ -3,8 +3,8 @@
 namespace Victoire\ListingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Victoire\CmsBundle\Annotations as VIC;
-use Victoire\CmsBundle\Entity\Widget;
+use Victoire\Bundle\CoreBundle\Annotations as VIC;
+use Victoire\Bundle\CoreBundle\Entity\Widget;
 
 /**
  * WidgetListingItem

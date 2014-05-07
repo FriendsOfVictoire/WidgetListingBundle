@@ -3,9 +3,9 @@ namespace Victoire\ListingBundle\Widget\Manager;
 
 use Victoire\ListingBundle\Form\WidgetListingType;
 use Victoire\ListingBundle\Entity\WidgetListing;
-use Victoire\CmsBundle\Event±WidgetQueryEvent;
-use Victoire\CmsBundle\VictoireCmsEvents;
-use Victoire\CmsBundle\Event\WidgetQueryEvent;
+use Victoire\Bundle\CoreBundle\Event±WidgetQueryEvent;
+use Victoire\Bundle\CoreBundle\VictoireCmsEvents;
+use Victoire\Bundle\CoreBundle\Event\WidgetQueryEvent;
 
 class WidgetListingManager
 {

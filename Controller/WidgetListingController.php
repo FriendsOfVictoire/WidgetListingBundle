@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Victoire\ListingBundle\Entity\WidgetListingItem;
-use Victoire\CmsBundle\Cached\Entity\EntityProxy;
+use Victoire\Bundle\CoreBundle\Cached\Entity\EntityProxy;
 
 
 /**
@@ -30,7 +30,7 @@ class WidgetListingController extends Controller
      */
     public function showAction(Request $request)
     {
-        $form = $request->request->get('appventus_victoirecmsbundle_widgetlistingtype');
+        $form = $request->request->get('appventus_victoireCoreBundle_widgetlistingtype');
 
         $widgetsHtml = array();
         $fields = $form['fields'];
@@ -41,7 +41,7 @@ class WidgetListingController extends Controller
                 $item = $item['entity'];
                 $itemKey = array_keys($item);
                 $entityName = $itemKey[0];
-                $businessClasses = $this->get('victoire_cms.annotation_reader')->getBusinessClasses();
+                $businessClasses = $this->get('victoire_core.annotation_reader')->getBusinessClasses();
                 $class = $businessClasses[$entityName];
                 $id = $item[$entityName];
                 // we get associated entity in db

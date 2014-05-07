@@ -5,8 +5,8 @@ namespace Victoire\ListingBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Victoire\CmsBundle\Form\EntityProxyFormType;
-use Victoire\CmsBundle\Form\WidgetType;
+use Victoire\Bundle\CoreBundle\Form\EntityProxyFormType;
+use Victoire\Bundle\CoreBundle\Form\WidgetType;
 use Victoire\ListingBundle\Form\WidgetListingItemType;
 
 
@@ -85,6 +85,6 @@ class WidgetListingType extends WidgetType
      */
     public function getName()
     {
-        return 'appventus_victoirecmsbundle_widgetlistingtype';
+        return 'appventus_victoireCoreBundle_widgetlistingtype';
     }
 }
