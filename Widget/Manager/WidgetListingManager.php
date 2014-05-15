@@ -48,21 +48,34 @@ class WidgetListingManager
 
         $listingId = $this->container->get('request')->query->get('filter')['listing'];
         $dispatcher = $this->container->get('event_dispatcher');
+        $em = $this->container->get('doctrine.orm.entity_manager');
+        $query = "";
+        if ($widget->getQuery() !== null) {
 
-        $itemsQueryBuilder = $this->container->get('doctrine.orm.entity_manager')
-             ->createQueryBuilder()
-             ->select('item')
-             ->from('VictoireListingBundle:WidgetListingItem', 'item')
-             ->join('item.listing', 'listing')
-             ->where('listing.id = :listing')
-             ->setParameter('listing', $listingId);
+            $itemsQueryBuilder = $em
+                 ->createQueryBuilder()
+                 ->select('item')
+                 ->from($widget->getBusinessClass(), 'item');
+
+            $query = $widget->getQuery();
+        } else {
+            $itemsQueryBuilder = $this->container->get('doctrine.orm.entity_manager')
+                 ->createQueryBuilder()
+                 ->select('item')
+                 ->from('VictoireListingBundle:WidgetListingItem', 'item')
+                 ->join('item.listing', 'listing')
+                 ->where('listing.id = :listing')
+                 ->setParameter('listing', $listingId);
+        }
 
 
         $dispatcher->dispatch(VictoireCmsEvents::WIDGET_POST_QUERY, new WidgetQueryEvent($widget, $itemsQueryBuilder, $this->container->get('request')));
 
-        $items = $itemsQueryBuilder
-                 ->getQuery()
-                 ->getResult();
+        $itemsQuery = $itemsQueryBuilder->getQuery()->getDQL() . " " . $query;
+
+        $items = $em->createQuery($itemsQuery)
+                        ->setParameters($itemsQueryBuilder->getParameters())
+                        ->getResult();
 
         return $this->container->get('victoire_templating')->render(
             "VictoireListingBundle::show.html.twig",
