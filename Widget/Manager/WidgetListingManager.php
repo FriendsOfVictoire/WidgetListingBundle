@@ -75,6 +75,10 @@ class WidgetListingManager
 
         $items = $em->createQuery($itemsQuery)
                         ->setParameters($itemsQueryBuilder->getParameters())
+                        ;
+
+        $items = $em->createQuery($itemsQuery)
+                        ->setParameters($itemsQueryBuilder->getParameters())
                         ->getResult();
 
         return $this->container->get('victoire_templating')->render(
@@ -146,4 +150,7 @@ class WidgetListingManager
             )
         );
     }
+
+
+
 }

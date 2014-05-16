@@ -30,7 +30,7 @@ class WidgetListingController extends Controller
      */
     public function showAction(Request $request)
     {
-        $form = $request->request->get('appventus_victoireCoreBundle_widgetlistingtype');
+        $form = $request->request->get('appventus_victoirecorebundle_widgetlistingtype');
 
         $widgetsHtml = array();
         $fields = $form['fields'];

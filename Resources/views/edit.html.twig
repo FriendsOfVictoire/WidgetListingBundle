@@ -1,15 +1,40 @@
 {% extends 'VictoireCoreBundle:Widget:edit.html.twig' %}
 
 {% block form %}
+
+<div class="vic-tab-content vic-modal-tab-content">
     {% if form.items.vars.attr.id != 'static' %}
-      {{form_row(form.fields)}}
-        {{ block('form_widget') }}
-            {{ form_widget(form.items.vars.prototype.entity)|raw }}
-        <ul id="{{form.items.vars.attr.id}}-listing">
-            {% for item in form.items %}
-                {% include "VictoireListingBundle::showItem.html.twig" with {'item': item.vars.data, 'entity_name': form.items.vars.attr.id, 'entity_id': item.vars.data.entity.id, 'entity': item.vars.data} %}
-            {% endfor %}
-        </ul>
+
+
+
+
+      <ul id="{{form.items.vars.attr.id}}-listing"></ul>
+        <div id="picker-{{entity}}" class="vic-tab-pane vic-active">
+
+            {% block form_picker %}
+                {{form_row(form.fields)}}
+                {{ block('form_widget') }}
+                    {{ form_widget(form.items.vars.prototype.entity)|raw }}
+                <ul id="{{form.items.vars.attr.id}}-listing">
+                    {% for item in form.items %}
+                        {% include "VictoireListingBundle::showItem.html.twig" with {'item': item.vars.data, 'entity_name': form.items.vars.attr.id, 'entity_id': item.vars.data.entity.id, 'entity': item.vars.data} %}
+                    {% endfor %}
+                </ul>
+            {% endblock form_picker %}
+        </div>
+        <div id="query-{{entity}}" class="vic-tab-pane">
+
+        {% block form_query %}
+            {{form_row(form.query)}}
+        {% endblock form_query %}
+        </div>
+
+
+
+
+
+
+
     {% else %}
     <ul class="items" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
         {{form_row(form.items)}}
@@ -18,4 +43,5 @@
     {% do form.items.setRendered %}
     {{form_row(form)}}
     {{form_rest(form)}}
+</div>
 {% endblock form %}

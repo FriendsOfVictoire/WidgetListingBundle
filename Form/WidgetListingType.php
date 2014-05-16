@@ -40,12 +40,6 @@ class WidgetListingType extends WidgetType
         } else {
             //else, WidgetType class will embed a EntityProxyType for given entity
             $builder
-                ->add('page', null,
-                    array(
-                        "label" => "",
-                        "attr" =>array("class" => "hide")
-                    )
-                )
                 ->add('slot', 'hidden')
 
                 ->add('fields', 'widget_fields', array(
@@ -61,7 +55,6 @@ class WidgetListingType extends WidgetType
                     ))
 
                 ->add('query')
-                ->add('businessClass')
                 //
                 ;
         }
@@ -86,6 +79,6 @@ class WidgetListingType extends WidgetType
      */
     public function getName()
     {
-        return 'appventus_victoireCoreBundle_widgetlistingtype';
+        return 'appventus_victoirecorebundle_widgetlistingtype';
     }
 }

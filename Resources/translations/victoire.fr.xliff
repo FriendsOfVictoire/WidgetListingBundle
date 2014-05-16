@@ -14,8 +14,8 @@
         <source>modal.form.widget.type.listing.label</source>
         <target>Widget Liste</target>
       </trans-unit>
-      <trans-unit id="910b1d053d7881577dd1c2537dadf3b92ad36f98" resname="widget.list.new.action.label">
-        <source>widget.list.new.action.label</source>
+      <trans-unit id="910b1d053d7881577dd1c2537dadf3b92ad36f98" resname="widget.listing.new.action.label">
+        <source>widget.listing.new.action.label</source>
         <target>Liste</target>
       </trans-unit>
     </body>
