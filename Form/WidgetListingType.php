@@ -53,8 +53,6 @@ class WidgetListingType extends WidgetType
                         'by_reference' => false,
                         "attr" =>array('id' => $this->entity_name)
                     ))
-
-                ->add('query')
                 //
                 ;
         }
