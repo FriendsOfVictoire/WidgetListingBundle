@@ -22,6 +22,15 @@ class WidgetListing extends Widget
     protected $items;
 
     /**
+     * To string function
+     * @return  string A string which represents the instance
+     */
+    public function __toString()
+    {
+        return sprintf('#%s - Liste de la page "%s"', $this->getId(), $this->getPage()->getTitle());
+    }
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -33,6 +42,7 @@ class WidgetListing extends Widget
      * Set items
      *
      * @param array $items
+     *
      * @return WidgetListing
      */
     public function setItems($items)
@@ -48,7 +58,8 @@ class WidgetListing extends Widget
     /**
      * Add items
      *
-     * @param \Victoire\ListingBundle\Entity\WidgetListingItem $items
+     * @param \Victoire\ListingBundle\Entity\WidgetListingItem $item
+     *
      * @return WidgetListing
      */
     public function addItem(\Victoire\ListingBundle\Entity\WidgetListingItem $item)
