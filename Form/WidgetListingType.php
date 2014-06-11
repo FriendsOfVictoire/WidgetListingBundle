@@ -1,13 +1,13 @@
 <?php
 
-namespace Victoire\ListingBundle\Form;
+namespace Victoire\Widget\ListingBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Victoire\Bundle\CoreBundle\Form\EntityProxyFormType;
 use Victoire\Bundle\CoreBundle\Form\WidgetType;
-use Victoire\ListingBundle\Form\WidgetListingItemType;
+use Victoire\Widget\ListingBundle\Form\WidgetListingItemType;
 
 
 /**
@@ -65,7 +65,7 @@ class WidgetListingType extends WidgetType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'         => 'Victoire\ListingBundle\Entity\WidgetListing',
+            'data_class'         => 'Victoire\Widget\ListingBundle\Entity\WidgetListing',
             'widget'             => 'listingitem',
             'translation_domain' => 'victoire'
         ));

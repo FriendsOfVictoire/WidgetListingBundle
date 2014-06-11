@@ -1,5 +1,5 @@
 <?php
-namespace Victoire\ListingBundle\Form;
+namespace Victoire\Widget\ListingBundle\Form;
 
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\AbstractType;
@@ -74,7 +74,7 @@ class WidgetListingItemType extends AbstractType
         // parent::setDefaultOptions($resolver);
 
         $resolver->setDefaults(array(
-            'data_class'         => 'Victoire\ListingBundle\Entity\WidgetListingItem',
+            'data_class'         => 'Victoire\Widget\ListingBundle\Entity\WidgetListingItem',
             'widget'             => null,
             'translation_domain' => 'victoire'
         ));

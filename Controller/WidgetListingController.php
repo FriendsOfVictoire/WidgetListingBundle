@@ -1,5 +1,5 @@
 <?php
-namespace Victoire\ListingBundle\Controller;
+namespace Victoire\Widget\ListingBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Victoire\ListingBundle\Entity\WidgetListingItem;
+use Victoire\Widget\ListingBundle\Entity\WidgetListingItem;
 use Victoire\Bundle\CoreBundle\Cached\Entity\EntityProxy;
 
 

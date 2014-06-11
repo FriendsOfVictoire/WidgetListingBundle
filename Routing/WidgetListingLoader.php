@@ -1,5 +1,5 @@
 <?php
-namespace Victoire\ListingBundle\Routing;
+namespace Victoire\Widget\ListingBundle\Routing;
 
 
 use Symfony\Component\Config\Loader\Loader;

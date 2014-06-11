@@ -1,6 +1,6 @@
 <?php
 
-namespace Victoire\ListingBundle\DependencyInjection;
+namespace Victoire\Widget\ListingBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -24,7 +24,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('name')->defaultValue('listing')->end()
                 ->scalarNode('widgetName')->defaultValue('listing')->end()
                 ->scalarNode('label')->defaultValue('widget.form.theme.listing')->end()
-                ->scalarNode('entityClass')->defaultValue('Victoire\ListingBundle\Entity\WidgetListing')->end()
+                ->scalarNode('entityClass')->defaultValue('Victoire\Widget\ListingBundle\Entity\WidgetListing')->end()
             ->end()
             // Here you should define the parameters that are allowed to configure your bundle.
         ;

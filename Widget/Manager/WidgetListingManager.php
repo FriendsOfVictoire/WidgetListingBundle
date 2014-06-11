@@ -1,8 +1,8 @@
 <?php
-namespace Victoire\ListingBundle\Widget\Manager;
+namespace Victoire\Widget\ListingBundle\Widget\Manager;
 
-use Victoire\ListingBundle\Form\WidgetListingType;
-use Victoire\ListingBundle\Entity\WidgetListing;
+use Victoire\Widget\ListingBundle\Form\WidgetListingType;
+use Victoire\Widget\ListingBundle\Entity\WidgetListing;
 use Victoire\Bundle\CoreBundle\Event±WidgetQueryEvent;
 use Victoire\Bundle\CoreBundle\VictoireCmsEvents;
 use Victoire\Bundle\CoreBundle\Event\WidgetQueryEvent;

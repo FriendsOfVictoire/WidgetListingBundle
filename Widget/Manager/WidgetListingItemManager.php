@@ -1,7 +1,7 @@
 <?php
-namespace Victoire\ListingBundle\Widget\Manager;
+namespace Victoire\Widget\ListingBundle\Widget\Manager;
 
-use Victoire\ListingBundle\Entity\WidgetListingItem;
+use Victoire\Widget\ListingBundle\Entity\WidgetListingItem;
 
 class WidgetListingItemManager
 {

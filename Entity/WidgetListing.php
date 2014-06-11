@@ -1,5 +1,5 @@
 <?php
-namespace Victoire\ListingBundle\Entity;
+namespace Victoire\Widget\ListingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\Bundle\CoreBundle\Entity\Widget;
@@ -58,11 +58,11 @@ class WidgetListing extends Widget
     /**
      * Add items
      *
-     * @param \Victoire\ListingBundle\Entity\WidgetListingItem $item
+     * @param \Victoire\Widget\ListingBundle\Entity\WidgetListingItem $item
      *
      * @return WidgetListing
      */
-    public function addItem(\Victoire\ListingBundle\Entity\WidgetListingItem $item)
+    public function addItem(\Victoire\Widget\ListingBundle\Entity\WidgetListingItem $item)
     {
         $item->setListing($this);
         $this->items[] = $item;
@@ -73,9 +73,9 @@ class WidgetListing extends Widget
     /**
      * Remove items
      *
-     * @param \Victoire\ListingBundle\Entity\WidgetListingItem $items
+     * @param \Victoire\Widget\ListingBundle\Entity\WidgetListingItem $items
      */
-    public function removeItem(\Victoire\ListingBundle\Entity\WidgetListingItem $items)
+    public function removeItem(\Victoire\Widget\ListingBundle\Entity\WidgetListingItem $items)
     {
         $this->items->removeElement($items);
     }

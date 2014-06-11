@@ -1,6 +1,6 @@
 <?php
 
-namespace Victoire\ListingBundle\Entity;
+namespace Victoire\Widget\ListingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\Bundle\CoreBundle\Annotations as VIC;
