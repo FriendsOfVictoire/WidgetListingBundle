@@ -1,6 +1,6 @@
 
 victoire_listing_widget_show:
     pattern:   /widgetlisting/show
-    defaults:  { _controller: VictoireListingBundle:WidgetListing:show }
+    defaults:  { _controller: VictoireWidgetListingBundle:WidgetListing:show }
     options:
         expose: true

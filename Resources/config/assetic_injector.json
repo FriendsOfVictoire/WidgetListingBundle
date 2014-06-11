@@ -5,7 +5,7 @@
         {
             "victoire-edit":
             [
-                "@VictoireListingBundle/Resources/public/Commons/js/victoire-edit.js"
+                "@VictoireWidgetListingBundle/Resources/public/Commons/js/victoire-edit.js"
             ]
          }
     }

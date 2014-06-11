@@ -62,7 +62,7 @@ class WidgetListingManager
             $itemsQueryBuilder = $this->container->get('doctrine.orm.entity_manager')
                  ->createQueryBuilder()
                  ->select('item')
-                 ->from('VictoireListingBundle:WidgetListingItem', 'item')
+                 ->from('VictoireWidgetListingBundle:WidgetListingItem', 'item')
                  ->join('item.listing', 'listing')
                  ->where('listing.id = :listing')
                  ->setParameter('listing', $listingId);
@@ -82,7 +82,7 @@ class WidgetListingManager
                         ->getResult();
 
         return $this->container->get('victoire_templating')->render(
-            "VictoireListingBundle::show.html.twig",
+            "VictoireWidgetListingBundle::show.html.twig",
             array(
                 "widget" => $widget,
                 "items" => $items
@@ -101,7 +101,7 @@ class WidgetListingManager
     {
 
         return $this->container->get('victoire_templating')->render(
-            "VictoireListingBundle::edit.html.twig",
+            "VictoireWidgetListingBundle::edit.html.twig",
             array(
                 "widget" => $widget,
                 'form'   => $form->createView(),
@@ -139,7 +139,7 @@ class WidgetListingManager
     {
 
         return $this->container->get('victoire_templating')->render(
-            "VictoireListingBundle::new.html.twig",
+            "VictoireWidgetListingBundle::new.html.twig",
             array(
                 "widget"          => $widget,
                 'form'            => $form->createView(),

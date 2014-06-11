@@ -11,7 +11,7 @@ class WidgetListingLoader extends Loader
     {
         $collection = new RouteCollection();
 
-        $resource = '@VictoireListingBundle/Resources/config/routing.yml';
+        $resource = '@VictoireWidgetListingBundle/Resources/config/routing.yml';
         $type = 'yaml';
 
         $importedRoutes = $this->import($resource, $type);
