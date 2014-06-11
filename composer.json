@@ -21,10 +21,8 @@
         "victoire/victoire"                   : ">=0.1.4"
     },
     "autoload": {
-        "psr-0": { "Victoire\\ListingBundle": "" }
+        "psr-0": { "Victoire\\Widget\\ListingBundle": "" }
     },
     "minimum-stability": "dev",
-
-
-    "target-dir": "Victoire/ListingBundle"
+    "target-dir": "Victoire/Widget/ListingBundle"
 }
