@@ -5,6 +5,9 @@ namespace Victoire\Widget\ListingBundle\Widget\Manager;
 use Victoire\Bundle\CoreBundle\Widget\Managers\BaseWidgetManager;
 use Victoire\Bundle\CoreBundle\Entity\Widget;
 use Victoire\Bundle\CoreBundle\Widget\Managers\WidgetManagerInterface;
+
+use Victoire\Widget\ListingBundle\Entity\WidgetListingItem;
+
 /**
  * CRUD operations on WidgetRedactor Widget
  *
@@ -41,54 +44,35 @@ class WidgetListingManager extends BaseWidgetManager implements WidgetManagerInt
         return 'Listing';
     }
 
+
     /**
-     * render the WidgetListing
-     * @param Widget $widget
+     * Get the content of the widget for the query mode
      *
-     * @return widget show
+     * @param Widget $widget
+     * @throws \Exception
      */
-    public function render(Widget $widget)
+    protected function getWidgetQueryContent(Widget $widget)
     {
-        $listingId = $this->container->get('request')->query->get('filter')['listing'];
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        $query = "";
-        if ($widget->getQuery() !== null) {
+        $items = $this->getWidgetQueryResults($widget);
 
-            $itemsQueryBuilder = $em
-                 ->createQueryBuilder()
-                 ->select('item')
-                 ->from($widget->getBusinessClass(), 'item');
+        $widgetItems = array();
 
-            $query = $widget->getQuery();
-        } else {
-            $itemsQueryBuilder = $this->container->get('doctrine.orm.entity_manager')
-                 ->createQueryBuilder()
-                 ->select('item')
-                 ->from('VictoireWidgetListingBundle:WidgetListingItem', 'item')
-                 ->join('item.listing', 'listing')
-                 ->where('listing.id = :listing')
-                 ->setParameter('listing', $listingId);
+        //parse the results
+        foreach ($items as $item) {
+            //create temporary widgetListing item for the render
+            $itemWidget = new WidgetListingItem();
+
+            //set the entity found
+            $itemWidget->setEntity($item);
+            //simulate the entity mode
+            $itemWidget->setMode(Widget::MODE_ENTITY);
+
+            //add it to the array
+            $widgetItems[] = $itemWidget;
+            unset($itemWidget);
         }
 
-
-
-        $itemsQuery = $itemsQueryBuilder->getQuery()->getDQL() . " " . $query;
-
-        $items = $em->createQuery($itemsQuery)
-                        ->setParameters($itemsQueryBuilder->getParameters())
-                        ;
-
-        $items = $em->createQuery($itemsQuery)
-                        ->setParameters($itemsQueryBuilder->getParameters())
-                        ->getResult();
-
-        return $this->container->get('victoire_templating')->render(
-            "VictoireWidgetListingBundle::show.html.twig",
-            array(
-                "widget" => $widget,
-                "items" => $items
-            )
-        );
+        //set the array to the current widget
+        $widget->setItems($widgetItems);
     }
-
 }

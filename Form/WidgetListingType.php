@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Victoire\Bundle\CoreBundle\Form\EntityProxyFormType;
 use Victoire\Bundle\CoreBundle\Form\WidgetType;
 use Victoire\Widget\ListingBundle\Form\WidgetListingItemType;
+use Victoire\Bundle\CoreBundle\Entity\Widget;
 
 
 /**
@@ -16,7 +17,6 @@ use Victoire\Widget\ListingBundle\Form\WidgetListingItemType;
  */
 class WidgetListingType extends WidgetType
 {
-
     /**
      * define form fields
      * @param FormBuilderInterface $builder
@@ -35,6 +35,8 @@ class WidgetListingType extends WidgetType
             }
         }
 
+        $mode = Widget::MODE_STATIC;
+
         //choose form mode
         if ($entityName === null) {
             //if no entity is given, we generate the static form
@@ -50,14 +52,17 @@ class WidgetListingType extends WidgetType
                 "attr" => array('id' => 'static')
             ));
         } else {
+            $mode = Widget::MODE_ENTITY;
+
             //else, WidgetType class will embed a EntityProxyType for given entity
             $builder
                 ->add('slot', 'hidden')
+                ->add('query')
 
-                ->add('fields', 'widget_fields', array(
-                    "namespace" => $namespace,
-                    "widget" => $options['widget']
-                ))
+                 ->add('fields', 'widget_fields', array(
+                     "namespace" => $namespace,
+                     "widget" => $options['widget']
+                 ))
                 ->add('items', 'collection', array(
                         'type' => 'victoire_widget_form_listingitem',
                         'allow_add' => true,
@@ -70,6 +75,11 @@ class WidgetListingType extends WidgetType
                         "attr" => array('id' => $entityName)
                     ));
         }
+
+        //add the mode to the form
+        $builder->add('mode', 'hidden', array(
+            'data' => $mode
+        ));
     }
 
     /**
@@ -78,8 +88,6 @@ class WidgetListingType extends WidgetType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        zdebug(__FUNCTION__);
-
         parent::setDefaultOptions($resolver);
 
         $resolver->setDefaults(array(

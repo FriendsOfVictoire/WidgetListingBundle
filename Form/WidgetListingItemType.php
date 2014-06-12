@@ -48,19 +48,10 @@ class WidgetListingItemType extends WidgetType
 
             //else, WidgetType class will embed a EntityProxyType for given entity
             $builder
-                ->add('listing', null,
-                    array(
-                        "label" => "",
-                        "attr"  => array('class' => "hide")
-                    )
-                )
-                ->add('position')
-                ->add('slot', 'hidden')
-                ->add('fields', 'widget_fields', array(
-                    'label' => 'widget.form.fields.label',
-                    'namespace' => $namespace,
-                    'widget'    => $options['widget']
+                ->add('position', 'hidden', array(
+                    'data' => 0
                 ))
+                ->add('slot', 'hidden')
                 ->add('entity_proxy', 'entity_proxy', array(
                     'entity_name' => $entityName,
                     'namespace'   => $namespace,

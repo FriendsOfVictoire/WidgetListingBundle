@@ -1,14 +1,9 @@
 {% extends 'VictoireCoreBundle:Widget:new.html.twig' %}
 
 {% block form_picker %}
-    {{ block('form_widget') }}
-        {{ form_widget(form.items.vars.prototype.entity_proxy)|raw }}
-    <ul id="{{form.items.vars.attr.id}}-listing">
-        {% for item in form.items %}
-            {% include "VictoireWidgetListingBundle::showItem.html.twig" with {'item': item.vars.data, 'entity_name': form.items.vars.attr.id, 'entity_id': item.vars.data.entity.id, 'entity': item.vars.data} %}
-        {% endfor %}
+    <a class="add_item_link" href="#" onClick='addItemEntityForm("{{ form.items.vars.attr.id }}")'>Ajouter un item</a>
+    <ul class="entityItems" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
     </ul>
-    {% do form.items.setRendered %}
 {% endblock form_picker %}
 
 {% block form_query %}
@@ -16,9 +11,9 @@
 {% endblock form_query %}
 
 {% block form_static %}
-        <ul class="items" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
-            {{form_row(form.items)}}
-        </ul>
+    <ul class="items" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
+        {{form_row(form.items)}}
+    </ul>
 {% endblock form_static %}
 
 {% block form %}
@@ -32,5 +27,5 @@
                 initStaticListWidgetForm("{{form.items.vars.attr.id}}");
             {% endif %}
         });
-      </script>
+    </script>
 {% endblock form %}

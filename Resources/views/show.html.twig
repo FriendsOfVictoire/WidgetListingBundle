@@ -3,7 +3,9 @@
 {% block content %}
 	<ul>
 		{% for item in widget.items %}
-		    {% include "VictoireWidgetListingBundle::showItem.html.twig" with {item: item} %}
+		      <li>
+ 		             {{ cms_widget(item) }}
+ 		      </li>
 		{% endfor %}
 	</ul>
 {% endblock content %}

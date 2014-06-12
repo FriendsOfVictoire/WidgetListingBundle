@@ -49,6 +49,7 @@ class WidgetListing extends Widget
     {
         foreach ($items as $item) {
             $item->setListing($this);
+            $item->setPage($this->getPage());
         }
         $this->items = $items;
 
@@ -65,6 +66,7 @@ class WidgetListing extends Widget
     public function addItem(\Victoire\Widget\ListingBundle\Entity\WidgetListingItem $item)
     {
         $item->setListing($this);
+        $item->setPage($this->getPage());
         $this->items[] = $item;
 
         return $this;
