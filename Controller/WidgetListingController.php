@@ -15,30 +15,35 @@ use Victoire\Bundle\CoreBundle\Cached\Entity\EntityProxy;
 /**
  * Widget listing controller
  *
+ * @Route("/victoire-dcms/widget-listing")
+ *
  */
 class WidgetListingController extends Controller
 {
-
     /**
      * This method is used in ajax to show list items when a listing is created
      *
      * @param Request $request
      * @return Response The renderig of posted items
      *
+     * @Route("/show", name="victoire_widgetlisting_widgetlisting_show", options={"expose"=true})
+     *
      * @Template()
      * @Method("POST")
      */
     public function showAction(Request $request)
     {
-        $form = $request->request->get('appventus_victoirecorebundle_widgetlistingtype');
+        $form = $request->request->get('victoire_widget_form_listing');
 
         $widgetsHtml = array();
+
         $fields = $form['fields'];
+
         if (array_key_exists('items', $form)) {
             // for each items added to the listing
             foreach ($form['items'] as $entityId => $item) {
 
-                $item = $item['entity'];
+                $item = $item['entity_proxy'];
                 $itemKey = array_keys($item);
                 $entityName = $itemKey[0];
                 $businessClasses = $this->get('victoire_core.annotation_reader')->getBusinessClasses();

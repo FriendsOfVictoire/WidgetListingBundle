@@ -15,7 +15,10 @@ use Symfony\Component\DependencyInjection\Loader;
 class VictoireWidgetListingExtension extends Extension
 {
     /**
-     * {@inheritDoc}
+     * Load configuration
+     *
+     * @param array $configs
+     * @param ContainerBuilder $container
      */
     public function load(array $configs, ContainerBuilder $container)
     {

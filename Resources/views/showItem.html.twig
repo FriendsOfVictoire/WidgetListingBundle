@@ -1,11 +1,10 @@
-
 {% if preview_mode is defined and preview_mode %}
     <li data-entity-name="{{entity_name}}" data-id="{{entity_id}}" data-entity="{{entity}}">
 {% else %}
     <li>
 {% endif %}
 
-        {{item.title}}: {{item.description}}
+        {{ item.title }}: {{ item.description }}
 
     {% if preview_mode is defined and preview_mode %}
         <a href="#" class="remove-widget-listing-item"><i class="icon-trash">&nbsp;</i></a>
