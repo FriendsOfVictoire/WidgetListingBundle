@@ -51,7 +51,6 @@ class WidgetListingItemType extends WidgetType
                 ->add('position', 'hidden', array(
                     'data' => 0
                 ))
-                ->add('slot', 'hidden')
                 ->add('entity_proxy', 'entity_proxy', array(
                     'entity_name' => $entityName,
                     'namespace'   => $namespace,

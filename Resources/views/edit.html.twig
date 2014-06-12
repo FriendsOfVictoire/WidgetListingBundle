@@ -1,26 +1,37 @@
 {% extends 'VictoireCoreBundle:Widget:edit.html.twig' %}
 
 
-{% block form_picker %}
-    {{ block('form_widget') }}
-    {{ form_widget(form.items.vars.prototype.entity_proxy)|raw }}
-
-    {% do form.items.setRendered %}
-{% endblock form_picker %}
-
-{% block form_query %}
-    {{form_row(form.query)}}
-{% endblock form_query %}
-
-{% block form_static %}
-        <ul class="items" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
-            {{form_row(form.items)}}
-        </ul>
-{% endblock form_static %}
-
 {% block form %}
     <ul id="{{form.items.vars.attr.id}}-listing"></ul>
-    {{ parent() }}
+	<div class="vic-tab-content vic-modal-tab-content">
+	    {% if entity != null %}
+	        <div id="picker-{{entity}}" class="vic-tab-pane vic-active">
+			    <a class="add_item_link" href="#" onClick='addItemEntityForm("{{ form.items.vars.attr.id }}")'>Ajouter un item</a>
+			    <ul class="entityItems" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
+
+			    {% if form.vars.value.mode == 'entity' %}
+			        {{form_row(form.items)}}
+			    {% endif %}
+			    </ul>
+	        </div>
+	        {% if is_granted('ROLE_VICTOIRE_DEVELOPER') %}
+	            <div id="query-{{entity}}" class="vic-tab-pane">
+                    {{form_row(form.query)}}
+	            </div>
+	        {% endif %}
+	        <div id="businessEntity-{{entity}}" class="vic-tab-pane">
+	        </div>
+	        {{form_row(form.fields)}}
+	    {% else %}
+	        <ul class="items" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
+		        {% if form.vars.value.mode == 'static' %}
+		           {{form_row(form.items)}}
+		        {% endif %}
+	        </ul>
+	    {% endif %}
+	    {{form_row(form._token)}}
+ 	    {{form_row(form.mode)}}
+    </div>
     <script type="text/javascript">
         $(document).ready(function(){
             {% if form.items.vars.attr.id != 'static' %}
