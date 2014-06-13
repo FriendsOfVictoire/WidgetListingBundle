@@ -11,6 +11,7 @@
 {% endblock form_query %}
 
 {% block form_static %}
+    <a href="#" class="add_item_link" onClick='addItemStaticForm();'>Ajouter un item</a>
     <ul class="items" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
         {{form_row(form.items)}}
     </ul>
@@ -19,13 +20,4 @@
 {% block form %}
     <ul id="{{form.items.vars.attr.id}}-listing"></ul>
     {{ parent() }}
-    <script type="text/javascript">
-        $(document).ready(function(){
-            {% if form.items.vars.attr.id != 'static' %}
-                initListWidgetForm("{{form.items.vars.attr.id}}");
-            {% else %}
-                initStaticListWidgetForm("{{form.items.vars.attr.id}}");
-            {% endif %}
-        });
-    </script>
 {% endblock form %}

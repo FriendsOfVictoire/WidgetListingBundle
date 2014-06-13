@@ -1,8 +1,4 @@
 services:
-    widget_listing.routing_loader:
-        class: Victoire\Widget\ListingBundle\Routing\WidgetListingLoader
-        tags:
-            - { name: routing.loader }
 
     victoire_core.twig.widget_listing_manager:
         class: Victoire\Widget\ListingBundle\Widget\Manager\WidgetListingManager
