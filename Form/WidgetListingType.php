@@ -43,6 +43,7 @@ class WidgetListingType extends WidgetType
             $builder->add('items', 'collection', array(
                 'type' => 'victoire_widget_form_listingitem',
                 'allow_add' => true,
+                'allow_delete' => true,
                 'widget_add_btn' => null,
                 'by_reference' => false,
                 'options' => array(
@@ -65,6 +66,7 @@ class WidgetListingType extends WidgetType
                         'type' => 'victoire_widget_form_listingitem',
                         'allow_add' => true,
                         'widget_add_btn' => null,
+                        'allow_delete' => true,
                         'by_reference' => false,
                         'options' => array(
                             'namespace' => $namespace,

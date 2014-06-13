@@ -1,51 +1,7 @@
 
-function initListWidgetForm(id)
+function addItemStaticForm()
 {
-    // Disable entity select when we submit the form
-    $vic('form#' + id ) .on('submit', function (e){
-        $vic('select.add_' + id + '_link').prop('disabled', true);
-    });
-}
-
-function initStaticListWidgetForm(id)
-{
-    var collectionHolder = $vic('ul.items');
-
-    // ajoute un lien « add a item »
-    var $addItemLink = $vic('<a href="#" class="add_item_link">Ajouter un item</a>');
-    var $newLinkLi = $vic('<li></li>').append($addItemLink);
-
-    // ajoute l'ancre « ajouter un item » et li à la balise ul
-    collectionHolder.append($newLinkLi);
-
-    $addItemLink.on('click', function (e) 
-    {
-        // empêche le lien de créer un « # » dans l'URL
-        e.preventDefault();
-
-        // ajoute un nouveau formulaire item
-        addItemForm(collectionHolder, $newLinkLi);
-    });
-}
-
-function addItemForm(collectionHolder, $newLinkLi)
-{
-    // Récupère l'élément ayant l'attribut data-prototype comme expliqué plus tôt
-    var prototype = collectionHolder.attr('data-prototype');
-
-    // Remplace '__name__' dans le HTML du prototype par un nombre basé sur
-    // la longueur de la collection courante
-    var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
-
-    // Affiche le formulaire dans la page dans un li, avant le lien "ajouter un item"
-    var $newFormLi = $vic('<li></li>').append(newForm);
-    $newLinkLi.before($newFormLi);
-}
-
-
-function addItemEntityForm(formId)
-{
-    var collectionHolder = $vic('#picker-' + formId + ' ul');
+    var collectionHolder = $vic('#picker-static ul.items');
     
     // Récupère l'élément ayant l'attribut data-prototype comme expliqué plus tôt
     var prototype = collectionHolder.attr('data-prototype');
@@ -58,6 +14,24 @@ function addItemEntityForm(formId)
     var $newFormLi = $vic('<li></li>').append(newForm);
     collectionHolder.append($newFormLi);
 }
+
+function addItemEntityForm(formId)
+{
+    var collectionHolder = $vic('#picker-' + formId + '-entity ul');
+    
+    // Récupère l'élément ayant l'attribut data-prototype comme expliqué plus tôt
+    var prototype = collectionHolder.attr('data-prototype');
+
+    // Remplace '__name__' dans le HTML du prototype par un nombre basé sur
+    // la longueur de la collection courante
+    var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
+
+    // Affiche le formulaire dans la page dans un li, avant le lien "ajouter un item"
+    var $newFormLi = $vic('<li></li>').append(newForm);
+    collectionHolder.append($newFormLi);
+}
+
+/*
 function ajaxUpdateListItems(url, data, successCallback)
 {
     $vic.ajax(
@@ -76,7 +50,7 @@ function ajaxUpdateListItems(url, data, successCallback)
         }
     });
 }
-
+/*
 $vic(document).on('click', '.remove-widget-listing-item', function (e) 
 {
     e.preventDefault();
@@ -118,4 +92,4 @@ function sortWidgetListItems(list_id)
             }
         });
     });
-}
+}*/
