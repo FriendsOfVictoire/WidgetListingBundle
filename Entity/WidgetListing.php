@@ -50,7 +50,6 @@ class WidgetListing extends Widget
         foreach ($items as $item) {
             $item->setListing($this);
             $item->setPage($this->getPage());
-            $item->setMode($this->getMode());
             $item->setSlot($this->getSlot());
         }
         $this->items = $items;

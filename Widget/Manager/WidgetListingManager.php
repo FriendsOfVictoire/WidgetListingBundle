@@ -75,4 +75,59 @@ class WidgetListingManager extends BaseWidgetManager implements WidgetManagerInt
         //set the array to the current widget
         $widget->setItems($widgetItems);
     }
+
+    /**
+     * Get the widget query result
+     *
+     * @param Widget $widget The widget
+     *
+     * @return array The list of entities
+     */
+    protected function getWidgetQueryResults(Widget $widget)
+    {
+        $em = $this->getEntityManager();
+
+        $itemsQueryBuilder = $em
+        ->createQueryBuilder()
+        ->select('item')
+        ->from($widget->getBusinessClass(), 'item');
+
+        // add this fake condition to ensure that there is always a "where" clause.
+        // In query mode, usage of "AND" will be always valid instead of "WHERE"
+        $itemsQueryBuilder->andWhere('1 = 1');
+
+        if ($this->container->has('victoire_core.filter_chain')) {
+            $request = $this->container->get('request');
+            $filters = $request->query->get('victoire_form_filter');
+
+            //the id is an integer
+            $listId = intval($filters['listing']);
+
+            //if the filters is the widget id
+            if ($listId === $widget->getId()) {
+                unset($filters['listing']);
+
+                $filterChains = $this->container->get('victoire_core.filter_chain');
+
+                //we parse the filters
+                foreach ($filterChains->getFilters() as $name => $filter) {
+                    if (!empty($filters[$name])) {
+                        zdebug($filters[$name]);
+                        $filter->buildQuery($itemsQueryBuilder, $filters[$name]);
+                        $widget->filters[$name] = $filter->getFilters($filters[$name]);
+                    }
+                }
+            }
+        }
+
+        //add the query of the widget
+        $query = $widget->getQuery();
+
+        //we add the
+        $itemsQuery = $itemsQueryBuilder->getQuery()->getDQL() . " " . $query;
+
+        $items = $em->createQuery($itemsQuery)->setParameters($itemsQueryBuilder->getParameters())->getResult();
+
+        return $items;
+    }
 }
