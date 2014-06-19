@@ -122,7 +122,7 @@ class WidgetListingManager extends BaseWidgetManager implements WidgetManagerInt
         //add the query of the widget
         $query = $widget->getQuery();
 
-        //we add the
+        //we add the query
         $itemsQuery = $itemsQueryBuilder->getQuery()->getDQL() . " " . $query;
 
         $items = $em->createQuery($itemsQuery)->setParameters($itemsQueryBuilder->getParameters())->getResult();
