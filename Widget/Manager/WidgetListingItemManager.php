@@ -139,8 +139,6 @@ class WidgetListingItemManager extends BaseWidgetManager implements WidgetManage
      */
     protected function getWidgetQueryContent(Widget $widget)
     {
-        zdebug(__FUNCTION__);
-
         $mode = $widget->getMode();
         throw new \Exception('The mode ['.$mode.'] is not yet supported by the widget manager. Widget ID:['.$widget->getId().']');
     }

@@ -112,7 +112,6 @@ class WidgetListingManager extends BaseWidgetManager implements WidgetManagerInt
                 //we parse the filters
                 foreach ($filterChains->getFilters() as $name => $filter) {
                     if (!empty($filters[$name])) {
-                        zdebug($filters[$name]);
                         $filter->buildQuery($itemsQueryBuilder, $filters[$name]);
                         $widget->filters[$name] = $filter->getFilters($filters[$name]);
                     }
