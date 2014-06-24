@@ -9,6 +9,8 @@ use Victoire\Bundle\CoreBundle\Form\EntityProxyFormType;
 use Victoire\Bundle\CoreBundle\Form\WidgetType;
 use Victoire\Widget\ListingBundle\Form\WidgetListingItemType;
 use Victoire\Bundle\CoreBundle\Entity\Widget;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 
 /**
@@ -26,8 +28,11 @@ class WidgetListingType extends WidgetType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->options = $options;
+
         $namespace = $options['namespace'];
         $entityName = $options['entityName'];
+        $mode = $options['mode'];
 
         if ($entityName !== null) {
             if ($namespace === null) {
@@ -35,10 +40,7 @@ class WidgetListingType extends WidgetType
             }
         }
 
-        $mode = Widget::MODE_STATIC;
-
-        //choose form mode
-        if ($entityName === null) {
+        if ($mode === Widget::MODE_STATIC) {
             //if no entity is given, we generate the static form
             $builder->add('items', 'collection', array(
                 'type' => 'victoire_widget_form_listingitem',
@@ -48,20 +50,23 @@ class WidgetListingType extends WidgetType
                 'by_reference' => false,
                 'options' => array(
                     'namespace' => $namespace,
-                    'entityName' => $entityName
+                    'entityName' => $entityName,
+                    'mode' => $mode
                 ),
                 "attr" => array('id' => 'static')
             ));
-        } else {
-            $mode = Widget::MODE_ENTITY;
+        }
 
+        if ($mode === Widget::MODE_ENTITY) {
+            $builder
+                ->add('slot', 'hidden')
+                ->add('fields', 'widget_fields', array(
+                    'label' => 'widget.form.fields.label',
+                    'namespace' => $options['namespace'],
+                    'widget'    => $options['widget']
+                ));
             //else, WidgetType class will embed a EntityProxyType for given entity
             $builder
-                ->add('query')
-                 ->add('fields', 'widget_fields', array(
-                     "namespace" => $namespace,
-                     "widget" => $options['widget']
-                 ))
                 ->add('items', 'collection', array(
                         'type' => 'victoire_widget_form_listingitem',
                         'allow_add' => true,
@@ -70,16 +75,51 @@ class WidgetListingType extends WidgetType
                         'by_reference' => false,
                         'options' => array(
                             'namespace' => $namespace,
-                            'entityName' => $entityName
+                            'entityName' => $entityName,
+                            'mode' => $mode
                         ),
                         "attr" => array('id' => $entityName)
                     ));
+        }
+
+        if ($mode === Widget::MODE_QUERY) {
+            parent::addQueryFields($builder);
         }
 
         //add the mode to the form
         $builder->add('mode', 'hidden', array(
             'data' => $mode
         ));
+
+        //we use the PRE_SUBMIT event to set the mode option
+        $builder->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            function (FormEvent $event)
+            {
+                $options = $this->options;
+
+                //we get the raw data for the widget form
+                $rawData = $event->getData();
+
+                //get the posted mode
+                $mode = $rawData['mode'];
+
+                //get the form to add more fields
+                $form = $event->getForm();
+
+                //the controller does not use the mode to construct the form, so we update it automatically
+                if ($mode === Widget::MODE_ENTITY) {
+                    $this->addEntityFields($form);
+                }
+
+                if ($mode === Widget::MODE_QUERY) {
+                    $this->addQueryFields($form);
+                }
+                if ($mode === Widget::MODE_BUSINESS_ENTITY) {
+                    $this->addBusinessEntityFields($form);
+                }
+            }
+        );
     }
 
     /**
