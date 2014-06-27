@@ -1,156 +1,132 @@
 <?php
-namespace Victoire\ListingBundle\Widget\Manager;
+namespace Victoire\Widget\ListingBundle\Widget\Manager;
 
-use Victoire\ListingBundle\Form\WidgetListingType;
-use Victoire\ListingBundle\Entity\WidgetListing;
-use Victoire\Bundle\CoreBundle\Event±WidgetQueryEvent;
-use Victoire\Bundle\CoreBundle\VictoireCmsEvents;
-use Victoire\Bundle\CoreBundle\Event\WidgetQueryEvent;
 
-class WidgetListingManager
+use Victoire\Bundle\CoreBundle\Widget\Managers\BaseWidgetManager;
+use Victoire\Bundle\CoreBundle\Entity\Widget;
+use Victoire\Bundle\CoreBundle\Widget\Managers\WidgetManagerInterface;
+
+use Victoire\Widget\ListingBundle\Entity\WidgetListingItem;
+
+/**
+ * CRUD operations on WidgetRedactor Widget
+ *
+ * The widget view has two parameters: widget and content
+ *
+ * widget: The widget to display, use the widget as you wish to render the view
+ * content: This variable is computed in this WidgetManager, you can set whatever you want in it and display it in the show view
+ *
+ * The content variable depends of the mode: static/businessEntity/entity/query
+ *
+ * The content is given depending of the mode by the methods:
+ *  getWidgetStaticContent
+ *  getWidgetBusinessEntityContent
+ *  getWidgetEntityContent
+ *  getWidgetQueryContent
+ *
+ * So, you can use the widget or the content in the show.html.twig view.
+ * If you want to do some computation, use the content and do it the 4 previous methods.
+ *
+ * If you just want to use the widget and not the content, remove the method that throws the exceptions.
+ *
+ * By default, the methods throws Exception to notice the developer that he should implements it owns logic for the widget
+ *
+ */
+class WidgetListingManager extends BaseWidgetManager implements WidgetManagerInterface
 {
-    protected $container;
-
     /**
-     * constructor
+     * The name of the widget
      *
-     * @param ServiceContainer $container
+     * @return string
      */
-    public function __construct($container)
+    public function getWidgetName()
     {
-        $this->container = $container;
+        return 'Listing';
     }
 
-    /**
-     * create a new WidgetListing
-     * @param Page   $page
-     * @param string $slot
-     *
-     * @return $widget
-     */
-    public function newWidget($page, $slot)
-    {
-        $widget = new WidgetListing();
-        $widget->setPage($page);
-        $widget->setSlot($slot);
 
-        return $widget;
-    }
     /**
-     * render the WidgetListing
+     * Get the content of the widget for the query mode
+     *
      * @param Widget $widget
-     *
-     * @return widget show
+     * @throws \Exception
      */
-    public function render($widget)
+    protected function getWidgetQueryContent(Widget $widget)
     {
+        $items = $this->getWidgetQueryResults($widget);
 
+        $widgetItems = array();
 
-        $listingId = $this->container->get('request')->query->get('filter')['listing'];
-        $dispatcher = $this->container->get('event_dispatcher');
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        $query = "";
-        if ($widget->getQuery() !== null) {
+        //parse the results
+        foreach ($items as $item) {
+            //create temporary widgetListing item for the render
+            $itemWidget = new WidgetListingItem();
 
-            $itemsQueryBuilder = $em
-                 ->createQueryBuilder()
-                 ->select('item')
-                 ->from($widget->getBusinessClass(), 'item');
+            //set the entity found
+            $itemWidget->setEntity($item);
+            //simulate the entity mode
+            $itemWidget->setMode(Widget::MODE_ENTITY);
 
-            $query = $widget->getQuery();
-        } else {
-            $itemsQueryBuilder = $this->container->get('doctrine.orm.entity_manager')
-                 ->createQueryBuilder()
-                 ->select('item')
-                 ->from('VictoireListingBundle:WidgetListingItem', 'item')
-                 ->join('item.listing', 'listing')
-                 ->where('listing.id = :listing')
-                 ->setParameter('listing', $listingId);
+            //add it to the array
+            $widgetItems[] = $itemWidget;
+            unset($itemWidget);
         }
 
+        //set the array to the current widget
+        $widget->setItems($widgetItems);
+    }
 
-        $dispatcher->dispatch(VictoireCmsEvents::WIDGET_POST_QUERY, new WidgetQueryEvent($widget, $itemsQueryBuilder, $this->container->get('request')));
+    /**
+     * Get the widget query result
+     *
+     * @param Widget $widget The widget
+     *
+     * @return array The list of entities
+     */
+    protected function getWidgetQueryResults(Widget $widget)
+    {
+        $em = $this->getEntityManager();
 
+        $itemsQueryBuilder = $em
+        ->createQueryBuilder()
+        ->select('item')
+        ->from($widget->getBusinessClass(), 'item');
+
+        // add this fake condition to ensure that there is always a "where" clause.
+        // In query mode, usage of "AND" will be always valid instead of "WHERE"
+        $itemsQueryBuilder->andWhere('1 = 1');
+
+        if ($this->container->has('victoire_core.filter_chain')) {
+            $request = $this->container->get('request');
+            $filters = $request->query->get('victoire_form_filter');
+
+            //the id is an integer
+            $listId = intval($filters['listing']);
+
+            //if the filters is the widget id
+            if ($listId === $widget->getId()) {
+                unset($filters['listing']);
+
+                $filterChains = $this->container->get('victoire_core.filter_chain');
+
+                //we parse the filters
+                foreach ($filterChains->getFilters() as $name => $filter) {
+                    if (!empty($filters[$name])) {
+                        $filter->buildQuery($itemsQueryBuilder, $filters[$name]);
+                        $widget->filters[$name] = $filter->getFilters($filters[$name]);
+                    }
+                }
+            }
+        }
+
+        //add the query of the widget
+        $query = $widget->getQuery();
+
+        //we add the query
         $itemsQuery = $itemsQueryBuilder->getQuery()->getDQL() . " " . $query;
 
-        $items = $em->createQuery($itemsQuery)
-                        ->setParameters($itemsQueryBuilder->getParameters())
-                        ;
+        $items = $em->createQuery($itemsQuery)->setParameters($itemsQueryBuilder->getParameters())->getResult();
 
-        $items = $em->createQuery($itemsQuery)
-                        ->setParameters($itemsQueryBuilder->getParameters())
-                        ->getResult();
-
-        return $this->container->get('victoire_templating')->render(
-            "VictoireListingBundle::show.html.twig",
-            array(
-                "widget" => $widget,
-                "items" => $items
-            )
-        );
+        return $items;
     }
-
-    /**
-     * render WidgetListing  form
-     * @param Form           $form
-     * @param WidgetListing  $widget
-     * @param BusinessEntity $entity
-     * @return form
-     */
-    public function renderForm($form, $widget, $entity = null)
-    {
-
-        return $this->container->get('victoire_templating')->render(
-            "VictoireListingBundle::edit.html.twig",
-            array(
-                "widget" => $widget,
-                'form'   => $form->createView(),
-                'id'     => $widget->getId(),
-                'entity' => $entity
-            )
-        );
-    }
-
-    /**
-     * create a form with given widget
-     * @param WidgetListing $widget
-     * @param string        $entityName
-     * @param string        $namespace
-     * @return $form
-     */
-    public function buildForm($widget, $entityName = null, $namespace = null)
-    {
-        $form = $this->container->get('form.factory')->create(new WidgetListingType($entityName, $namespace), $widget);
-
-        return $form;
-    }
-
-    /**
-     * create form new for WidgetListing
-     * @param Form           $form
-     * @param WidgetListing  $widget
-     * @param string         $slot
-     * @param Page           $page
-     * @param string         $entity
-     *
-     * @return new form
-     */
-    public function renderNewForm($form, $widget, $slot, $page, $entity = null)
-    {
-
-        return $this->container->get('victoire_templating')->render(
-            "VictoireListingBundle::new.html.twig",
-            array(
-                "widget"          => $widget,
-                'form'            => $form->createView(),
-                "slot"            => $slot,
-                "entity"          => $entity,
-                "renderContainer" => true,
-                "page"            => $page
-            )
-        );
-    }
-
-
-
 }

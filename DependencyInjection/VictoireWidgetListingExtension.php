@@ -1,6 +1,6 @@
 <?php
 
-namespace Victoire\ListingBundle\DependencyInjection;
+namespace Victoire\Widget\ListingBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -12,10 +12,13 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class VictoireListingExtension extends Extension
+class VictoireWidgetListingExtension extends Extension
 {
     /**
-     * {@inheritDoc}
+     * Load configuration
+     *
+     * @param array $configs
+     * @param ContainerBuilder $container
      */
     public function load(array $configs, ContainerBuilder $container)
     {

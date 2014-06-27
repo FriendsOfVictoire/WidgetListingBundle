@@ -1,25 +1,11 @@
-{% block body %}
-
-{#
-   _   _   _   _   _   _   _
-  / \ / \ / \ / \ / \ / \ / \
- ( C ) o ) m ) m ) o ) n ) s )
-  \_/ \_/ \_/ \_/ \_/ \_/ \_/
-
-#}
-
-<div class="vic-widget vic-widget-listing" id="widget-{{widget.id}}">
-{% block actions %}{{cms_widget_actions(widget)}}{% endblock actions %}
+{% extends 'VictoireCoreBundle:Widget:show.html.twig' %}
 
 {% block content %}
-{#Booya ! Replace this default rendering by your own logic#}
-<ul>
-{% for item in items %}
-    {% include "VictoireListingBundle::showItem.html.twig" %}
-{% endfor %}
-</ul>
-{#Enjoy !#}
+	<ul>
+		{% for item in widget.items %}
+		      <li>
+ 		             {{ cms_widget(item) }}
+ 		      </li>
+		{% endfor %}
+	</ul>
 {% endblock content %}
-</div>
-
-{% endblock body %}

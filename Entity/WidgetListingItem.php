@@ -1,6 +1,6 @@
 <?php
 
-namespace Victoire\ListingBundle\Entity;
+namespace Victoire\Widget\ListingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\Bundle\CoreBundle\Annotations as VIC;
@@ -45,44 +45,22 @@ class WidgetListingItem extends Widget
     protected $position = 0;
 
     /**
-     * if __isset returns true, returns linked entity value
-     * else, call default get() method
-     *
-     * @param string $name magic called value
-     * @return liked entity value
-     **/
-    public function __get($name)
-    {
-        if ($this->getEntity()) {
-            return $this->getEntity()->getReferedValue($this->getListing()->getBusinessEntityName(), $name);
-        }
-    }
-
-    /**
-     * check if asked field is defined in the entity
-     * and if entity is in proxy mode
-     *
-     * @param string $name magic called value
-     * @return liked entity value
-     **/
-    public function __isset($name)
-    {
-        if (array_key_exists($name, get_class_vars(get_class($this)))) {
-            if ($this->getListing() && $this->getListing()->getBusinessEntityName()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-    /**
      * Get fields
      *
      * @return string
      */
     public function getFields()
     {
-        return $this->getListing()->getFields();
+        $fields = array();
+
+        //get the listing
+        $listing = $this->getListing();
+
+        if ($listing !== null) {
+            $fields = $listing->getFields();
+        }
+
+        return $fields;
     }
 
     /**

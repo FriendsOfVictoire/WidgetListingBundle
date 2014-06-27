@@ -1,0 +1,27 @@
+{% if entity != null %}
+    <div id="picker-{{entity}}-{{ form.mode.vars.data }}" class="vic-tab-pane {% if form.mode.vars.data == 'entity' %}vic-active{% endif %}">
+        {{ form_start(form) }}
+            {% if form.mode.vars.data == 'entity' %}
+                <a class="add_item_link" href="#" onClick='addItemEntityForm("{{ form.items.vars.attr.id }}")'>Ajouter un item</a>
+                <ul class="entityItems" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
+                    {% for item in form.items %}
+                        {{ form_row(item) }}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {{form_rest(form)}}
+        {{ form_end(form) }}
+    </div>
+{% else %}
+    <div id="picker-{{ form.mode.vars.data }}" class="vic-tab-pane vic-active">
+        {{ form_start(form) }}
+        <a href="#" class="add_item_link" onClick='addItemStaticForm();'>Ajouter un item</a>
+        <ul class="items" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
+            {% for item in form.items %}
+                {{ form_row(item) }}
+            {% endfor %}
+        </ul>
+        {{form_rest(form)}}
+        {{ form_end(form) }}
+    </div>
+{% endif %}

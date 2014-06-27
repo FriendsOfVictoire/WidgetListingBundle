@@ -1,5 +1,5 @@
 <?php
-namespace Victoire\ListingBundle\Entity;
+namespace Victoire\Widget\ListingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\Bundle\CoreBundle\Entity\Widget;
@@ -49,6 +49,8 @@ class WidgetListing extends Widget
     {
         foreach ($items as $item) {
             $item->setListing($this);
+            $item->setPage($this->getPage());
+            $item->setSlot($this->getSlot());
         }
         $this->items = $items;
 
@@ -58,13 +60,16 @@ class WidgetListing extends Widget
     /**
      * Add items
      *
-     * @param \Victoire\ListingBundle\Entity\WidgetListingItem $item
+     * @param \Victoire\Widget\ListingBundle\Entity\WidgetListingItem $item
      *
      * @return WidgetListing
      */
-    public function addItem(\Victoire\ListingBundle\Entity\WidgetListingItem $item)
+    public function addItem(\Victoire\Widget\ListingBundle\Entity\WidgetListingItem $item)
     {
         $item->setListing($this);
+        $item->setPage($this->getPage());
+        $item->setSlot($this->getSlot());
+        $item->setMode($this->getMode());
         $this->items[] = $item;
 
         return $this;
@@ -73,9 +78,9 @@ class WidgetListing extends Widget
     /**
      * Remove items
      *
-     * @param \Victoire\ListingBundle\Entity\WidgetListingItem $items
+     * @param \Victoire\Widget\ListingBundle\Entity\WidgetListingItem $items
      */
-    public function removeItem(\Victoire\ListingBundle\Entity\WidgetListingItem $items)
+    public function removeItem(\Victoire\Widget\ListingBundle\Entity\WidgetListingItem $items)
     {
         $this->items->removeElement($items);
     }

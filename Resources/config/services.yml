@@ -1,21 +1,37 @@
 services:
+
     victoire_core.twig.widget_listing_manager:
-        class: Victoire\ListingBundle\Widget\Manager\WidgetListingManager
-        arguments: [@service_container]
+        class: Victoire\Widget\ListingBundle\Widget\Manager\WidgetListingManager
+        arguments: 
+            - "@service_container"
 
     widget_listing_manager:
         alias: victoire_core.twig.widget_listing_manager
-    widget_list_manager:
-        alias: victoire_core.twig.widget_listing_manager
-
+        
+    #alias to the entity
+    victoire.widget.listing:
+        class: Victoire\Widget\ListingBundle\Entity\WidgetListing
+    #alias to the form
+    victoire.widget.form.listing:
+        class: Victoire\Widget\ListingBundle\Form\WidgetListingType
+        tags:
+            - { name: form.type , alias: victoire_widget_form_listing}
+            
     victoire_core.twig.widget_listingitem_manager:
-        class: Victoire\ListingBundle\Widget\Manager\WidgetListingItemManager
-        arguments: [@service_container]
+        class: Victoire\Widget\ListingBundle\Widget\Manager\WidgetListingItemManager
+        arguments: 
+            - "@service_container"
 
     widget_listingitem_manager:
         alias: victoire_core.twig.widget_listingitem_manager
-
-    widget_listing.routing_loader:
-        class: Victoire\ListingBundle\Routing\WidgetListingLoader
+        
+    #alias to the entity
+    victoire.widget.listingitem:
+        class: Victoire\Widget\ListingBundle\Entity\WidgetListingItem
+    #alias to the form
+    victoire.widget.form.listingitem:
+        class: Victoire\Widget\ListingBundle\Form\WidgetListingItemType
         tags:
-            - { name: routing.loader }
+            - { name: form.type , alias: victoire_widget_form_listingitem}
+            
+            
