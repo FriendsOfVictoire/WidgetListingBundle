@@ -91,6 +91,9 @@ class WidgetListingType extends WidgetType
             'data' => $mode
         ));
 
+        //add the slot to the form
+        $builder->add('slot', 'hidden', array());
+
         //we use the PRE_SUBMIT event to set the mode option
         $builder->addEventListener(
             FormEvents::PRE_SUBMIT,
