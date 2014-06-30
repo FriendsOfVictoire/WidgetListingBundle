@@ -4,6 +4,7 @@ services:
         class: Victoire\Widget\ListingBundle\Widget\Manager\WidgetListingManager
         arguments: 
             - "@service_container"
+            - "Listing"
 
     widget_listing_manager:
         alias: victoire_core.twig.widget_listing_manager
@@ -21,6 +22,7 @@ services:
         class: Victoire\Widget\ListingBundle\Widget\Manager\WidgetListingItemManager
         arguments: 
             - "@service_container"
+            - "ListingItem"
 
     widget_listingitem_manager:
         alias: victoire_core.twig.widget_listingitem_manager

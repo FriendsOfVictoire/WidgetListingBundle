@@ -34,17 +34,6 @@ use Victoire\Bundle\CoreBundle\Event\WidgetRenderEvent;
  */
 class WidgetListingItemManager extends BaseWidgetManager implements WidgetManagerInterface
 {
-
-    /**
-     * The name of the widget
-     *
-     * @return string
-     */
-    public function getWidgetName()
-    {
-        return 'ListingItem';
-    }
-
     /**
      * Get the name of the widget bundle
      *
