@@ -23,6 +23,7 @@ services:
         arguments: 
             - "@service_container"
             - "ListingItem"
+            - "VictoireWidgetListingBundle"
 
     widget_listingitem_manager:
         alias: victoire_core.twig.widget_listingitem_manager
