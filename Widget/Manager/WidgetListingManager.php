@@ -35,17 +35,6 @@ use Victoire\Widget\ListingBundle\Entity\WidgetListingItem;
 class WidgetListingManager extends BaseWidgetManager implements WidgetManagerInterface
 {
     /**
-     * The name of the widget
-     *
-     * @return string
-     */
-    public function getWidgetName()
-    {
-        return 'Listing';
-    }
-
-
-    /**
      * Get the content of the widget for the query mode
      *
      * @param Widget $widget
