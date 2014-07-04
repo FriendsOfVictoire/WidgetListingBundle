@@ -74,12 +74,10 @@ class WidgetListingManager extends BaseWidgetManager implements WidgetManagerInt
      */
     protected function getWidgetQueryResults(Widget $widget)
     {
-        $em = $this->getEntityManager();
+        $queryHelper = $this->get('victoire_query.query_helper');
 
-        $itemsQueryBuilder = $em
-        ->createQueryBuilder()
-        ->select('item')
-        ->from($widget->getBusinessClass(), 'item');
+        //get the base query
+        $itemsQueryBuilder = $queryHelper->getQueryBuilder($widget);
 
         // add this fake condition to ensure that there is always a "where" clause.
         // In query mode, usage of "AND" will be always valid instead of "WHERE"
@@ -109,12 +107,7 @@ class WidgetListingManager extends BaseWidgetManager implements WidgetManagerInt
         }
 
         //add the query of the widget
-        $query = $widget->getQuery();
-
-        //we add the query
-        $itemsQuery = $itemsQueryBuilder->getQuery()->getDQL() . " " . $query;
-
-        $items = $em->createQuery($itemsQuery)->setParameters($itemsQueryBuilder->getParameters())->getResult();
+        $items = $queryHelper->getResultsAddingSubQuery($widget, $itemsQueryBuilder);
 
         return $items;
     }
