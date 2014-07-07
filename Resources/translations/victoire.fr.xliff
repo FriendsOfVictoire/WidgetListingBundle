@@ -6,15 +6,19 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="da39a3ee5e6b4b0d3255bfef95601890afd80709" resname="">
-        <source></source>
-        <target state="new"></target>
-      </trans-unit>
       <trans-unit id="77ff90fd1a56d5dee1b0d3e83155d275172b73a8" resname="modal.form.widget.type.listing.label">
         <source>modal.form.widget.type.listing.label</source>
         <target>Widget Liste</target>
       </trans-unit>
-      <trans-unit id="910b1d053d7881577dd1c2537dadf3b92ad36f98" resname="widget.listing.new.action.label">
+      <trans-unit id="83c40c3c50480013678086b0b9a8bdcafeff3348" resname="widget.form.collection.remove">
+        <source>widget.form.collection.remove</source>
+        <target>Supprimer</target>
+      </trans-unit>
+      <trans-unit id="e73f4ed23832568330c963f0e40ac22daa9ab2c9" resname="widget.form.fields.label">
+        <source>widget.form.fields.label</source>
+        <target state="new">widget.form.fields.label</target>
+      </trans-unit>
+      <trans-unit id="7795f1ac8680b91327a4a2a23b71cda8abc53bba" resname="widget.listing.new.action.label">
         <source>widget.listing.new.action.label</source>
         <target>Liste</target>
       </trans-unit>

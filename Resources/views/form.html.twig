@@ -5,7 +5,9 @@
                 <a class="add_item_link" href="#" onClick='addItemEntityForm("{{ form.items.vars.attr.id }}")'>Ajouter un item</a>
                 <ul class="entityItems" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
                     {% for item in form.items %}
-                        {{ form_row(item) }}
+                        <li>
+                            {{ form_row(item) }}
+                        </li>
                     {% endfor %}
                 </ul>
             {% endif %}
@@ -18,10 +20,20 @@
         <a href="#" class="add_item_link" onClick='addItemStaticForm();'>Ajouter un item</a>
         <ul class="items" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
             {% for item in form.items %}
-                {{ form_row(item) }}
+                <li>
+                    {{ form_row(item) }}
+                </li>
             {% endfor %}
         </ul>
         {{form_rest(form)}}
         {{ form_end(form) }}
     </div>
 {% endif %}
+
+
+<script type="text/javascript">
+    $vic(document).on('click', 'button[data-action="remove-block"]', function(e) {
+        e.preventDefault();
+        $(this).parents('li').remove();
+    });
+</script>
