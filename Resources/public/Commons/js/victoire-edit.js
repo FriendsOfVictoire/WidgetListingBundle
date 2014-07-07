@@ -1,4 +1,8 @@
 
+//the index for the list begins at 1000 to avoid conflicts, we will never have 1000 items in the manual lists
+var addItemStaticFormIndex = 1000;
+var addItemEntityFormIndex = 1000;
+
 function addItemStaticForm()
 {
     var collectionHolder = $vic('#picker-static ul.items');
@@ -8,7 +12,10 @@ function addItemStaticForm()
 
     // Remplace '__name__' dans le HTML du prototype par un nombre basé sur
     // la longueur de la collection courante
-    var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
+    var newForm = prototype.replace(/__name__/g, addItemStaticFormIndex);
+    
+    //incremente index for the list
+    addItemStaticFormIndex = addItemStaticFormIndex + 1;
 
     // Affiche le formulaire dans la page dans un li, avant le lien "ajouter un item"
     var $newFormLi = $vic('<li></li>').append(newForm);
@@ -24,8 +31,11 @@ function addItemEntityForm(formId)
 
     // Remplace '__name__' dans le HTML du prototype par un nombre basé sur
     // la longueur de la collection courante
-    var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
+    var newForm = prototype.replace(/__name__/g, addItemEntityFormIndex);
 
+    //incremente index for the list
+    addItemEntityFormIndex = addItemEntityFormIndex + 1;
+    
     // Affiche le formulaire dans la page dans un li, avant le lien "ajouter un item"
     var $newFormLi = $vic('<li></li>').append(newForm);
     collectionHolder.append($newFormLi);

@@ -15,7 +15,7 @@ class WidgetListing extends Widget
     /**
      * @var string
      *
-     * @ORM\OneToMany(targetEntity="WidgetListingItem", mappedBy="listing", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="WidgetListingItem", mappedBy="listing", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      *
      */

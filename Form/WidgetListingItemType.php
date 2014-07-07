@@ -43,6 +43,13 @@ class WidgetListingItemType extends WidgetType
             $builder
                 ->add('title')
                 ->add('description');
+
+            //add the remove button
+            $builder->add('collection.remove', 'button', array(
+                'label' => 'widget.form.collection.remove',
+                'attr' => array('data-action' => 'remove-block')
+            ));
+
         } else {
             $mode = Widget::MODE_ENTITY;
 
@@ -56,6 +63,12 @@ class WidgetListingItemType extends WidgetType
                     'namespace'   => $namespace,
                     'widget'      => $options['widget']
                 ));
+
+            //add the remove button
+            $builder->add('collection.remove', 'button', array(
+                'label' => 'widget.form.collection.remove',
+                'attr' => array('data-action' => 'remove-block')
+            ));
         }
 
         //add the mode to the form
