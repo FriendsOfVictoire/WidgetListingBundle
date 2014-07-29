@@ -1,7 +1,6 @@
 <?php
 namespace Victoire\Widget\ListingBundle\Widget\Manager;
 
-
 use Victoire\Bundle\CoreBundle\Widget\Managers\BaseWidgetManager;
 use Victoire\Bundle\CoreBundle\Entity\Widget;
 use Victoire\Bundle\CoreBundle\Widget\Managers\WidgetManagerInterface;
@@ -53,7 +52,7 @@ class WidgetListingItemManager extends BaseWidgetManager implements WidgetManage
 
     /**
      * Get the business entity content
-     * @param Widget $widget
+     * @param  Widget   $widget
      * @return Ambigous <string, unknown, \Victoire\Bundle\CoreBundle\Widget\Managers\mixed, mixed>
      *
      * @throws \Exception
@@ -110,7 +109,7 @@ class WidgetListingItemManager extends BaseWidgetManager implements WidgetManage
     /**
      * Get the content of the widget for the query mode
      *
-     * @param Widget $widget
+     * @param  Widget     $widget
      * @throws \Exception
      */
     protected function getWidgetQueryContent(Widget $widget)
@@ -125,7 +124,7 @@ class WidgetListingItemManager extends BaseWidgetManager implements WidgetManage
      *
      * @return widget show
      */
-    public function render(Widget $widget)
+    public function render(Widget $widget, $entity = null)
     {
         //the templating service
         $templating = $this->container->get('victoire_templating');
@@ -153,14 +152,14 @@ class WidgetListingItemManager extends BaseWidgetManager implements WidgetManage
      *
      * @return template
      */
-    public function renderContainer(Widget $widget, $addContainer = false)
+    public function renderContainer(Widget $widget, $addContainer = false, $entity = null)
     {
         $html = '';
         $dispatcher = $this->container->get('event_dispatcher');
 
         $dispatcher->dispatch(VictoireCmsEvents::WIDGET_PRE_RENDER, new WidgetRenderEvent($widget, $html));
 
-        $html .= $this->render($widget);
+        $html .= $this->render($widget, $entity);
 
         if ($addContainer) {
             $html = "<div class='widget-container' id='vic-widget-".$widget->getId()."-container'>".$html.'</div>';

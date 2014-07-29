@@ -1,7 +1,6 @@
 <?php
 namespace Victoire\Widget\ListingBundle\Widget\Manager;
 
-
 use Victoire\Bundle\CoreBundle\Widget\Managers\BaseWidgetManager;
 use Victoire\Bundle\CoreBundle\Entity\Widget;
 use Victoire\Bundle\CoreBundle\Widget\Managers\WidgetManagerInterface;
@@ -37,7 +36,7 @@ class WidgetListingManager extends BaseWidgetManager implements WidgetManagerInt
     /**
      * Get the content of the widget for the query mode
      *
-     * @param Widget $widget
+     * @param  Widget     $widget
      * @throws \Exception
      */
     protected function getWidgetQueryContent(Widget $widget)
@@ -55,7 +54,6 @@ class WidgetListingManager extends BaseWidgetManager implements WidgetManagerInt
             $itemWidget->setEntity($item);
             //simulate the entity mode
             $itemWidget->setMode(Widget::MODE_ENTITY);
-
             //add it to the array
             $widgetItems[] = $itemWidget;
             unset($itemWidget);
@@ -78,10 +76,6 @@ class WidgetListingManager extends BaseWidgetManager implements WidgetManagerInt
 
         //get the base query
         $itemsQueryBuilder = $queryHelper->getQueryBuilder($widget);
-
-        // add this fake condition to ensure that there is always a "where" clause.
-        // In query mode, usage of "AND" will be always valid instead of "WHERE"
-        $itemsQueryBuilder->andWhere('1 = 1');
 
         if ($this->container->has('victoire_core.filter_chain')) {
             $request = $this->container->get('request');
