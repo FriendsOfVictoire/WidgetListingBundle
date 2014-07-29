@@ -74,6 +74,20 @@ class WidgetListingManager extends BaseWidgetManager implements WidgetManagerInt
     {
         $queryHelper = $this->get('victoire_query.query_helper');
 
+        return $this->getWidgetQueryBuilder($widget)->getQuery()->getResult();
+    }
+
+    /**
+     * Get the widget query result
+     *
+     * @param Widget $widget The widget
+     *
+     * @return array The list of entities
+     */
+    protected function getWidgetQueryBuilder(Widget $widget)
+    {
+        $queryHelper = $this->get('victoire_query.query_helper');
+
         //get the base query
         $itemsQueryBuilder = $queryHelper->getQueryBuilder($widget);
 
@@ -101,8 +115,6 @@ class WidgetListingManager extends BaseWidgetManager implements WidgetManagerInt
         }
 
         //add the query of the widget
-        $items = $queryHelper->getResultsAddingSubQuery($widget, $itemsQueryBuilder);
-
-        return $items;
+        return $queryHelper->buildWithSubQuery($widget, $itemsQueryBuilder);
     }
 }
