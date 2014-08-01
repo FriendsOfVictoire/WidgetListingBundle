@@ -149,6 +149,7 @@ class WidgetListingItemManager extends BaseWidgetManager implements WidgetManage
      *
      * @param Widget  $widget
      * @param boolean $addContainer
+     * @param Entity  $entity
      *
      * @return template
      */
@@ -162,7 +163,7 @@ class WidgetListingItemManager extends BaseWidgetManager implements WidgetManage
         $html .= $this->render($widget, $entity);
 
         if ($addContainer) {
-            $html = "<div class='widget-container' id='vic-widget-".$widget->getId()."-container'>".$html.'</div>';
+            $html = "<div id='vic-widget-".$widget->getId()."-container'>".$html.'</div>';
         }
 
         $dispatcher->dispatch(VictoireCmsEvents::WIDGET_POST_RENDER, new WidgetRenderEvent($widget, $html));
