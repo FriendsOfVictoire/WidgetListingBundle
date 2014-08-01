@@ -77,7 +77,7 @@ class WidgetListingItemManager extends BaseWidgetManager implements WidgetManage
         //the result
         $content = '';
 
-        $entity = $widget->getEntity();
+        $entity = $widget->getBusinessEntity();
 
         if ($entity === null) {
             throw new \Exception('The widget ['.$widget->getId().'] has no entity to display.');
