@@ -1,8 +1,5 @@
 victoire_core:
     widgets:
-        listing:
+        Listing:
             class: "Victoire\\Widget\\ListingBundle\\Entity\\WidgetListing"
-            name: listing
-        listingitem:
-            class: "Victoire\\Widget\\ListingBundle\\Entity\\WidgetListingItem"
-            name: listingitem
+            name: Listing
