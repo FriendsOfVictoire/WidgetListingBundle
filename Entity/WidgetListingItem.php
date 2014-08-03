@@ -9,7 +9,7 @@ use Victoire\Bundle\CoreBundle\Entity\Widget;
 /**
  * WidgetListingItem
  *
- * @ORM\Table("cms_widget_listing_item")
+ * @ORM\Table("vic_widget_listing_item")
  * @ORM\Entity
  */
 class WidgetListingItem extends Widget
@@ -65,8 +65,8 @@ class WidgetListingItem extends Widget
 
     /**
      * Set title
-     *
      * @param string $title
+     *
      * @return WidgetListingItem
      */
     public function setTitle($title)
@@ -88,8 +88,8 @@ class WidgetListingItem extends Widget
 
     /**
      * Set description
-     *
      * @param string $description
+     *
      * @return WidgetListingItem
      */
     public function setDescription($description)
@@ -110,8 +110,8 @@ class WidgetListingItem extends Widget
     }
     /**
      * Set listing
-     *
      * @param string $listing
+     *
      * @return WidgetListingItem
      */
     public function setListing($listing)
@@ -143,8 +143,7 @@ class WidgetListingItem extends Widget
 
     /**
      * Set position
-     *
-     * @param integer The position
+     * @param integer $position The position
      */
     public function setPosition($position)
     {

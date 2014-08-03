@@ -7,7 +7,7 @@ use Victoire\Bundle\CoreBundle\Entity\Widget;
 /**
  * WidgetListing
  *
- * @ORM\Table("cms_widget_listing")
+ * @ORM\Table("vic_widget_listing")
  * @ORM\Entity
  */
 class WidgetListing extends Widget
@@ -23,7 +23,7 @@ class WidgetListing extends Widget
 
     /**
      * To string function
-     * @return  string A string which represents the instance
+     * @return string A string which represents the instance
      */
     public function __toString()
     {
