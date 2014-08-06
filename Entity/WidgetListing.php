@@ -7,7 +7,7 @@ use Victoire\Bundle\WidgetBundle\Entity\Widget;
 /**
  * WidgetListing
  *
- * @ORM\Table("cms_widget_listing")
+ * @ORM\Table("vic_widget_listing")
  * @ORM\Entity
  */
 class WidgetListing extends Widget
