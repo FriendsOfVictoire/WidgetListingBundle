@@ -4,7 +4,7 @@ namespace Victoire\Widget\ListingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\Bundle\CoreBundle\Annotations as VIC;
-use Victoire\Bundle\CoreBundle\Entity\Widget;
+use Victoire\Bundle\WidgetBundle\Entity\Widget;
 
 /**
  * WidgetListingItem
@@ -66,7 +66,7 @@ class WidgetListingItem extends Widget
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string            $title
      * @return WidgetListingItem
      */
     public function setTitle($title)
@@ -89,7 +89,7 @@ class WidgetListingItem extends Widget
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string            $description
      * @return WidgetListingItem
      */
     public function setDescription($description)
@@ -111,7 +111,7 @@ class WidgetListingItem extends Widget
     /**
      * Set listing
      *
-     * @param string $listing
+     * @param  string            $listing
      * @return WidgetListingItem
      */
     public function setListing($listing)

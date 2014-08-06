@@ -2,7 +2,7 @@
 namespace Victoire\Widget\ListingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Victoire\Bundle\CoreBundle\Entity\Widget;
+use Victoire\Bundle\WidgetBundle\Entity\Widget;
 
 /**
  * WidgetListing
@@ -23,7 +23,7 @@ class WidgetListing extends Widget
 
     /**
      * To string function
-     * @return  string A string which represents the instance
+     * @return string A string which represents the instance
      */
     public function __toString()
     {
