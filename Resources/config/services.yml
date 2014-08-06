@@ -1,14 +1,9 @@
 services:
+    victoire_core.widget_listing_content_resolver:
+        class: Victoire\Widget\ListingBundle\Resolver\WidgetListingContentResolver
+        tags:
+            - { name: victoire_widget.widget_content_resolver, alias: Listing }
 
-    victoire_core.twig.widget_listing_manager:
-        class: Victoire\Widget\ListingBundle\Widget\Manager\WidgetListingManager
-        arguments: 
-            - "@service_container"
-            - "Listing"
-
-    widget_listing_manager:
-        alias: victoire_core.twig.widget_listing_manager
-        
     #alias to the entity
     victoire.widget.listing:
         class: Victoire\Widget\ListingBundle\Entity\WidgetListing
@@ -17,24 +12,4 @@ services:
         class: Victoire\Widget\ListingBundle\Form\WidgetListingType
         tags:
             - { name: form.type , alias: victoire_widget_form_listing}
-            
-    victoire_core.twig.widget_listingitem_manager:
-        class: Victoire\Widget\ListingBundle\Widget\Manager\WidgetListingItemManager
-        arguments: 
-            - "@service_container"
-            - "ListingItem"
-            - "VictoireWidgetListingBundle"
 
-    widget_listingitem_manager:
-        alias: victoire_core.twig.widget_listingitem_manager
-        
-    #alias to the entity
-    victoire.widget.listingitem:
-        class: Victoire\Widget\ListingBundle\Entity\WidgetListingItem
-    #alias to the form
-    victoire.widget.form.listingitem:
-        class: Victoire\Widget\ListingBundle\Form\WidgetListingItemType
-        tags:
-            - { name: form.type , alias: victoire_widget_form_listingitem}
-            
-            
