@@ -8,8 +8,6 @@ use Victoire\Bundle\WidgetBundle\Entity\Widget;
 
 /**
  *
- * @author Thomas Beaujean
- *
  */
 class WidgetListingItemType extends WidgetType
 {
