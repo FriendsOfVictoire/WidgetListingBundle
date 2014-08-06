@@ -1,12 +1,10 @@
 <?php
 namespace Victoire\Widget\ListingBundle\Form;
 
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Victoire\Bundle\CoreBundle\Form\WidgetType;
-use Victoire\Bundle\CoreBundle\Entity\Widget;
+use Victoire\Bundle\WidgetBundle\Entity\Widget;
 
 /**
  *
@@ -98,7 +96,6 @@ class WidgetListingItemType extends WidgetType
             'translation_domain' => 'victoire'
         ));
     }
-
 
     /**
      * get form name
