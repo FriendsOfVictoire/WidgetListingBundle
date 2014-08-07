@@ -4,7 +4,6 @@ namespace Victoire\Widget\ListingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\Bundle\CoreBundle\Annotations as VIC;
-use Victoire\Bundle\WidgetBundle\Entity\Widget;
 
 /**
  * WidgetListingItem
@@ -12,8 +11,17 @@ use Victoire\Bundle\WidgetBundle\Entity\Widget;
  * @ORM\Table("vic_widget_listing_item")
  * @ORM\Entity
  */
-class WidgetListingItem extends Widget
+class WidgetListingItem
 {
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
     /**
      * @var string
      *
@@ -43,6 +51,26 @@ class WidgetListingItem extends Widget
      * @ORM\Column(name="position", type="integer")
      */
     protected $position = 0;
+
+    /**
+     * Set the id
+     *
+     * @param integer $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * Get the id
+     *
+     * @return integer The id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Get fields
