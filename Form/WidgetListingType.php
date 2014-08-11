@@ -57,7 +57,7 @@ class WidgetListingType extends WidgetType
             $builder
                 ->add('slot', 'hidden')
                 ->add('fields', 'widget_fields', array(
-                    'label' => 'widget.form.fields.label',
+                    'label' => 'widget.form.entity.fields.label',
                     'namespace' => $options['namespace'],
                     'widget'    => $options['widget']
                 ));

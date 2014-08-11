@@ -14,9 +14,9 @@
         <source>widget.form.collection.remove</source>
         <target>Supprimer</target>
       </trans-unit>
-      <trans-unit id="e73f4ed23832568330c963f0e40ac22daa9ab2c9" resname="widget.form.fields.label">
-        <source>widget.form.fields.label</source>
-        <target state="new">widget.form.fields.label</target>
+      <trans-unit id="e73f4ed23832568330c963f0e40ac22daa9ab2c9" resname="widget.form.entity.fields.label">
+        <source>widget.form.entity.fields.label</source>
+        <target state="new">Champs</target>
       </trans-unit>
       <trans-unit id="7795f1ac8680b91327a4a2a23b71cda8abc53bba" resname="widget.listing.new.action.label">
         <source>widget.listing.new.action.label</source>
