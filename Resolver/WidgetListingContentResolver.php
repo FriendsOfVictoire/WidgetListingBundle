@@ -23,10 +23,7 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
                        ->getQuery()
                        ->getResult();
 
-        $fields = $widget->getFields();
-        foreach ($entities as $entity) {
-            $this->populateParametersWithWidgetFields($widget, $entity, $parameters['items']);
-        }
+        $parameters['items'] = $entities;
 
         return $parameters;
     }
