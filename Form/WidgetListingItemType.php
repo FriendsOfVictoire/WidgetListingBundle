@@ -14,8 +14,8 @@ class WidgetListingItemType extends WidgetType
     /**
      * define form fields
      *
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder
+     * @param array                $options
      *
      * @throws \Exception
      */
@@ -82,7 +82,7 @@ class WidgetListingItemType extends WidgetType
     /**
      * bind form to WidgetRedactor entity
      *
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
