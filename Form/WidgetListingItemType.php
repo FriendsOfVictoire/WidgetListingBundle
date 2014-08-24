@@ -1,6 +1,7 @@
 <?php
 namespace Victoire\Widget\ListingBundle\Form;
 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Victoire\Bundle\CoreBundle\Form\WidgetType;
@@ -9,7 +10,7 @@ use Victoire\Bundle\WidgetBundle\Entity\Widget;
 /**
  *
  */
-class WidgetListingItemType extends WidgetType
+class WidgetListingItemType extends AbstractType
 {
     /**
      * define form fields
@@ -30,10 +31,7 @@ class WidgetListingItemType extends WidgetType
             }
         }
 
-        //the mode of the widget
-        $mode = Widget::MODE_STATIC;
-
-        //choose form mode
+        //choose form entityName
         if ($entityName === null) {
             //if no entity is given, we generate the static form that contains only title and description
             $builder
@@ -43,7 +41,6 @@ class WidgetListingItemType extends WidgetType
             //add the remove button
             $this->addRemoveButton($builder);
         } else {
-            $mode = Widget::MODE_ENTITY;
 
             //else, WidgetType class will embed a EntityProxyType for given entity
             $builder
@@ -59,11 +56,6 @@ class WidgetListingItemType extends WidgetType
             //add the remove button
             $this->addRemoveButton($builder);
         }
-
-        //add the mode to the form
-        $builder->add('mode', 'hidden', array(
-            'data' => $mode
-        ));
     }
 
     /**
@@ -80,22 +72,6 @@ class WidgetListingItemType extends WidgetType
     }
 
     /**
-     * bind form to WidgetRedactor entity
-     *
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        parent::setDefaultOptions($resolver);
-
-        $resolver->setDefaults(array(
-            'data_class'         => 'Victoire\Widget\ListingBundle\Entity\WidgetListingItem',
-            'widget'             => null,
-            'translation_domain' => 'victoire'
-        ));
-    }
-
-    /**
      * get form name
      *
      * @return string The name of the form
@@ -103,5 +79,25 @@ class WidgetListingItemType extends WidgetType
     public function getName()
     {
         return 'victoire_widget_form_listingitem';
+    }
+
+    /**
+     * bind form to WidgetRedactor entity
+     * @param OptionsResolverInterface $resolver
+     *
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class'         => 'Victoire\Widget\ListingBundle\Entity\WidgetListingItem',
+            'translation_domain' => 'victoire'
+        ));
+
+        $resolver->setOptional(array('widget'));
+        $resolver->setOptional(array('filters'));
+        $resolver->setOptional(array('slot'));
+        $resolver->setOptional(array('namespace'));
+        $resolver->setOptional(array('entityName'));
+
     }
 }

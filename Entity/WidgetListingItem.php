@@ -8,6 +8,8 @@ use Victoire\Bundle\CoreBundle\Annotations as VIC;
 /**
  * WidgetListingItem
  *
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\Table("vic_widget_listing_item")
  * @ORM\Entity
  */
