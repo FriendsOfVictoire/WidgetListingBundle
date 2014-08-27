@@ -1,6 +1,10 @@
 services:
     victoire_core.widget_listing_content_resolver:
         class: Victoire\Widget\ListingBundle\Resolver\WidgetListingContentResolver
+        arguments:
+            - "@request_stack" # used for widget-filter
+            - "@victoire_core.filter_chain" # used for widget-filter
+        parent: victoire_widget.base_widget_content_resolver
         tags:
             - { name: victoire_widget.widget_content_resolver, alias: Listing }
 

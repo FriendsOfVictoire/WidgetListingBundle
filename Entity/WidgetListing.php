@@ -22,6 +22,11 @@ class WidgetListing extends Widget
     protected $items;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Victoire\Bundle\BusinessEntityPageBundle\Entity\BusinessEntityPagePattern")
+     */
+    protected $targetPattern;
+
+    /**
      * To string function
      * @return string A string which represents the instance
      */
@@ -93,5 +98,28 @@ class WidgetListing extends Widget
     public function getItems()
     {
         return $this->items;
+    }
+
+    /**
+     * Get targetPattern
+     *
+     * @return string
+     */
+    public function getTargetPattern()
+    {
+        return $this->targetPattern;
+    }
+
+    /**
+     * Set targetPattern
+     *
+     * @param  string $targetPattern
+     * @return $this
+     */
+    public function setTargetPattern($targetPattern)
+    {
+        $this->targetPattern = $targetPattern;
+
+        return $this;
     }
 }

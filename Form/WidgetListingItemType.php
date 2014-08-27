@@ -98,6 +98,7 @@ class WidgetListingItemType extends AbstractType
         $resolver->setOptional(array('slot'));
         $resolver->setOptional(array('namespace'));
         $resolver->setOptional(array('entityName'));
+        $resolver->setOptional(array('mode'));
 
     }
 }

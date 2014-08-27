@@ -47,7 +47,7 @@ class WidgetListingType extends WidgetType
                 'options' => array(
                     'namespace' => $namespace,
                     'entityName' => $entityName,
-                    'mode' => $mode
+                    'widget'    => $options['widget']
                 ),
                 "attr" => array('id' => 'static')
             ));
@@ -72,14 +72,15 @@ class WidgetListingType extends WidgetType
                         'options' => array(
                             'namespace' => $namespace,
                             'entityName' => $entityName,
-                            'mode' => $mode
+                            'mode' => $mode,
+                            'widget' => $options['widget']
                         ),
                         "attr" => array('id' => $entityName)
                     ));
         }
 
         if ($mode === Widget::MODE_QUERY) {
-            parent::addQueryFields($builder);
+            $this->addQueryFields($builder);
         }
 
         //add the mode to the form
@@ -120,6 +121,23 @@ class WidgetListingType extends WidgetType
         );
     }
 
+    /**
+     * Add the fields to the form for the query mode
+     *
+     * @param unknown $form
+     */
+    protected function addQueryFields($form)
+    {
+        $options = $this->options;
+
+        $form->add('targetPattern');
+        $form->add('query');
+        $form->add('fields', 'widget_fields', array(
+            'label' => 'widget.form.entity.fields.label',
+            'namespace' => $options['namespace'],
+            'widget'    => $options['widget']
+        ));
+    }
     /**
      * bind form to WidgetRedactor entity
      * @param OptionsResolverInterface $resolver
