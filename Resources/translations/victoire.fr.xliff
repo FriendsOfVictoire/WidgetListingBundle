@@ -22,6 +22,18 @@
         <source>widget.listing.new.action.label</source>
         <target>Liste</target>
       </trans-unit>
+      <trans-unit resname="widget.form.WidgetListingItemType.removeButton.label">
+        <source>widget.form.WidgetListingItemType.removeButton.label</source>
+        <target><![CDATA[<i class="fa fa-trash-o"></i>]]></target>
+      </trans-unit>
+      <trans-unit resname="widget.form.WidgetListingItemType.moveButton.label">
+        <source>widget.form.WidgetListingItemType.moveButton.label</source>
+        <target><![CDATA[<i class="fa fa-arrows"></i>]]></target>
+      </trans-unit>
+      <trans-unit resname="widget.form.WidgetListingItemType.addItem.label">
+        <source>widget.form.WidgetListingItemType.addItem.label</source>
+        <target>Ajouter un nouvel élément</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

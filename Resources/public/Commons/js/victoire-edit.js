@@ -5,15 +5,15 @@ var addItemEntityFormIndex = 1000;
 
 function addItemStaticForm()
 {
-    var collectionHolder = $vic('#picker-static ul.items');
-    
+    var collectionHolder = $vic('#picker-static ul.vic-items');
+
     // Récupère l'élément ayant l'attribut data-prototype comme expliqué plus tôt
     var prototype = collectionHolder.attr('data-prototype');
 
     // Remplace '__name__' dans le HTML du prototype par un nombre basé sur
     // la longueur de la collection courante
     var newForm = prototype.replace(/__name__/g, addItemStaticFormIndex);
-    
+
     //incremente index for the list
     addItemStaticFormIndex = addItemStaticFormIndex + 1;
 
@@ -24,8 +24,8 @@ function addItemStaticForm()
 
 function addItemEntityForm(formId)
 {
-    var collectionHolder = $vic('#picker-' + formId + '-entity ul');
-    
+    var collectionHolder = $vic('#picker-' + formId + '-entity ul.vic-items');
+
     // Récupère l'élément ayant l'attribut data-prototype comme expliqué plus tôt
     var prototype = collectionHolder.attr('data-prototype');
 
@@ -35,13 +35,13 @@ function addItemEntityForm(formId)
 
     //incremente index for the list
     addItemEntityFormIndex = addItemEntityFormIndex + 1;
-    
+
     // Affiche le formulaire dans la page dans un li, avant le lien "ajouter un item"
     var $newFormLi = $vic('<li></li>').append(newForm);
     collectionHolder.append($newFormLi);
 }
 
-/*
+
 function ajaxUpdateListItems(url, data, successCallback)
 {
     $vic.ajax(
@@ -50,18 +50,50 @@ function ajaxUpdateListItems(url, data, successCallback)
         data: data,
         context: document.body,
         type: "POST",
-        success: function (response) 
+        success: function (response)
         {
             successCallback(response);
         },
-        error: function (response) 
+        error: function (response)
         {
             alert("Il semble s'êre produit une erreur");
         }
     });
 }
+
+function sortWidgetListItems(list_id)
+{
+    $vic('ul#' + list_id).each(function (){
+        pos = 0;
+        $vic(this).children().each(function ()
+        {
+            $vic(this).children('[data-type="position"]').val(++pos);
+        });
+        $vic(this).sortable({
+            items: "li",
+            placeholder: "vic-ui-state-highlight",
+            forcePlaceholderSize: true,
+            update: function (event, ui)
+            {
+                pos = 0;
+                $vic(this).children().each(function (){
+                    $vic('[data-type="position"]', this).val(++pos);
+                });
+            },
+            create: function (event, ui)
+            {
+                pos = 0;
+                $vic(this).children().each(function ()
+                {
+                    $vic('[data-type="position"]', this).val(++pos);
+                });
+            }
+        });
+    });
+}
+
 /*
-$vic(document).on('click', '.remove-widget-listing-item', function (e) 
+$vic(document).on('click', '.remove-widget-listing-item', function (e)
 {
     e.preventDefault();
     id = $vic(this).parent().data('id');
@@ -72,34 +104,4 @@ $vic(document).on('click', '.remove-widget-listing-item', function (e)
 
     $vic(this).parent('li').remove();
 });
-
-function sortWidgetListItems(list_id) 
-{
-    count = $vic('ul#' + list_id).children('li').size();
-    $vic('ul#' + list_id).each(function (){
-        pos = 0;
-        $vic(this).children().each(function ()
-        {
-            $vic(this).children('input.position-field').val(++pos);
-        });
-        $vic(this).sortable({
-            revert: true,
-            items: "li",
-            update: function (event, ui) 
-            {
-                pos = 0;
-                $vic(this).children().each(function (){
-                    $vic(this).children('input.position-field').val(++pos);
-                });
-            },
-            create: function (event, ui)
-            {
-                pos = 0;
-                $vic(this).children().each(function ()
-                {
-                    $vic(this).children('input.position-field').val(++pos);
-                });
-            }
-        });
-    });
-}*/
+*/

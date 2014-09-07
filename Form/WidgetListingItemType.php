@@ -44,9 +44,6 @@ class WidgetListingItemType extends AbstractType
 
             //else, WidgetType class will embed a EntityProxyType for given entity
             $builder
-                ->add('position', 'hidden', array(
-                    'data' => 0
-                ))
                 ->add('entity_proxy', 'entity_proxy', array(
                     'entity_name' => $entityName,
                     'namespace'   => $namespace,
@@ -56,6 +53,14 @@ class WidgetListingItemType extends AbstractType
             //add the remove button
             $this->addRemoveButton($builder);
         }
+
+        $builder->add('position', 'text', array(
+                'data' => 0,
+                'attr' => array(
+                    'data-type' => 'position'
+                )
+            )
+        );
     }
 
     /**
@@ -65,9 +70,12 @@ class WidgetListingItemType extends AbstractType
     protected function addRemoveButton(FormBuilderInterface $builder)
     {
         //add the remove button
-        $builder->add('collection.remove', 'button', array(
-            'label' => 'widget.form.collection.remove',
-            'attr' => array('data-action' => 'remove-block')
+        $builder->add('removeButton', 'button', array(
+            'label' => 'widget.form.WidgetListingItemType.removeButton.label',
+            'attr' => array(
+                'data-action' => 'remove-block',
+                'class'       => 'vic-btn vic-btn-remove vic-btn-large vic-pull-right'
+            )
         ));
     }
 
