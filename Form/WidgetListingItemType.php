@@ -35,8 +35,7 @@ class WidgetListingItemType extends AbstractType
         if ($entityName === null) {
             //if no entity is given, we generate the static form that contains only title and description
             $builder
-                ->add('title')
-                ->add('description');
+                ->add('title');
 
             //add the remove button
             $this->addRemoveButton($builder);
@@ -54,7 +53,7 @@ class WidgetListingItemType extends AbstractType
             $this->addRemoveButton($builder);
         }
 
-        $builder->add('position', 'text', array(
+        $builder->add('position', 'hidden', array(
                 'data' => 0,
                 'attr' => array(
                     'data-type' => 'position'

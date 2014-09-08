@@ -35,14 +35,6 @@ class WidgetListingItem
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", nullable=true)
-     * @VIC\ReceiverProperty("textable")
-     */
-    protected $description;
-
-    /**
-     * @var string
-     *
      * @ORM\ManyToOne(targetEntity="WidgetListing", inversedBy="items")
      * @ORM\JoinColumn(name="listing_id", referencedColumnName="id", onDelete="CASCADE")
      *
@@ -116,28 +108,6 @@ class WidgetListingItem
         return $this->title;
     }
 
-    /**
-     * Set description
-     * @param string $description
-     *
-     * @return WidgetListingItem
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
     /**
      * Set listing
      * @param string $listing
