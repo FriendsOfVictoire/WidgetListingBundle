@@ -9,8 +9,8 @@ use Victoire\Widget\FilterBundle\Filter\Chain\FilterChain;
 class WidgetListingContentResolver extends BaseWidgetContentResolver
 {
 
-    private $request;
-    private $filterChain;
+    protected $request;
+    protected $filterChain;
 
     /**
      * $filterChain is not cast because it can be null
