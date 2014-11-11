@@ -9,8 +9,8 @@
                     {% include 'VictoireWidgetListingBundle::_itemForm.html.twig' %}
                 {% endfor %}
                 </ul>
+                {% do form.items.setRendered %}
             {% endif %}
-            {% do form.items.setRendered %}
             {{form_rest(form)}}
         {{ form_end(form) }}
     </div>
