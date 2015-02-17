@@ -80,7 +80,9 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
         }
 
         //add the query of the widget
-        return $queryHelper->buildWithSubQuery($widget, $itemsQueryBuilder);
+        $queryBuilder = $queryHelper->buildWithSubQuery($widget, $itemsQueryBuilder);
+        // Filter only visibleOnFront
+        return $queryBuilder->andWhere('main_item.visibleOnFront = true');
     }
 
 }
