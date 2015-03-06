@@ -4,7 +4,7 @@ namespace Victoire\Widget\ListingBundle\Resolver;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Victoire\Bundle\WidgetBundle\Model\Widget;
 use Victoire\Bundle\WidgetBundle\Resolver\BaseWidgetContentResolver;
-use Victoire\Widget\FilterBundle\Filter\Chain\FilterChain;
+use Victoire\Bundle\FilterBundle\Filter\Chain\FilterChain;
 
 class WidgetListingContentResolver extends BaseWidgetContentResolver
 {
