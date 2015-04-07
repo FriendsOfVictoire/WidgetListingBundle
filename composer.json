@@ -1,5 +1,5 @@
 {
-    "name": "victoire/listing-widget",
+    "name": "appventus/listing-widget",
     "type": "symfony-bundle",
     "description": "Victoire Cms Listing component",
     "keywords": ["cms", "victoire", "listing"],
