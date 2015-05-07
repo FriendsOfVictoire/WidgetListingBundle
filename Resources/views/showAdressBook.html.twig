@@ -1,0 +1,102 @@
+{% extends 'VictoireCoreBundle:Widget:show.html.twig' %}
+
+{% block content %}<div class="container">
+    <div id="adress-book-{{widget.id}}" class="list-adress-book" class="row">
+
+        <div class="col-md-4">
+            <div class="adress-book-slider" id="adress-book-{{ widget.id }}">
+                <div class="search-zone">
+                    <div class="input-group input-group-search">
+                        <input class="form-control" id="adress-book-search-{{ widget.id }}" type="text" placeholder="Rechercher..." aria-describedby="sizing-addon3">
+
+                        <span class="input-group-addon" id="adress-book-search-{{ widget.id }}-btn">
+                            <button class="input-group-search-button"><span class="fa fa-search"></span></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="adress-book-slider-content">
+                    <ul id="page-list-{{widget.id}}" class="page-list">
+                    </ul>
+                </div>
+
+                <div class="adress-book-slider-nav">
+                    <ul>
+                        {% for letter in 'a'|upper..'z'|upper %}
+                        {% spaceless %}
+                        <li>
+                            <a alt="#{{ letter }}" data-adress-book-goto="{{ letter }}">{{ letter }}</a>
+                        </li>
+                        {% endspaceless %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="{{widget.id}}-acronym-prototype" class="hidden">
+    <li id="{{widget.id}}__acronym_initial__" data-adress-book-section="__acronym_initial__">
+        <ul class="acronym-list">
+            <li class="acronym-elem" data-adress-book-sectionTitle>
+                __acronym_initial__
+            </li>
+        </ul>
+    </li>
+</div>
+<div id="{{widget.id}}-page-prototype" class="hidden">
+    <li class="page-elem" data-adress-book-term>
+        <a href="__page_url__">__page_name__</a>
+    </li>
+</div>
+
+<script type="text/javascript">
+    var orderedList{{widget.id}} = adressBookOrderList([
+{% for item in items %}
+        {'name' : '{{item.name}}', 'url' : '{{ path('victoire_core_page_show_by_id', {'viewId': item.pattern.id, 'entityId': item.id }) }}'}{% if loop.length > 1 and not loop.last %},
+{% endif %}
+{% endfor %}
+
+    ]);
+    adressBookDisplayList(orderedList{{widget.id}}, {{widget.id}});
+    $(document).on('click', '#adress-book-{{ widget.id }} [data-adress-book-goto]', function(event) {
+        var letter = $(this).data('adress-book-goto');
+        var section = $("#adress-book-{{ widget.id }} [data-adress-book-section='" + letter + "']");
+
+        $('.adress-book-slider-content').animate(
+            { scrollTop: section.position().top }, 500
+        );
+    });
+
+    // On search
+    $(document).on('click', '#adress-book-search-{{ widget.id }}-btn', function(event) {
+        var query = $('#adress-book-search-{{ widget.id }}').val();
+        var translateTable = {'á' : 'a', 'Á' : 'A', 'à' : 'a', 'À' : 'A', 'ă' : 'a', 'Ă' : 'A', 'â' : 'a', 'Â' : 'A', 'å' : 'a', 'Å' : 'A', 'ã' : 'a', 'Ã' : 'A', 'ą' : 'a', 'Ą' : 'A', 'ā' : 'a', 'Ā' : 'A', 'ä' : 'ae', 'Ä' : 'AE', 'æ' : 'ae', 'Æ' : 'AE', 'ḃ' : 'b', 'Ḃ' : 'B', 'ć' : 'c', 'Ć' : 'C', 'ĉ' : 'c', 'Ĉ' : 'C', 'č' : 'c', 'Č' : 'C', 'ċ' : 'c', 'Ċ' : 'C', 'ç' : 'c', 'Ç' : 'C', 'ď' : 'd', 'Ď' : 'D', 'ḋ' : 'd', 'Ḋ' : 'D', 'đ' : 'd', 'Đ' : 'D', 'ð' : 'dh', 'Ð' : 'Dh', 'é' : 'e', 'É' : 'E', 'è' : 'e', 'È' : 'E', 'ĕ' : 'e', 'Ĕ' : 'E', 'ê' : 'e', 'Ê' : 'E', 'ě' : 'e', 'Ě' : 'E', 'ë' : 'e', 'Ë' : 'E', 'ė' : 'e', 'Ė' : 'E', 'ę' : 'e', 'Ę' : 'E', 'ē' : 'e', 'Ē' : 'E', 'ḟ' : 'f', 'Ḟ' : 'F', 'ƒ' : 'f', 'Ƒ' : 'F', 'ğ' : 'g', 'Ğ' : 'G', 'ĝ' : 'g', 'Ĝ' : 'G', 'ġ' : 'g', 'Ġ' : 'G', 'ģ' : 'g', 'Ģ' : 'G', 'ĥ' : 'h', 'Ĥ' : 'H', 'ħ' : 'h', 'Ħ' : 'H', 'í' : 'i', 'Í' : 'I', 'ì' : 'i', 'Ì' : 'I', 'î' : 'i', 'Î' : 'I', 'ï' : 'i', 'Ï' : 'I', 'ĩ' : 'i', 'Ĩ' : 'I', 'į' : 'i', 'Į' : 'I', 'ī' : 'i', 'Ī' : 'I', 'ĵ' : 'j', 'Ĵ' : 'J', 'ķ' : 'k', 'Ķ' : 'K', 'ĺ' : 'l', 'Ĺ' : 'L', 'ľ' : 'l', 'Ľ' : 'L', 'ļ' : 'l', 'Ļ' : 'L', 'ł' : 'l', 'Ł' : 'L', 'ṁ' : 'm', 'Ṁ' : 'M', 'ń' : 'n', 'Ń' : 'N', 'ň' : 'n', 'Ň' : 'N', 'ñ' : 'n', 'Ñ' : 'N', 'ņ' : 'n', 'Ņ' :! 'N', 'ó' : 'o', 'Ó' : 'O', 'ò' : 'o', 'Ò' : 'O', 'ô' : 'o', 'Ô' : 'O', 'ő' : 'o', 'Ő' : 'O', 'õ' : 'o', 'Õ' : 'O', 'ø' : 'oe', 'Ø' : 'OE', 'ō' : 'o', 'Ō' : 'O', 'ơ' : 'o', 'Ơ' : 'O', 'ö' : 'oe', 'Ö' : 'OE', 'ṗ' : 'p', 'Ṗ' : 'P', 'ŕ' : 'r', 'Ŕ' : 'R', 'ř' : 'r', 'Ř' : 'R', 'ŗ' : 'r', 'Ŗ' : 'R', 'ś' : 's', 'Ś' : 'S', 'ŝ' : 's', 'Ŝ' : 'S', 'š' : 's', 'Š' : 'S', 'ṡ' : 's', 'Ṡ' : 'S', 'ş' : 's', 'Ş' : 'S', 'ș' : 's', 'Ș' : 'S', 'ß' : 'SS', 'ť' : 't', 'Ť' : 'T', 'ṫ' : 't', 'Ṫ' : 'T', 'ţ' : 't', 'Ţ' : 'T', 'ț' : 't', 'Ț' : 'T', 'ŧ' : 't', 'Ŧ' : 'T', 'ú' : 'u', 'Ú' : 'U', 'ù' : 'u', 'Ù' : 'U', 'ŭ' : 'u', 'Ŭ' : 'U', 'û' : 'u', 'Û' : 'U', 'ů' : 'u', 'Ů' : 'U', 'ű' : 'u', 'Ű' : 'U', 'ũ' : 'u', 'Ũ' : 'U', 'ų' : 'u', 'Ų' : 'U', 'ū' : 'u', 'Ū' : 'U', 'ư' : 'u', 'Ư' : 'U', 'ü' : 'ue', 'Ü' : 'UE', 'ẃ' : 'w', 'Ẃ' : 'W', 'ẁ' : 'w', 'Ẁ' : 'W', 'ŵ' : 'w', 'Ŵ' : 'W', 'ẅ' : 'w', 'Ẅ' : 'W', 'ý' : 'y', 'Ý' : 'Y', 'ỳ' : 'y', 'Ỳ' : 'Y', 'ŷ' : 'y', 'Ŷ' : 'Y', 'ÿ' : 'y', 'Ÿ' : 'Y', 'ź' : 'z', 'Ź' : 'Z', 'ž' : 'z', 'Ž' : 'Z', 'ż' : 'z', 'Ż' : 'Z', 'þ' : 'th', 'Þ' : 'Th', 'µ' : 'u', 'а' : 'a', 'А' : 'a', 'б' : 'b', 'Б' : 'b', 'в' : 'v', 'В' : 'v', 'г' : 'g', 'Г' : 'g', 'д' : 'd', 'Д' : 'd', 'е' : 'e', 'Е' : 'e', 'ё' : 'e', 'Ё' : 'e', 'ж' : 'zh', 'Ж' : 'zh', 'з' : 'z', 'З' : 'z', 'и' : 'i', 'И' : 'i', 'й' : 'j', 'Й' : 'j', 'к' : 'k', 'К' : 'k', 'л' : 'l', 'Л' : 'l', 'м' : 'm', 'М' : 'm', 'н' : 'n', 'Н' : 'n', 'о' : 'o', 'О' : 'o', 'п' : 'p', 'П' : 'p', 'р' : 'r', 'Р' : 'r', 'с' : 's', 'С' : 's', 'т' : 't', 'Т' : 't', 'у' : 'u', 'У' : 'u', 'ф' : 'f', 'Ф' : 'f', 'х' : 'h', 'Х' : 'h', 'ц' : 'c', 'Ц' : 'c', 'ч' : 'ch', 'Ч' : 'ch', 'ш' : 'sh', 'Ш' : 'sh', 'щ' : 'sch', 'Щ' : 'sch', 'ъ' : '', 'Ъ' : '', 'ы' : 'y', 'Ы' : 'y', 'ь' : '', 'Ь' : '', 'э' : 'e', 'Э' : 'e', 'ю' : 'ju', 'Ю' : 'ju', 'я' : 'ja', 'Я' : 'ja'};
+
+        $('[data-adress-book-term]').each(function(index, el) {
+            var current = $(this).text().toLowerCase();
+
+            for (var i in translateTable) {
+                current = current.replace(i, translateTable[i]);
+                query = query.replace(i, translateTable[i]);
+            }
+
+            if (current.indexOf(query) !== -1) {
+                $(this).removeClass('hidden');
+            } else {
+                $(this).addClass('hidden');
+            }
+        });
+
+        $('[data-adress-book-sectionTitle]').each(function () {
+            var childs = $(this).siblings('.page-elem:not(.hidden)')
+
+            if (childs.length == 0) {
+                $(this).parent().addClass('hidden');
+            } else {
+                $(this).parent().removeClass('hidden');
+            }
+        });
+    });
+</script>
+{% endblock content %}

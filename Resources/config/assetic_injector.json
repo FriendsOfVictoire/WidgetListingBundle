@@ -6,6 +6,17 @@
             "victoire-edit":
             [
                 "@VictoireWidgetListingBundle/Resources/public/Commons/js/victoire-edit.js"
+            ],
+            "victoire-head":
+            [
+                "@VictoireWidgetListingBundle/Resources/public/js/adressBook.js"
+            ]
+         },
+        "stylesheets":
+        {
+            "victoire-edit":
+            [
+                "@VictoireWidgetListingBundle/Resources/public/less/adressBook.less"
             ]
          }
     }
