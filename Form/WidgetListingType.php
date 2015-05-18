@@ -148,7 +148,7 @@ class WidgetListingType extends WidgetType
 
         $resolver->setDefaults(array(
             'data_class'         => 'Victoire\Widget\ListingBundle\Entity\WidgetListing',
-            'widget'             => 'listingitem',
+            'widget'             => 'ListingItem',
             'translation_domain' => 'victoire'
         ));
     }
