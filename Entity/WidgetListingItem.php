@@ -4,6 +4,7 @@ namespace Victoire\Widget\ListingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\Bundle\CoreBundle\Annotations as VIC;
+use Victoire\Bundle\WidgetBundle\Entity\WidgetItemInterface;
 
 /**
  * WidgetListingItem
@@ -13,7 +14,7 @@ use Victoire\Bundle\CoreBundle\Annotations as VIC;
  * @ORM\Table("vic_widget_listing_item")
  * @ORM\Entity
  */
-class WidgetListingItem
+class WidgetListingItem implements WidgetItemInterface
 {
     /**
      * @var integer
