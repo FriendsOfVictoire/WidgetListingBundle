@@ -1,36 +1,33 @@
 {% extends 'VictoireCoreBundle:Widget:show.html.twig' %}
 
 {% block content %}<div class="container">
-    <div id="adress-book-{{widget.id}}" class="list-adress-book" class="row">
+    <div id="adress-book-{{widget.id}}" class="list-adress-book">
+        <div class="adress-book-slider" id="adress-book-{{ widget.id }}">
+            <div class="search-zone">
+                <div class="input-group input-group-search">
+                    <input class="form-control" id="adress-book-search-{{ widget.id }}" type="text" placeholder="Rechercher..." aria-describedby="sizing-addon3">
 
-        <div class="col-md-4">
-            <div class="adress-book-slider" id="adress-book-{{ widget.id }}">
-                <div class="search-zone">
-                    <div class="input-group input-group-search">
-                        <input class="form-control" id="adress-book-search-{{ widget.id }}" type="text" placeholder="Rechercher..." aria-describedby="sizing-addon3">
-
-                        <span class="input-group-addon" id="adress-book-search-{{ widget.id }}-btn">
-                            <button class="input-group-search-button"><span class="fa fa-search"></span></button>
-                        </span>
-                    </div>
+                    <span class="input-group-addon" id="adress-book-search-{{ widget.id }}-btn">
+                        <button class="input-group-search-button"><span class="fa fa-search"></span></button>
+                    </span>
                 </div>
+            </div>
 
-                <div class="adress-book-slider-content">
-                    <ul id="page-list-{{widget.id}}" class="page-list">
-                    </ul>
-                </div>
+            <div class="adress-book-slider-content">
+                <ul id="page-list-{{widget.id}}" class="page-list">
+                </ul>
+            </div>
 
-                <div class="adress-book-slider-nav">
-                    <ul>
-                        {% for letter in 'a'|upper..'z'|upper %}
-                        {% spaceless %}
-                        <li>
-                            <a alt="#{{ letter }}" data-adress-book-goto="{{ letter }}">{{ letter }}</a>
-                        </li>
-                        {% endspaceless %}
-                        {% endfor %}
-                    </ul>
-                </div>
+            <div class="adress-book-slider-nav">
+                <ul>
+                    {% for letter in 'a'|upper..'z'|upper %}
+                    {% spaceless %}
+                    <li>
+                        <a alt="#{{ letter }}" data-adress-book-goto="{{ letter }}">{{ letter }}</a>
+                    </li>
+                    {% endspaceless %}
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
@@ -53,7 +50,7 @@
 <script type="text/javascript">
     var orderedList{{widget.id}} = adressBookOrderList([
 {% for item in items %}
-        {'name' : '{{item.name}}', 'url' : '{{ path('victoire_core_page_show_by_id', {'viewId': item.pattern.id, 'entityId': item.id }) }}'}{% if loop.length > 1 and not loop.last %},
+        {'name' : '{{item.name}}', 'url' : '{{ vic_business_link(item) }}'}{% if loop.length > 1 and not loop.last %},
 {% endif %}
 {% endfor %}
 
