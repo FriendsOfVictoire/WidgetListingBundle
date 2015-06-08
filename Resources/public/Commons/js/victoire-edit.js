@@ -3,7 +3,7 @@
 var addItemStaticFormIndex = 1000;
 var addItemEntityFormIndex = 1000;
 
-function addItemStaticForm()
+function addItemStaticForm(liAttributes)
 {
     var collectionHolder = $vic('#picker-static ul.vic-items');
 
@@ -18,7 +18,7 @@ function addItemStaticForm()
     addItemStaticFormIndex = addItemStaticFormIndex + 1;
 
     // Affiche le formulaire dans la page dans un li, avant le lien "ajouter un item"
-    var $newFormLi = $vic('<li></li>').append(newForm);
+    var $newFormLi = $vic('<li ' + liAttributes + '></li>').append(newForm);
     collectionHolder.append($newFormLi);
 }
 
