@@ -1,13 +1,19 @@
-Victoire Listing Bundle
+##Victoire DCMS SocialButtons Bundle
 ============
 
-Need to add a Listing in a victoire website ?
-Get this listing bundle and so on
+Need to add a Listing in your Victoire website ?
 
-First you need to have a valid Symfony2 Victoire edition.
-Then you just have to run the following composer command :
+#Set Up Victoire
+
+If you haven't already, you can follow the steps to set up Victoire *[here](https://github.com/Victoire/victoire/blob/master/setup.md)*
+
+#Install the Simple Contact Form Bundle :
+
+Run the following composer command :Victoire Listing Bundle
 
     php composer.phar require friendsofvictoire/listing-widget
+
+#Reminder
 
 Do not forget to add the bundle in your AppKernel !
 

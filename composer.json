@@ -1,18 +1,17 @@
 {
     "name": "friendsofvictoire/listing-widget",
     "type": "symfony-bundle",
-    "description": "Victoire Cms Listing component",
-    "keywords": ["cms", "victoire", "listing"],
-    "homepage": "http://appventus.com",
-    "license": "MIT",
+    "description": "Victoire DCMS Listing component",
+    "keywords": ["DCMS", "Victoire", "listing", "widget", "FriendsofVictoire", "Dynamic", "CMS"],
+    "homepage": "http://victoire.io",
     "authors": [
         {
             "name": "Paul Andrieux",
-            "email": "paul@appventus.com"
+            "email": "paul@victoire.io"
         },
         {
             "name": "Leny Bernard",
-            "email": "leny@appventus.com"
+            "email": "leny@victoire.io"
         }
     ],
     "require": {

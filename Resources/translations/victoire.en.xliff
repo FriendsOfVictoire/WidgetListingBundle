@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -8,19 +8,19 @@
     <body>
       <trans-unit id="77ff90fd1a56d5dee1b0d3e83155d275172b73a8" resname="modal.form.widget.type.listing.label">
         <source>modal.form.widget.type.listing.label</source>
-        <target>Widget Liste</target>
+        <target>Widget List</target>
       </trans-unit>
       <trans-unit id="83c40c3c50480013678086b0b9a8bdcafeff3348" resname="widget.form.collection.remove">
         <source>widget.form.collection.remove</source>
-        <target>Supprimer</target>
+        <target>Delete</target>
       </trans-unit>
       <trans-unit id="e73f4ed23832568330c963f0e40ac22daa9ab2c9" resname="widget.form.entity.fields.label">
         <source>widget.form.entity.fields.label</source>
-        <target state="new">Champs</target>
+        <target state="new">Fields</target>
       </trans-unit>
       <trans-unit id="7795f1ac8680b91327a4a2a23b71cda8abc53bba" resname="widget.listing.new.action.label">
         <source>widget.listing.new.action.label</source>
-        <target>Liste</target>
+        <target>List</target>
       </trans-unit>
       <trans-unit resname="widget.form.WidgetListingItemType.removeButton.label">
         <source>widget.form.WidgetListingItemType.removeButton.label</source>
@@ -32,11 +32,7 @@
       </trans-unit>
       <trans-unit resname="widget.form.WidgetListingItemType.addItem.label">
         <source>widget.form.WidgetListingItemType.addItem.label</source>
-        <target>Ajouter un nouvel élément</target>
-      </trans-unit>
-      <trans-unit resname="widget_listingitem.form.title.label">
-        <source>widget_listingitem.form.title.label </source>
-        <target>Titre</target>
+        <target>Add a new item</target>
       </trans-unit>
     </body>
   </file>
