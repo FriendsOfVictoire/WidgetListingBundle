@@ -5,6 +5,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Victoire\Bundle\WidgetBundle\Model\Widget;
 use Victoire\Bundle\WidgetBundle\Resolver\BaseWidgetContentResolver;
 use Victoire\Bundle\FilterBundle\Filter\Chain\FilterChain;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 
 class WidgetListingContentResolver extends BaseWidgetContentResolver
 {
@@ -32,14 +34,25 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
      */
     public function getWidgetQueryContent(Widget $widget)
     {
+        $filterBuilder = $this->getWidgetQueryBuilder($widget);
+
+        $adapter = new DoctrineORMAdapter($filterBuilder->getQuery());
+
+        $pager = new Pagerfanta($adapter);
+        if ($widget->getMaxResults() && is_integer($widget->getMaxResults())) {
+            $pager->setMaxPerPage($widget->getMaxResults());
+        }
+
+        $pager->setCurrentPage($this->request->get('page') ?: 1);
+
+        $items = $pager->getCurrentPageResults();
+
         $parameters = $this->getWidgetStaticContent($widget);
-        $entities = $this->getWidgetQueryBuilder($widget)
-                       ->getQuery()
-                       ->getResult();
 
-        $parameters['items'] = $entities;
+        return array_merge($parameters, array('items' => $items, 'pager' => $pager));
 
-        return $parameters;
+
+
     }
 
     /**
