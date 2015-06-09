@@ -132,6 +132,7 @@ class WidgetListingType extends WidgetType
 
         $form->add('targetPattern');
         $form->add('query');
+        $form->add('maxResults');
         $form->add('fields', 'widget_fields', array(
             'label' => 'widget.form.entity.fields.label',
             'namespace' => $options['namespace'],

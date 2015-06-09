@@ -27,6 +27,13 @@ class WidgetListing extends Widget
     protected $targetPattern;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="maxResults", type="integer", nullable=true)
+     */
+    protected $maxResults;
+
+    /**
      * To string function
      * @return string A string which represents the instance
      */
@@ -122,4 +129,27 @@ class WidgetListing extends Widget
 
         return $this;
     }
+
+    /**
+     * Set maxResults
+     *
+     * @param string $maxResults
+     */
+    public function setMaxResults($maxResults)
+    {
+        $this->maxResults = $maxResults;
+
+        return $this;
+    }
+
+    /**
+     * Get maxResults
+     *
+     * @return string
+     */
+    public function getMaxResults()
+    {
+        return $this->maxResults;
+    }
+
 }
