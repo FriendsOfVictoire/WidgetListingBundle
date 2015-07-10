@@ -14,7 +14,7 @@
          },
         "stylesheets":
         {
-            "victoire-edit":
+            "head":
             [
                 "@VictoireWidgetListingBundle/Resources/public/less/adressBook.less"
             ]
