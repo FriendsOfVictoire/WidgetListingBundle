@@ -71,7 +71,7 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
 
         if ($this->filterChain !== null) {
             $request = $this->request;
-            $filters = $request->query->get('victoire_form_filter');
+            $filters = $request->query->get('filter');
 
             //the id is an integer
             $listId = intval($filters['listing']);
