@@ -132,6 +132,12 @@ class WidgetListingType extends WidgetType
 
         $form->add('targetPattern');
         $form->add('query');
+        $form->add('orderBy', null, array(
+            'required' => false,
+            'attr' => array(
+                'placeholder' => '[{"by": "name", "order": "DESC"}, {"by": "address", "order": "ASC"}]',
+            ),
+        ));
         $form->add('maxResults');
         $form->add('fields', 'widget_fields', array(
             'label' => 'widget.form.entity.fields.label',
