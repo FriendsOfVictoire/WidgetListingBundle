@@ -1,4 +1,4 @@
-##Victoire DCMS SocialButtons Bundle
+##Victoire DCMS Listing Bundle
 ============
 
 Need to add a Listing in your Victoire website ?
@@ -7,7 +7,7 @@ Need to add a Listing in your Victoire website ?
 
 If you haven't already, you can follow the steps to set up Victoire *[here](https://github.com/Victoire/victoire/blob/master/setup.md)*
 
-#Install the Simple Contact Form Bundle :
+#Install the Listing Bundle :
 
 Run the following composer command :Victoire Listing Bundle
 
