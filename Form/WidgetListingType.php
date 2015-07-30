@@ -3,11 +3,13 @@
 namespace Victoire\Widget\ListingBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Victoire\Bundle\CoreBundle\Form\WidgetType;
 use Victoire\Bundle\WidgetBundle\Entity\Widget;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 
 /**
  *
@@ -55,12 +57,7 @@ class WidgetListingType extends WidgetType
 
         if ($mode === Widget::MODE_ENTITY) {
             $builder
-                ->add('slot', 'hidden')
-                ->add('fields', 'widget_fields', array(
-                    'label' => 'widget.form.entity.fields.label',
-                    'namespace' => $options['namespace'],
-                    'widget'    => $options['widget']
-                ));
+                ->add('slot', 'hidden');
             //else, WidgetType class will embed a EntityProxyType for given entity
             $builder
                 ->add('items', 'collection', array(
@@ -77,10 +74,16 @@ class WidgetListingType extends WidgetType
                         ),
                         "attr" => array('id' => $entityName)
                     ));
+
+            $this->addEntityFields($builder);
         }
 
         if ($mode === Widget::MODE_QUERY) {
             $this->addQueryFields($builder);
+        }
+
+        if ($mode === Widget::MODE_BUSINESS_ENTITY) {
+            $this->addBusinessEntityFields($builder);
         }
 
         //add the mode to the form
@@ -91,34 +94,6 @@ class WidgetListingType extends WidgetType
         //add the slot to the form
         $builder->add('slot', 'hidden', array());
 
-        //we use the PRE_SUBMIT event to set the mode option
-        $builder->addEventListener(
-            FormEvents::PRE_SUBMIT,
-            function (FormEvent $event) {
-                $options = $this->options;
-
-                //we get the raw data for the widget form
-                $rawData = $event->getData();
-
-                //get the posted mode
-                $mode = $rawData['mode'];
-
-                //get the form to add more fields
-                $form = $event->getForm();
-
-                //the controller does not use the mode to construct the form, so we update it automatically
-                if ($mode === Widget::MODE_ENTITY) {
-                    $this->addEntityFields($form);
-                }
-
-                if ($mode === Widget::MODE_QUERY) {
-                    $this->addQueryFields($form);
-                }
-                if ($mode === Widget::MODE_BUSINESS_ENTITY) {
-                    $this->addBusinessEntityFields($form);
-                }
-            }
-        );
     }
 
     /**
@@ -128,23 +103,55 @@ class WidgetListingType extends WidgetType
      */
     protected function addQueryFields($form)
     {
-        $options = $this->options;
 
         $form->add('targetPattern');
-        $form->add('query');
-        $form->add('orderBy', null, array(
-            'required' => false,
+        $form->add('randomResults', null, array(
             'attr' => array(
-                'placeholder' => '[{"by": "name", "order": "DESC"}, {"by": "address", "order": "ASC"}]',
-            ),
+                'data-refreshOnChange' => "true",
+            )
         ));
         $form->add('maxResults');
-        $form->add('fields', 'widget_fields', array(
-            'label' => 'widget.form.entity.fields.label',
-            'namespace' => $options['namespace'],
-            'widget'    => $options['widget']
-        ));
+
+        $form->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function(FormEvent $event) {
+                self::disableOrderBy($event->getForm(), $event->getData()->isRandomResults());
+            }
+        );
+
+        $form->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            function(FormEvent $event) {
+                $data = $event->getData();
+                $randomResults = isset($data['randomResults']) ? $data['randomResults'] : false;
+                self::disableOrderBy($event->getForm(), $randomResults);
+            }
+        );
+
+        parent::addQueryFields($form);
+
     }
+
+    /*
+     * Disable orderBy field if random checkbox is checked
+     */
+    protected function disableOrderBy(FormInterface $form, $randomResults)
+    {
+        switch ($randomResults) {
+            case true:
+                $form->remove('orderBy');
+                break;
+            default:
+                $form->add('orderBy', null, array(
+                    'required' => false,
+                    'attr' => array(
+                        'placeholder' => '[{"by": "name", "order": "DESC"}, {"by": "address", "order": "ASC"}]'
+                    ),
+                ));
+                break;
+        }
+    }
+
     /**
      * bind form to WidgetRedactor entity
      * @param OptionsResolverInterface $resolver
