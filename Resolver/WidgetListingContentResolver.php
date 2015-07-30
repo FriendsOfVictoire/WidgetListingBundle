@@ -1,6 +1,7 @@
 <?php
 namespace Victoire\Widget\ListingBundle\Resolver;
 
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Victoire\Bundle\WidgetBundle\Model\Widget;
 use Victoire\Bundle\WidgetBundle\Resolver\BaseWidgetContentResolver;
@@ -34,23 +35,41 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
      */
     public function getWidgetQueryContent(Widget $widget)
     {
-        $filterBuilder = $this->getWidgetQueryBuilder($widget);
+        $parameters = $this->getWidgetStaticContent($widget);
+        $maxResults = $widget->getMaxResults();
+        $randomResults = $widget->isRandomResults();
 
-        $adapter = new DoctrineORMAdapter($filterBuilder->getQuery());
+        // Use pager only if maxResult is set and random order is not asked
+        if ($maxResults && is_integer($maxResults) && !$randomResults) {
 
-        $pager = new Pagerfanta($adapter);
-        if ($widget->getMaxResults() && is_integer($widget->getMaxResults())) {
+            $filterBuilder = $this->getWidgetQueryBuilder($widget);
+            $adapter = new DoctrineORMAdapter($filterBuilder->getQuery());
+            $pager = new Pagerfanta($adapter);
             $pager->setMaxPerPage($widget->getMaxResults());
+            $pager->setCurrentPage($this->request->get('page') ?: 1);
+            $items = $pager->getCurrentPageResults();
+
+            return array_merge($parameters, array('items' => $items, 'pager' => $pager));
+
         }
 
-        $pager->setCurrentPage($this->request->get('page') ?: 1);
+        /* @var $qb QueryBuilder */
+        $qb = $this->getWidgetQueryBuilder($widget);
+        $entities = $qb->getQuery()->getResult();
 
-        $items = $pager->getCurrentPageResults();
+        // Random order
+        if($randomResults) {
+            shuffle($entities);
+        }
 
-        $parameters = $this->getWidgetStaticContent($widget);
+        // Max result in php
+        if ($maxResults && is_integer($maxResults)) {
+            $entities = array_slice($entities, 0, $maxResults);
+        }
 
-        return array_merge($parameters, array('items' => $items, 'pager' => $pager));
+        $parameters['items'] = $entities;
 
+        return $parameters;
 
 
     }
@@ -92,8 +111,9 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
             }
         }
 
-        //add the query of the widget
+        // Add the query of the widget
         $queryBuilder = $queryHelper->buildWithSubQuery($widget, $itemsQueryBuilder);
+
         // Filter only visibleOnFront
         return $queryBuilder->andWhere('main_item.visibleOnFront = true');
     }
