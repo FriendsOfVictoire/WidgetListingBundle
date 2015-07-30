@@ -34,6 +34,13 @@ class WidgetListing extends Widget
     protected $maxResults;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="randomResults", type="boolean")
+     */
+    protected $randomResults;
+
+    /**
      * To string function
      * @return string A string which represents the instance
      */
@@ -150,6 +157,22 @@ class WidgetListing extends Widget
     public function getMaxResults()
     {
         return $this->maxResults;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isRandomResults()
+    {
+        return $this->randomResults;
+    }
+
+    /**
+     * @param boolean $randomResults
+     */
+    public function setRandomResults($randomResults)
+    {
+        $this->randomResults = $randomResults;
     }
 
 }
