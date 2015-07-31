@@ -7,7 +7,7 @@
             [
                 "@VictoireWidgetListingBundle/Resources/public/Commons/js/victoire-edit.js"
             ],
-            "victoire-head":
+            "head":
             [
                 "@VictoireWidgetListingBundle/Resources/public/js/adressBook.js"
             ]
