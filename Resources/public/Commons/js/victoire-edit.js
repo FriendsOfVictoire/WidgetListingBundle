@@ -91,17 +91,3 @@ function sortWidgetListItems(list_id)
         });
     });
 }
-
-/*
-$vic(document).on('click', '.remove-widget-listing-item', function (e)
-{
-    e.preventDefault();
-    id = $vic(this).parent().data('id');
-    entityName = $vic(this).parent().data('entity-name');
-    name = $vic(this).parent().data('entity');
-    option = '<option value="' + id + '">' + entityName + '</option>';
-    $vic('select.add_' + name + '_link').append(option);
-
-    $vic(this).parent('li').remove();
-});
-*/

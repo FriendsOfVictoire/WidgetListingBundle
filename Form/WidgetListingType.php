@@ -29,12 +29,12 @@ class WidgetListingType extends WidgetType
         $this->options = $options;
 
         $namespace = $options['namespace'];
-        $entityName = $options['entityName'];
+        $businessEntityId = $options['businessEntityId'];
         $mode = $options['mode'];
 
-        if ($entityName !== null) {
+        if ($businessEntityId !== null) {
             if ($namespace === null) {
-                throw new \Exception('The namespace is mandatory if the entity_name is given.');
+                throw new \Exception('The namespace is mandatory if the business_entity_id is given.');
             }
         }
 
@@ -48,7 +48,7 @@ class WidgetListingType extends WidgetType
                 'by_reference' => false,
                 'options' => array(
                     'namespace' => $namespace,
-                    'entityName' => $entityName,
+                    'businessEntityId' => $businessEntityId,
                     'widget'    => $options['widget']
                 ),
                 "attr" => array('id' => 'static')
@@ -61,18 +61,18 @@ class WidgetListingType extends WidgetType
             //else, WidgetType class will embed a EntityProxyType for given entity
             $builder
                 ->add('items', 'collection', array(
-                        'type' => 'victoire_widget_form_listingitem',
-                        'allow_add' => true,
+                        'type'               => 'victoire_widget_form_listingitem',
+                        'allow_add'          => true,
                         'vic_widget_add_btn' => null,
-                        'allow_delete' => true,
-                        'by_reference' => false,
-                        'options' => array(
-                            'namespace' => $namespace,
-                            'entityName' => $entityName,
-                            'mode' => $mode,
-                            'widget' => $options['widget']
+                        'allow_delete'       => true,
+                        'by_reference'       => false,
+                        "attr"               => array('id' => $businessEntityId),
+                        'options'            => array(
+                            'namespace'        => $namespace,
+                            'businessEntityId' => $businessEntityId,
+                            'mode'             => $mode,
+                            'widget'           => $options['widget']
                         ),
-                        "attr" => array('id' => $entityName)
                     ));
 
             $this->addEntityFields($builder);

@@ -23,16 +23,16 @@ class WidgetListingItemType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $namespace = $options['namespace'];
-        $entityName = $options['entityName'];
+        $businessEntityId = $options['businessEntityId'];
 
-        if ($entityName !== null) {
+        if ($businessEntityId !== null) {
             if ($namespace === null) {
-                throw new \Exception('The namespace is mandatory if the entity_name is given.');
+                throw new \Exception('The namespace is mandatory if the business_entity_id is given.');
             }
         }
 
-        //choose form entityName
-        if ($entityName === null) {
+        //choose form businessEntityId
+        if ($businessEntityId === null) {
             //if no entity is given, we generate the static form that contains only title and description
             $builder
                 ->add('title');
@@ -44,9 +44,9 @@ class WidgetListingItemType extends AbstractType
             //else, WidgetType class will embed a EntityProxyType for given entity
             $builder
                 ->add('entity_proxy', 'entity_proxy', array(
-                    'entity_name' => $entityName,
-                    'namespace'   => $namespace,
-                    'widget'      => $options['widget']
+                    'business_entity_id' => $businessEntityId,
+                    'namespace'          => $namespace,
+                    'widget'             => $options['widget']
                 ));
 
             //add the remove button
@@ -104,7 +104,7 @@ class WidgetListingItemType extends AbstractType
         $resolver->setOptional(array('filters'));
         $resolver->setOptional(array('slot'));
         $resolver->setOptional(array('namespace'));
-        $resolver->setOptional(array('entityName'));
+        $resolver->setOptional(array('businessEntityId'));
         $resolver->setOptional(array('mode'));
 
     }
