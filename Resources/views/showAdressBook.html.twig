@@ -49,12 +49,10 @@
 
 <script type="text/javascript">
     var orderedList{{widget.id}} = adressBookOrderList([
-{% for item in items %}
-        {'name' : '{{item.name}}', 'url' : '{{ vic_business_link(item) }}'}{% if loop.length > 1 and not loop.last %},
-{% endif %}
-{% endfor %}
-
-    ]);
+        {% for item in items %}
+                {'name' : '{{item.name}}', 'url' : '{{ vic_business_link(item) }}'}{% if loop.length > 1 and not loop.last %},{% endif %}
+        {% endfor %}
+    ], 'name');
     adressBookDisplayList(orderedList{{widget.id}}, {{widget.id}});
     $(document).on('click', '#adress-book-{{ widget.id }} [data-adress-book-goto]', function(event) {
         var letter = $(this).data('adress-book-goto');
