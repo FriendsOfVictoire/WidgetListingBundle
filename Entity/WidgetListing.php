@@ -36,7 +36,7 @@ class WidgetListing extends Widget
     /**
      * @var boolean
      *
-     * @ORM\Column(name="randomResults", type="boolean")
+     * @ORM\Column(name="randomResults", type="boolean", nullable=true)
      */
     protected $randomResults;
 
