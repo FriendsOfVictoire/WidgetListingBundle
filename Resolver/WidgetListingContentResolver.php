@@ -3,11 +3,13 @@ namespace Victoire\Widget\ListingBundle\Resolver;
 
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Victoire\Bundle\QueryBundle\Helper\QueryHelper;
 use Victoire\Bundle\WidgetBundle\Model\Widget;
 use Victoire\Bundle\WidgetBundle\Resolver\BaseWidgetContentResolver;
 use Victoire\Bundle\FilterBundle\Filter\Chain\FilterChain;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+use Victoire\Widget\ListingBundle\Entity\WidgetListing;
 
 class WidgetListingContentResolver extends BaseWidgetContentResolver
 {
@@ -24,7 +26,9 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
     {
         $this->request = $requestStack->getCurrentRequest();
         $this->filterChain = $filterChain;
+        $this->currentPage = 1;
     }
+
     /**
      * Get the content of the widget for the query mode
      *
@@ -46,7 +50,7 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
             $adapter = new DoctrineORMAdapter($filterBuilder->getQuery());
             $pager = new Pagerfanta($adapter);
             $pager->setMaxPerPage($widget->getMaxResults());
-            $pager->setCurrentPage($this->request->get('page') ?: 1);
+            $pager->setCurrentPage($this->request->get('page', $this->currentPage));
             $items = $pager->getCurrentPageResults();
 
             return array_merge($parameters, array('items' => $items, 'pager' => $pager));
@@ -70,8 +74,6 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
         $parameters['items'] = $entities;
 
         return $parameters;
-
-
     }
 
     /**
@@ -83,6 +85,7 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
      */
     public function getWidgetQueryBuilder(Widget $widget)
     {
+        /** @var QueryHelper $queryHelper */
         $queryHelper = $this->queryHelper;
 
         //get the base query
@@ -118,4 +121,39 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
         return $queryBuilder->andWhere('main_item.visibleOnFront = true');
     }
 
+    /**
+     * Get the business entity content
+     * If we're in a Business Entity context (current entity),
+     * \ we'll open the default page in the current entity's page
+     * \ if page get parameter is not defined
+     * @param Widget $widget
+     *
+     * @return string
+     */
+    public function getWidgetBusinessEntityContent(Widget $widget)
+    {
+        $entity = $widget->getEntity();
+        $parameters = $this->getWidgetQueryContent($widget);
+
+        $this->populateParametersWithWidgetFields($widget, $entity, $parameters);
+        if (!empty($parameters['pager']) && !$this->request->get('page')) {
+            /** @var Pagerfanta $_pager */
+            $_pager = $parameters['pager'];
+            for ($i = 1; $i <= $_pager->getNbPages(); $i++) {
+                /** @var WidgetListing $widget */
+                $this->currentPage = $i;
+                $_parameters = $this->getWidgetQueryContent($widget);
+                $_pager = $_parameters['pager'];
+                foreach ($_pager->getCurrentPageResults() as $_item) {
+                    if ($_item === $entity) {
+                        $parameters['pager'] = $_pager;
+                        $parameters['items'] = $_pager->getCurrentPageResults();
+                        break;
+                    }
+                }
+            }
+        }
+
+        return $parameters;
+    }
 }
