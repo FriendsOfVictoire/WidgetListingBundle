@@ -22,7 +22,7 @@ class WidgetListing extends Widget
     protected $items;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Victoire\Bundle\BusinessEntityPageBundle\Entity\BusinessEntityPagePattern")
+     * @ORM\ManyToOne(targetEntity="Victoire\Bundle\BusinessPageBundle\Entity\BusinessTemplate")
      */
     protected $targetPattern;
 

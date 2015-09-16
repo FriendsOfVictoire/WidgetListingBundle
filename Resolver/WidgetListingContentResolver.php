@@ -89,7 +89,7 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
         $queryHelper = $this->queryHelper;
 
         //get the base query
-        $itemsQueryBuilder = $queryHelper->getQueryBuilder($widget);
+        $itemsQueryBuilder = $queryHelper->getQueryBuilder($widget, $this->entityManager);
 
         if ($this->filterChain !== null) {
             $request = $this->request;
@@ -115,7 +115,7 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
         }
 
         // Add the query of the widget
-        $queryBuilder = $queryHelper->buildWithSubQuery($widget, $itemsQueryBuilder);
+        $queryBuilder = $queryHelper->buildWithSubQuery($widget, $itemsQueryBuilder, $this->entityManager);
 
         // Filter only visibleOnFront
         return $queryBuilder->andWhere('main_item.visibleOnFront = true');
