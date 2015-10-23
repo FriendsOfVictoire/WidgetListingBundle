@@ -11,14 +11,12 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 
-/**
- *
- * WidgetListing form type
- */
+/* WidgetListing form type */
 class WidgetListingType extends WidgetType
 {
     /**
-     * define form fields
+     * define form fields.
+     *
      * @param FormBuilderInterface $builder
      * @param array                $options
      *
@@ -97,7 +95,7 @@ class WidgetListingType extends WidgetType
     }
 
     /**
-     * Add the fields to the form for the query mode
+     * Add the fields to the form for the query mode.
      *
      * @param unknown $form
      */
@@ -132,9 +130,7 @@ class WidgetListingType extends WidgetType
 
     }
 
-    /*
-     * Disable orderBy field if random checkbox is checked
-     */
+    /* Disable orderBy field if random checkbox is checked */
     protected function disableOrderBy(FormInterface $form, $randomResults)
     {
         switch ($randomResults) {
@@ -153,7 +149,8 @@ class WidgetListingType extends WidgetType
     }
 
     /**
-     * bind form to WidgetRedactor entity
+     * bind form to WidgetRedactor entity.
+     *
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -168,7 +165,7 @@ class WidgetListingType extends WidgetType
     }
 
     /**
-     * get form name
+     * get form name.
      *
      * @return string The name of the form
      */
