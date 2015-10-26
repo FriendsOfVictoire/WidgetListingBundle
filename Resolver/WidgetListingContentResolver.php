@@ -18,7 +18,8 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
     protected $filterChain;
 
     /**
-     * $filterChain is not cast because it can be null
+     * $filterChain is not cast because it can be null.
+     *
      * @param RequestStack $requestStack [description]
      * @param FilterChain  $filterChain  [description]
      */
@@ -30,7 +31,7 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
     }
 
     /**
-     * Get the content of the widget for the query mode
+     * Get the content of the widget for the query mode.
      *
      * @param Widget $widget
      *
@@ -77,7 +78,7 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
     }
 
     /**
-     * Get the widget query result
+     * Get the widget query result.
      *
      * @param Widget $widget The widget
      *

@@ -58,7 +58,7 @@ class WidgetListing extends Widget
     }
 
     /**
-     * Set items
+     * Set items.
      *
      * @param array $items
      *
@@ -77,7 +77,7 @@ class WidgetListing extends Widget
     }
 
     /**
-     * Add items
+     * Add items.
      *
      * @param \Victoire\Widget\ListingBundle\Entity\WidgetListingItem $item
      *
@@ -95,7 +95,7 @@ class WidgetListing extends Widget
     }
 
     /**
-     * Remove items
+     * Remove items.
      *
      * @param \Victoire\Widget\ListingBundle\Entity\WidgetListingItem $items
      */
@@ -105,7 +105,7 @@ class WidgetListing extends Widget
     }
 
     /**
-     * Get items
+     * Get items.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -115,7 +115,7 @@ class WidgetListing extends Widget
     }
 
     /**
-     * Get targetPattern
+     * Get targetPattern.
      *
      * @return string
      */
@@ -125,7 +125,7 @@ class WidgetListing extends Widget
     }
 
     /**
-     * Set targetPattern
+     * Set targetPattern.
      *
      * @param  string $targetPattern
      * @return $this
@@ -138,7 +138,7 @@ class WidgetListing extends Widget
     }
 
     /**
-     * Set maxResults
+     * Set maxResults.
      *
      * @param string $maxResults
      */
@@ -150,7 +150,7 @@ class WidgetListing extends Widget
     }
 
     /**
-     * Get maxResults
+     * Get maxResults.
      *
      * @return string
      */

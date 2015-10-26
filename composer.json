@@ -1,7 +1,7 @@
 {
     "name": "friendsofvictoire/listing-widget",
     "type": "symfony-bundle",
-    "description": "Victoire DCMS Listing component",
+    "description": "Victoire DCMS Listing widget",
     "keywords": ["DCMS", "Victoire", "listing", "widget", "FriendsofVictoire", "Dynamic", "CMS"],
     "homepage": "http://victoire.io",
     "authors": [

@@ -1,4 +1,5 @@
 <?php
+
 namespace Victoire\Widget\ListingBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -13,7 +14,7 @@ use Victoire\Bundle\WidgetBundle\Entity\Widget;
 class WidgetListingItemType extends AbstractType
 {
     /**
-     * define form fields
+     * define form fields.
      *
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -79,7 +80,7 @@ class WidgetListingItemType extends AbstractType
     }
 
     /**
-     * get form name
+     * get form name.
      *
      * @return string The name of the form
      */
@@ -89,7 +90,8 @@ class WidgetListingItemType extends AbstractType
     }
 
     /**
-     * bind form to WidgetRedactor entity
+     * bind form to WidgetRedactor entity.
+     *
      * @param OptionsResolverInterface $resolver
      *
      */

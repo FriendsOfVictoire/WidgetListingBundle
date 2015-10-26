@@ -48,7 +48,7 @@ class WidgetListingItem implements WidgetItemInterface
     protected $position = 0;
 
     /**
-     * Set the id
+     * Set the id.
      *
      * @param integer $id
      */
@@ -58,7 +58,7 @@ class WidgetListingItem implements WidgetItemInterface
     }
 
     /**
-     * Get the id
+     * Get the id.
      *
      * @return integer The id
      */
@@ -68,7 +68,7 @@ class WidgetListingItem implements WidgetItemInterface
     }
 
     /**
-     * Get fields
+     * Get fields.
      *
      * @return string
      */
@@ -87,7 +87,8 @@ class WidgetListingItem implements WidgetItemInterface
     }
 
     /**
-     * Set title
+     * Set title.
+     *
      * @param string $title
      *
      * @return WidgetListingItem
@@ -100,7 +101,7 @@ class WidgetListingItem implements WidgetItemInterface
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -110,7 +111,8 @@ class WidgetListingItem implements WidgetItemInterface
     }
 
     /**
-     * Set listing
+     * Set listing.
+     *
      * @param string $listing
      *
      * @return WidgetListingItem
@@ -123,7 +125,7 @@ class WidgetListingItem implements WidgetItemInterface
     }
 
     /**
-     * Get listing
+     * Get listing.
      *
      * @return string
      */
@@ -133,7 +135,7 @@ class WidgetListingItem implements WidgetItemInterface
     }
 
     /**
-     * Get position
+     * Get position.
      *
      * @return integer
      */
@@ -143,7 +145,8 @@ class WidgetListingItem implements WidgetItemInterface
     }
 
     /**
-     * Set position
+     * Set position.
+     *
      * @param integer $position The position
      */
     public function setPosition($position)
