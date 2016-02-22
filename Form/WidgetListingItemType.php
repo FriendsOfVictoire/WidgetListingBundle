@@ -3,10 +3,11 @@
 namespace Victoire\Widget\ListingBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Victoire\Bundle\CoreBundle\Form\WidgetType;
-use Victoire\Bundle\WidgetBundle\Entity\Widget;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Victoire\Bundle\CoreBundle\Form\EntityProxyFormType;
 
 /**
  *
@@ -44,22 +45,22 @@ class WidgetListingItemType extends AbstractType
 
             //else, WidgetType class will embed a EntityProxyType for given entity
             $builder
-                ->add('entity_proxy', 'entity_proxy', array(
+                ->add('entity_proxy', EntityProxyFormType::class, [
                     'business_entity_id' => $businessEntityId,
                     'namespace'          => $namespace,
                     'widget'             => $options['widget']
-                ));
+                ]);
 
             //add the remove button
             $this->addRemoveButton($builder);
         }
 
-        $builder->add('position', 'hidden', array(
+        $builder->add('position', HiddenType::class, [
                 'data' => 0,
-                'attr' => array(
+                'attr' => [
                     'data-type' => 'position'
-                )
-            )
+                ]
+            ]
         );
     }
 
@@ -70,44 +71,33 @@ class WidgetListingItemType extends AbstractType
     protected function addRemoveButton(FormBuilderInterface $builder)
     {
         //add the remove button
-        $builder->add('removeButton', 'button', array(
+        $builder->add('removeButton', ButtonType::class, [
             'label' => 'widget.form.WidgetListingItemType.removeButton.label',
-            'attr' => array(
+            'attr' => [
                 'data-action' => 'remove-block',
                 'class'       => 'vic-btn vic-btn-remove vic-btn-large vic-pull-right'
-            )
-        ));
+            ]
+        ]);
     }
 
     /**
-     * get form name.
-     *
-     * @return string The name of the form
+     * {@inheritdoc}
      */
-    public function getName()
+    public function configureOptions(OptionsResolver $resolver)
     {
-        return 'victoire_widget_form_listingitem';
-    }
-
-    /**
-     * bind form to WidgetRedactor entity.
-     *
-     * @param OptionsResolverInterface $resolver
-     *
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class'         => 'Victoire\Widget\ListingBundle\Entity\WidgetListingItem',
             'translation_domain' => 'victoire'
-        ));
+        ]);
 
-        $resolver->setOptional(array('widget'));
-        $resolver->setOptional(array('filters'));
-        $resolver->setOptional(array('slot'));
-        $resolver->setOptional(array('namespace'));
-        $resolver->setOptional(array('businessEntityId'));
-        $resolver->setOptional(array('mode'));
+        $resolver->setDefined([
+            'widget',
+            'filters',
+            'slot',
+            'namespace',
+            'businessEntityId',
+            'mode'
+        ]);
 
     }
 }

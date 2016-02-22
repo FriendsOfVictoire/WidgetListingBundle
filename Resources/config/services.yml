@@ -16,13 +16,13 @@ services:
     victoire.widget.form.listing:
         class: Victoire\Widget\ListingBundle\Form\WidgetListingType
         tags:
-            - { name: form.type , alias: victoire_widget_form_listing}
+            - { name: form.type }
 
     #alias to the listing item form
     victoire.widget.form.listingitem:
         class: Victoire\Widget\ListingBundle\Form\WidgetListingItemType
         tags:
-            - { name: form.type , alias: victoire_widget_form_listingitem}
+            - { name: form.type }
 
     #tag listing Item as a widgetItem
     victoire.widget.listingitem:

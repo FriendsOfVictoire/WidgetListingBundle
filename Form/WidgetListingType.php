@@ -2,9 +2,11 @@
 
 namespace Victoire\Widget\ListingBundle\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormError;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Victoire\Bundle\CoreBundle\Form\WidgetType;
 use Victoire\Bundle\WidgetBundle\Entity\Widget;
 use Symfony\Component\Form\FormEvent;
@@ -24,90 +26,85 @@ class WidgetListingType extends WidgetType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->options = $options;
-
-        $namespace = $options['namespace'];
-        $businessEntityId = $options['businessEntityId'];
-        $mode = $options['mode'];
-
-        if ($businessEntityId !== null) {
-            if ($namespace === null) {
+        if ($options['businessEntityId'] !== null) {
+            if ($options['namespace'] === null) {
                 throw new \Exception('The namespace is mandatory if the business_entity_id is given.');
             }
         }
 
-        if ($mode === Widget::MODE_STATIC) {
+        if ($options['mode'] === Widget::MODE_STATIC) {
             //if no entity is given, we generate the static form
-            $builder->add('items', 'collection', array(
-                'type' => 'victoire_widget_form_listingitem',
+            $builder->add('items', CollectionType::class, [
+                'entry_type' => WidgetListingItemType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'vic_widget_add_btn' => null,
                 'by_reference' => false,
-                'options' => array(
-                    'namespace' => $namespace,
-                    'businessEntityId' => $businessEntityId,
+                'options' => [
+                    'namespace' => $options['namespace'],
+                    'businessEntityId' => $options['businessEntityId'],
                     'widget'    => $options['widget']
-                ),
-                "attr" => array('id' => 'static')
-            ));
+                ],
+                "attr" => ['id' => 'static']
+            ]);
         }
 
-        if ($mode === Widget::MODE_ENTITY) {
+        if ($options['mode'] === Widget::MODE_ENTITY) {
             $builder
-                ->add('slot', 'hidden');
+                ->add('slot', HiddenType::class);
             //else, WidgetType class will embed a EntityProxyType for given entity
             $builder
-                ->add('items', 'collection', array(
-                        'type'               => 'victoire_widget_form_listingitem',
+                ->add('items', CollectionType::class, [
+                        'entry_type'         => WidgetListingItemType::class,
                         'allow_add'          => true,
                         'vic_widget_add_btn' => null,
                         'allow_delete'       => true,
                         'by_reference'       => false,
-                        "attr"               => array('id' => $businessEntityId),
-                        'options'            => array(
-                            'namespace'        => $namespace,
-                            'businessEntityId' => $businessEntityId,
-                            'mode'             => $mode,
+                        "attr"               => ['id' => $options['businessEntityId']],
+                        'options'            => [
+                            'namespace'        => $options['namespace'],
+                            'businessEntityId' => $options['businessEntityId'],
+                            'mode'             => $options['mode'],
                             'widget'           => $options['widget']
-                        ),
-                    ));
+                        ],
+                    ]);
 
-            $this->addEntityFields($builder);
+            $this->addEntityFields($builder, $options);
         }
 
-        if ($mode === Widget::MODE_QUERY) {
-            $this->addQueryFields($builder);
+        if ($options['mode'] === Widget::MODE_QUERY) {
+            $this->addQueryFields($builder, $options);
         }
 
-        if ($mode === Widget::MODE_BUSINESS_ENTITY) {
-            $this->addBusinessEntityFields($builder);
+        if ($options['mode'] === Widget::MODE_BUSINESS_ENTITY) {
+            $this->addBusinessEntityFields($builder, $options);
         }
 
         //add the mode to the form
-        $builder->add('mode', 'hidden', array(
-            'data' => $mode
-        ));
+        $builder->add('mode', HiddenType::class, [
+            'data' => $options['mode']
+        ]);
 
         //add the slot to the form
-        $builder->add('slot', 'hidden', array());
+        $builder->add('slot', HiddenType::class);
 
     }
 
     /**
      * Add the fields to the form for the query mode.
      *
-     * @param unknown $form
+     * @param FormInterface|FormBuilderInterface $form
+     * @param array $options
      */
-    protected function addQueryFields($form)
+    protected function addQueryFields($form, $options)
     {
 
         $form->add('targetPattern');
-        $form->add('randomResults', null, array(
-            'attr' => array(
+        $form->add('randomResults', null, [
+            'attr' => [
                 'data-refreshOnChange' => "true",
-            )
-        ));
+            ]
+        ]);
         $form->add('maxResults');
 
         $form->addEventListener(
@@ -126,7 +123,7 @@ class WidgetListingType extends WidgetType
             }
         );
 
-        parent::addQueryFields($form);
+        parent::addQueryFields($form, $options);
 
     }
 
@@ -138,39 +135,27 @@ class WidgetListingType extends WidgetType
                 $form->remove('orderBy');
                 break;
             default:
-                $form->add('orderBy', null, array(
+                $form->add('orderBy', null, [
                     'required' => false,
-                    'attr' => array(
+                    'attr' => [
                         'placeholder' => '[{"by": "name", "order": "DESC"}, {"by": "address", "order": "ASC"}]'
-                    ),
-                ));
+                    ],
+                ]);
                 break;
         }
     }
 
     /**
-     * bind form to WidgetRedactor entity.
-     *
-     * @param OptionsResolverInterface $resolver
+     * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class'         => 'Victoire\Widget\ListingBundle\Entity\WidgetListing',
             'widget'             => 'ListingItem',
             'translation_domain' => 'victoire'
-        ));
-    }
-
-    /**
-     * get form name.
-     *
-     * @return string The name of the form
-     */
-    public function getName()
-    {
-        return 'victoire_widget_form_listing';
+        ]);
     }
 }
