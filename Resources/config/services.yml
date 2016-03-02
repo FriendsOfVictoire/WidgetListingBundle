@@ -3,8 +3,8 @@ services:
         class: Victoire\Widget\ListingBundle\Resolver\WidgetListingContentResolver
         parent: victoire_widget.base_widget_content_resolver
         arguments:
-            - "@request_stack" # used for widget-filter
-            - "@victoire_core.filter_chain" # used for widget-filter
+            - "@request_stack"
+            - "@=service('victoire_core.filter_chain').getFilters()"
         parent: victoire_widget.base_widget_content_resolver
         tags:
             - { name: victoire_widget.widget_content_resolver, alias: Listing }

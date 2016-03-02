@@ -15,18 +15,18 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
 {
 
     protected $request;
-    protected $filterChain;
+    protected $filters;
 
     /**
-     * $filterChain is not cast because it can be null.
+     * $filters is not cast because it can be null.
      *
      * @param RequestStack $requestStack [description]
-     * @param FilterChain  $filterChain  [description]
+     * @param array        $filters  [description]
      */
-    public function __construct(RequestStack $requestStack, FilterChain $filterChain = null)
+    public function __construct(RequestStack $requestStack, array $filters)
     {
         $this->request = $requestStack->getCurrentRequest();
-        $this->filterChain = $filterChain;
+        $this->filters = $filters;
         $this->currentPage = 1;
     }
 
@@ -92,7 +92,7 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
         //get the base query
         $itemsQueryBuilder = $queryHelper->getQueryBuilder($widget, $this->entityManager);
 
-        if ($this->filterChain !== null) {
+        if ($this->filters !== null) {
             $request = $this->request;
             $filters = $request->query->get('filter');
 
@@ -103,13 +103,11 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
             if ($listId === $widget->getId()) {
                 unset($filters['listing']);
 
-                $filterChains = $this->filterChain;
-
                 //we parse the filters
-                foreach ($filterChains->getFilters() as $name => $filter) {
+                foreach ($this->filters as $name => $filter) {
                     if (!empty($filters[$name])) {
                         $filter->buildQuery($itemsQueryBuilder, $filters[$name]);
-                        $widget->filters[$name] = $filter->getFilters($filters[$name]);
+                        $widget->filters[$name] = $filter;
                     }
                 }
             }
