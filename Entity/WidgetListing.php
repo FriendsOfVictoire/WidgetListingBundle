@@ -46,7 +46,7 @@ class WidgetListing extends Widget
      */
     public function __toString()
     {
-        return sprintf('#%s - Liste de la page "%s"', $this->getId(), $this->getView()->getName());
+        return sprintf('Widget Listing #%s', $this->getId());
     }
 
     /**
