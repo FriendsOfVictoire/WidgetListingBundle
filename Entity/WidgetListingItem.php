@@ -7,7 +7,7 @@ use Victoire\Bundle\CoreBundle\Annotations as VIC;
 use Victoire\Bundle\WidgetBundle\Entity\WidgetItemInterface;
 
 /**
- * WidgetListingItem
+ * WidgetListingItem.
  *
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="type", type="string")
@@ -17,7 +17,7 @@ use Victoire\Bundle\WidgetBundle\Entity\WidgetItemInterface;
 class WidgetListingItem implements WidgetItemInterface
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -38,7 +38,6 @@ class WidgetListingItem implements WidgetItemInterface
      *
      * @ORM\ManyToOne(targetEntity="WidgetListing", inversedBy="items")
      * @ORM\JoinColumn(name="listing_id", referencedColumnName="id", onDelete="CASCADE")
-     *
      */
     protected $listing;
 
@@ -50,7 +49,7 @@ class WidgetListingItem implements WidgetItemInterface
     /**
      * Set the id.
      *
-     * @param integer $id
+     * @param int $id
      */
     public function setId($id)
     {
@@ -60,7 +59,7 @@ class WidgetListingItem implements WidgetItemInterface
     /**
      * Get the id.
      *
-     * @return integer The id
+     * @return int The id
      */
     public function getId()
     {
@@ -74,7 +73,7 @@ class WidgetListingItem implements WidgetItemInterface
      */
     public function getFields()
     {
-        $fields = array();
+        $fields = [];
 
         //get the listing
         $listing = $this->getListing();
@@ -137,7 +136,7 @@ class WidgetListingItem implements WidgetItemInterface
     /**
      * Get position.
      *
-     * @return integer
+     * @return int
      */
     public function getPosition()
     {
@@ -147,7 +146,7 @@ class WidgetListingItem implements WidgetItemInterface
     /**
      * Set position.
      *
-     * @param integer $position The position
+     * @param int $position The position
      */
     public function setPosition($position)
     {

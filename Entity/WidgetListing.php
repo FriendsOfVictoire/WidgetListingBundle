@@ -1,11 +1,12 @@
 <?php
+
 namespace Victoire\Widget\ListingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\Bundle\WidgetBundle\Entity\Widget;
 
 /**
- * WidgetListing
+ * WidgetListing.
  *
  * @ORM\Table("vic_widget_listing")
  * @ORM\Entity
@@ -17,7 +18,6 @@ class WidgetListing extends Widget
      *
      * @ORM\OneToMany(targetEntity="WidgetListingItem", mappedBy="listing", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
-     *
      */
     protected $items;
 
@@ -27,21 +27,22 @@ class WidgetListing extends Widget
     protected $targetPattern;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="maxResults", type="integer", nullable=true)
      */
     protected $maxResults;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="randomResults", type="boolean", nullable=true)
      */
     protected $randomResults;
 
     /**
-     * To string function
+     * To string function.
+     *
      * @return string A string which represents the instance
      */
     public function __toString()
@@ -50,7 +51,7 @@ class WidgetListing extends Widget
     }
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -127,7 +128,8 @@ class WidgetListing extends Widget
     /**
      * Set targetPattern.
      *
-     * @param  string $targetPattern
+     * @param string $targetPattern
+     *
      * @return $this
      */
     public function setTargetPattern($targetPattern)
@@ -160,7 +162,7 @@ class WidgetListing extends Widget
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isRandomResults()
     {
@@ -168,11 +170,10 @@ class WidgetListing extends Widget
     }
 
     /**
-     * @param boolean $randomResults
+     * @param bool $randomResults
      */
     public function setRandomResults($randomResults)
     {
         $this->randomResults = $randomResults;
     }
-
 }
