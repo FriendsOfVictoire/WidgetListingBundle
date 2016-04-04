@@ -9,9 +9,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Victoire\Bundle\CoreBundle\Form\EntityProxyFormType;
 
-/**
- *
- */
 class WidgetListingItemType extends AbstractType
 {
     /**
@@ -48,7 +45,7 @@ class WidgetListingItemType extends AbstractType
                 ->add('entity_proxy', EntityProxyFormType::class, [
                     'business_entity_id' => $businessEntityId,
                     'namespace'          => $namespace,
-                    'widget'             => $options['widget']
+                    'widget'             => $options['widget'],
                 ]);
 
             //add the remove button
@@ -58,14 +55,13 @@ class WidgetListingItemType extends AbstractType
         $builder->add('position', HiddenType::class, [
                 'data' => 0,
                 'attr' => [
-                    'data-type' => 'position'
-                ]
+                    'data-type' => 'position',
+                ],
             ]
         );
     }
 
     /**
-     *
      * @param FormBuilderInterface $builder
      */
     protected function addRemoveButton(FormBuilderInterface $builder)
@@ -73,10 +69,10 @@ class WidgetListingItemType extends AbstractType
         //add the remove button
         $builder->add('removeButton', ButtonType::class, [
             'label' => 'widget.form.WidgetListingItemType.removeButton.label',
-            'attr' => [
+            'attr'  => [
                 'data-action' => 'remove-block',
-                'class'       => 'vic-btn vic-btn-remove vic-btn-large vic-pull-right'
-            ]
+                'class'       => 'vic-btn vic-btn-remove vic-btn-large vic-pull-right',
+            ],
         ]);
     }
 
@@ -87,7 +83,7 @@ class WidgetListingItemType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => 'Victoire\Widget\ListingBundle\Entity\WidgetListingItem',
-            'translation_domain' => 'victoire'
+            'translation_domain' => 'victoire',
         ]);
 
         $resolver->setDefined([
@@ -96,8 +92,7 @@ class WidgetListingItemType extends AbstractType
             'slot',
             'namespace',
             'businessEntityId',
-            'mode'
+            'mode',
         ]);
-
     }
 }

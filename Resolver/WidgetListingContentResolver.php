@@ -1,19 +1,18 @@
 <?php
+
 namespace Victoire\Widget\ListingBundle\Resolver;
 
 use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Victoire\Bundle\QueryBundle\Helper\QueryHelper;
 use Victoire\Bundle\WidgetBundle\Model\Widget;
 use Victoire\Bundle\WidgetBundle\Resolver\BaseWidgetContentResolver;
-use Victoire\Bundle\FilterBundle\Filter\Chain\FilterChain;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Pagerfanta;
 use Victoire\Widget\ListingBundle\Entity\WidgetListing;
 
 class WidgetListingContentResolver extends BaseWidgetContentResolver
 {
-
     protected $request;
     protected $filters;
 
@@ -21,7 +20,7 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
      * $filters is not cast because it can be null.
      *
      * @param RequestStack $requestStack [description]
-     * @param array        $filters  [description]
+     * @param array        $filters      [description]
      */
     public function __construct(RequestStack $requestStack, array $filters)
     {
@@ -36,7 +35,6 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
      * @param Widget $widget
      *
      * @return string
-     *
      */
     public function getWidgetQueryContent(Widget $widget)
     {
@@ -45,8 +43,7 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
         $randomResults = $widget->isRandomResults();
 
         // Use pager only if maxResult is set and random order is not asked
-        if ($maxResults && is_integer($maxResults) && !$randomResults) {
-
+        if ($maxResults && is_int($maxResults) && !$randomResults) {
             $filterBuilder = $this->getWidgetQueryBuilder($widget);
             $adapter = new DoctrineORMAdapter($filterBuilder->getQuery());
             $pager = new Pagerfanta($adapter);
@@ -54,8 +51,7 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
             $pager->setCurrentPage($this->request->get('page', $this->currentPage));
             $items = $pager->getCurrentPageResults();
 
-            return array_merge($parameters, array('items' => $items, 'pager' => $pager));
-
+            return array_merge($parameters, ['items' => $items, 'pager' => $pager]);
         }
 
         /* @var $qb QueryBuilder */
@@ -63,12 +59,12 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
         $entities = $qb->getQuery()->getResult();
 
         // Random order
-        if($randomResults) {
+        if ($randomResults) {
             shuffle($entities);
         }
 
         // Max result in php
-        if ($maxResults && is_integer($maxResults)) {
+        if ($maxResults && is_int($maxResults)) {
             $entities = array_slice($entities, 0, $maxResults);
         }
 
@@ -124,7 +120,8 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
      * Get the business entity content
      * If we're in a Business Entity context (current entity),
      * \ we'll open the default page in the current entity's page
-     * \ if page get parameter is not defined
+     * \ if page get parameter is not defined.
+     *
      * @param Widget $widget
      *
      * @return string
@@ -139,7 +136,7 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
             /** @var Pagerfanta $_pager */
             $_pager = $parameters['pager'];
             for ($i = 1; $i <= $_pager->getNbPages(); $i++) {
-                /** @var WidgetListing $widget */
+                /* @var WidgetListing $widget */
                 $this->currentPage = $i;
                 $_parameters = $this->getWidgetQueryContent($widget);
                 $_pager = $_parameters['pager'];
