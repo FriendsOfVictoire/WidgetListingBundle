@@ -55,6 +55,7 @@ class WidgetListing extends Widget
      */
     public function __construct()
     {
+        parent::__construct();
         $this->items = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
