@@ -3,3 +3,4 @@ victoire_core:
         Listing:
             class: "Victoire\\Widget\\ListingBundle\\Entity\\WidgetListing"
             name: Listing
+            cache: false
