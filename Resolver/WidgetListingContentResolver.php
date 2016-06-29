@@ -45,7 +45,7 @@ class WidgetListingContentResolver extends BaseWidgetContentResolver
         // Use pager only if maxResult is set and random order is not asked
         if ($maxResults && is_int($maxResults) && !$randomResults) {
             $filterBuilder = $this->getWidgetQueryBuilder($widget);
-            $adapter = new DoctrineORMAdapter($filterBuilder->getQuery());
+            $adapter = new DoctrineORMAdapter($filterBuilder->getQuery(), false);
             $pager = new Pagerfanta($adapter);
             $pager->setMaxPerPage($widget->getMaxResults());
             $pager->setCurrentPage($this->request->get('page', $this->currentPage));
