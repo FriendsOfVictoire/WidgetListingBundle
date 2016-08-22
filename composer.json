@@ -23,7 +23,7 @@
     "require": {
         "php": ">=5.5.9",
         "symfony/framework-bundle": "~2.8|~3.0",
-        "victoire/victoire": "~1.6",
+        "victoire/victoire": ">=2.0.0",
         "pagerfanta/pagerfanta": "^1.0@dev"
     },
     "autoload": {
@@ -31,6 +31,5 @@
             "Victoire\\Widget\\ListingBundle": ""
         }
     },
-    "minimum-stability": "dev",
     "target-dir": "Victoire/Widget/ListingBundle"
 }
