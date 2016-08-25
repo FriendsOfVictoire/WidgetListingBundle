@@ -7,16 +7,16 @@
             [
                 "@VictoireWidgetListingBundle/Resources/public/Commons/js/victoire-edit.js"
             ],
-            "head":
+            "addressBook-theme":
             [
-                "@VictoireWidgetListingBundle/Resources/public/js/adressBook.js"
+                "@VictoireWidgetListingBundle/Resources/public/js/addressBook.js"
             ]
          },
         "stylesheets":
         {
-            "head":
+            "addressBook-theme":
             [
-                "@VictoireWidgetListingBundle/Resources/public/less/adressBook.less"
+                "@VictoireWidgetListingBundle/Resources/public/less/addressBook.less"
             ]
          }
     }
