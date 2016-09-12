@@ -1,7 +1,6 @@
 {% extends 'VictoireCoreBundle:Widget:new.html.twig' %}
 
 {% block form_entity %}
-    <div id="picker{% if entity %}-{{ entity }}{% endif %}-{{ quantum }}-{{ form.mode.vars.data }}" class="entity vic-tab-pane {% if form.mode.vars.data == widget.mode %}vic-active{% endif %}">
         {{ form_start(form) }}
         {% if form.mode.vars.data == 'entity' %}
             <a href="#" onclick='addItemEntityForm("{{ form.items.vars.attr.id }}")' class="vic-btn vic-btn-add" class="vic-btn vic-btn-add add-request-block">{{ 'widget.form.WidgetListingItemType.addItem.label'|trans({}, 'victoire') }}</a>
@@ -15,11 +14,9 @@
         {% endif %}
         {{form_rest(form)}}
         {{ form_end(form) }}
-    </div>
 {% endblock form_entity %}
 
 {% block form_static %}
-    <div id="picker-{{ form.mode.vars.data }}" class="vic-tab-pane vic-active">
         {{ form_start(form) }}
         <a href="#" onclick='addItemStaticForm()' class="vic-btn vic-btn-add" class="vic-btn vic-btn-add add-request-block">{{ 'widget.form.WidgetListingItemType.addItem.label'|trans({}, 'victoire') }}</a>
         {# It could be simpler here but this is done in order to give an example to implementations with more complicated forms #}
@@ -31,7 +28,6 @@
         {% do form.items.setRendered %}
         {{form_rest(form)}}
         {{ form_end(form) }}
-    </div>
 {% endblock form_static %}
 
 {% block form %}
