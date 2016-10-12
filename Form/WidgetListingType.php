@@ -86,7 +86,7 @@ class WidgetListingType extends WidgetType
 
         //add the slot to the form
         $builder->add('slot', HiddenType::class);
-        parent::buildForm($builder, $options);
+        $this->addCriteriasFields($builder, $options);
     }
 
     /**
