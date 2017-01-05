@@ -38,6 +38,19 @@
         <source>widget_listingitem.form.title.label </source>
         <target>Title</target>
       </trans-unit>
+      <trans-unit resname="widget_listingitem.info.slot">
+        <source>widget_listingitem.info.slot</source>
+        <target>
+          <![CDATA[
+          After creating this widget, you can add content into 3 new insertion blocks:<br>
+          <ul>
+          <li>a block before the list that appears only if the list is not empty (possibly to display a title)</li>
+          <li>a block after the list that appears only if the list is not empty</li>
+          <li>a block replacing the list if this one is empty (possibly to display a "no result" message)</li>
+          </ul>
+          ]]>
+        </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

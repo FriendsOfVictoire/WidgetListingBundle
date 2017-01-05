@@ -1,11 +1,17 @@
 {% extends 'VictoireCoreBundle:Widget:show.html.twig' %}
 
 {% block content %}
-	<ul>
-		{% for item in items %}
-		      <li>
-		             {% include "VictoireWidgetListingBundle::_showItem.html.twig" %}
-		      </li>
-		{% endfor %}
-	</ul>
+	{% if items|length > 0 %}
+        {{ cms_slot_widgets(widget.childrenSlot ~ '_before') }}
+		<ul>
+			{% for item in items %}
+				  <li>
+						 {% include "VictoireWidgetListingBundle::_showItem.html.twig" %}
+				  </li>
+			{% endfor %}
+		</ul>
+        {{ cms_slot_widgets(widget.childrenSlot ~ '_after') }}
+	{% else %}
+        {{ cms_slot_widgets(widget.childrenSlot ~ '_noitems') }}
+	{% endif %}
 {% endblock content %}

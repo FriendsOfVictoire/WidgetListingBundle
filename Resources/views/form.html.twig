@@ -1,5 +1,11 @@
 {% extends 'VictoireCoreBundle:Widget:new.html.twig' %}
 
+{% block info %}
+    <div class="vic-alert vic-alert-warning vic-alert-dismissible">
+        {{ 'widget_listingitem.info.slot'|trans({}, 'victoire')|raw }}
+    </div>
+{% endblock info %}
+
 {% block form_entity %}
         {{ form_start(form) }}
         {% if form.mode.vars.data == 'entity' %}
