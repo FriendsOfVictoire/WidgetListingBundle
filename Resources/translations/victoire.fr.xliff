@@ -38,6 +38,19 @@
         <source>widget_listingitem.form.title.label </source>
         <target>Titre</target>
       </trans-unit>
+      <trans-unit resname="widget_listingitem.info.slot">
+        <source>widget_listingitem.info.slot</source>
+        <target>
+          <![CDATA[
+          Après avoir créé ce widget, vous pourrez ajouter du contenu dans 3 nouveaux blocs d'insertion de contenu :<br>
+          <ul>
+          <li>un bloc avant la liste qui s'affiche si la liste n'est pas vide (pour éventuellement afficher un titre)</li>
+          <li>un bloc après la liste qui s'affiche si la liste n'est pas vide</li>
+          <li>un bloc qui remplace la liste si celle-ci est vide (pour éventuellement afficher un message indiquant qu'il n'y a aucun résultat)</li>
+          </ul>
+          ]]>
+        </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
