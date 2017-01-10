@@ -56,7 +56,7 @@ function ajaxUpdateListItems(url, data, successCallback)
         },
         error: function (response)
         {
-            alert("Il semble s'êre produit une erreur");
+            alert("Il semble s'être produit une erreur");
         }
     });
 }
