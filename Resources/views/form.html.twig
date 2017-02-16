@@ -24,7 +24,7 @@
 
 {% block form_static %}
         {{ form_start(form) }}
-        <a href="#" onclick='addItemStaticForm()' class="vic-btn vic-btn-add" class="vic-btn vic-btn-add add-request-block">{{ 'widget.form.WidgetListingItemType.addItem.label'|trans({}, 'victoire') }}</a>
+        <a href="#" onclick='addItemStaticForm("", {{ quantum }})' class="vic-btn vic-btn-add" class="vic-btn vic-btn-add add-request-block">{{ 'widget.form.WidgetListingItemType.addItem.label'|trans({}, 'victoire') }}</a>
         {# It could be simpler here but this is done in order to give an example to implementations with more complicated forms #}
         <ul class="vic-row vic-items" data-prototype="{% filter escape %}{% include 'VictoireWidgetListingBundle::_itemForm.html.twig' with { 'item': form.items.vars.prototype } %}{% endfilter %}">
             {% for item in form.items %}

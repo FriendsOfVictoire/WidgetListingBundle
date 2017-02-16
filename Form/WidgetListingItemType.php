@@ -5,6 +5,7 @@ namespace Victoire\Widget\ListingBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Victoire\Bundle\CoreBundle\Form\EntityProxyFormType;
@@ -34,7 +35,9 @@ class WidgetListingItemType extends AbstractType
         if ($businessEntityId === null) {
             //if no entity is given, we generate the static form that contains only title and description
             $builder
-                ->add('title');
+                ->add('title', TextType::class, [
+                    'label' => 'widget_listing.form.listing_item.title.label'
+                ]);
 
             //add the remove button
             $this->addRemoveButton($builder);
