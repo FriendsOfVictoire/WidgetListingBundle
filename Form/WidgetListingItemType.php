@@ -49,6 +49,7 @@ class WidgetListingItemType extends AbstractType
                     'business_entity_id' => $businessEntityId,
                     'namespace'          => $namespace,
                     'widget'             => $options['widget'],
+                    'mapped'             => false
                 ]);
 
             //add the remove button
