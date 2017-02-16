@@ -3,9 +3,9 @@
 var addItemStaticFormIndex = 1000;
 var addItemEntityFormIndex = 1000;
 
-function addItemStaticForm(liAttributes)
+function addItemStaticForm(liAttributes, quantum)
 {
-    var collectionHolder = $vic('#picker-static ul.vic-items');
+    var collectionHolder = $vic('#picker-static-' + quantum + ' ul.vic-items');
 
     // Récupère l'élément ayant l'attribut data-prototype comme expliqué plus tôt
     var prototype = collectionHolder.attr('data-prototype');

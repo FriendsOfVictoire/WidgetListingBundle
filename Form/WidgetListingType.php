@@ -34,15 +34,17 @@ class WidgetListingType extends WidgetType
         if ($options['mode'] === Widget::MODE_STATIC) {
             //if no entity is given, we generate the static form
             $builder->add('items', CollectionType::class, [
-                'entry_type'         => WidgetListingItemType::class,
-                'allow_add'          => true,
-                'allow_delete'       => true,
-                'vic_widget_add_btn' => null,
-                'by_reference'       => false,
-                'options'            => [
-                    'namespace'        => $options['namespace'],
-                    'businessEntityId' => $options['businessEntityId'],
-                    'widget'           => $options['widget'],
+                'entry_type'            => WidgetListingItemType::class,
+                'allow_add'             => true,
+                'allow_delete'          => true,
+                'vic_widget_add_btn'    => null,
+                'by_reference'          => false,
+                'options'               => [
+                    'vic_widget_remove_btn' => null,
+                    'label'                 => false,
+                    'namespace'             => $options['namespace'],
+                    'businessEntityId'      => $options['businessEntityId'],
+                    'widget'                => $options['widget'],
                 ],
                 'attr' => ['id' => 'static'],
             ]);
