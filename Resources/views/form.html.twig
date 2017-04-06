@@ -7,33 +7,33 @@
 {% endblock info %}
 
 {% block form_entity %}
-        {{ form_start(form) }}
-        {% if form.mode.vars.data == 'entity' %}
-            <a href="#" onclick='addItemEntityForm("{{ form.items.vars.attr.id }}")' class="vic-btn vic-btn-add" class="vic-btn vic-btn-add add-request-block">{{ 'widget.form.WidgetListingItemType.addItem.label'|trans({}, 'victoire') }}</a>
-            {# It could be simpler here but this is done in order to give an example to implementations with more complicated forms #}
-            <ul class="vic-row vic-items entityItems" data-prototype="{% filter escape %}{% include 'VictoireWidgetListingBundle::_itemForm.html.twig' with { 'item': form.items.vars.prototype } %}{% endfilter %}">
-                {% for item in form.items %}
-                    {% include 'VictoireWidgetListingBundle::_itemForm.html.twig' %}
-                {% endfor %}
-            </ul>
-            {% do form.items.setRendered %}
-        {% endif %}
-        {{form_rest(form)}}
-        {{ form_end(form) }}
-{% endblock form_entity %}
-
-{% block form_static %}
-        {{ form_start(form) }}
-        <a href="#" onclick='addItemStaticForm("", {{ quantum }})' class="vic-btn vic-btn-add" class="vic-btn vic-btn-add add-request-block">{{ 'widget.form.WidgetListingItemType.addItem.label'|trans({}, 'victoire') }}</a>
+    {{ form_start(form) }}
+    {% if form.mode.vars.data == 'entity' %}
+        <a href="#" onclick='addItemEntityForm("{{ form.items.vars.attr.id }}")' class="vic-btn vic-btn-add" class="vic-btn vic-btn-add add-request-block">{{ 'widget.form.WidgetListingItemType.addItem.label'|trans({}, 'victoire') }}</a>
         {# It could be simpler here but this is done in order to give an example to implementations with more complicated forms #}
-        <ul class="vic-row vic-items" data-prototype="{% filter escape %}{% include 'VictoireWidgetListingBundle::_itemForm.html.twig' with { 'item': form.items.vars.prototype } %}{% endfilter %}">
+        <ul class="vic-row vic-items entityItems" data-prototype="{% filter escape %}{% include 'VictoireWidgetListingBundle::_itemForm.html.twig' with { 'item': form.items.vars.prototype } %}{% endfilter %}">
             {% for item in form.items %}
                 {% include 'VictoireWidgetListingBundle::_itemForm.html.twig' %}
             {% endfor %}
         </ul>
         {% do form.items.setRendered %}
-        {{form_rest(form)}}
-        {{ form_end(form) }}
+    {% endif %}
+    {{form_rest(form)}}
+    {{ form_end(form) }}
+{% endblock form_entity %}
+
+{% block form_static %}
+    {{ form_start(form) }}
+    <a href="#" onclick='addItemStaticForm("", {{ quantum }})' class="vic-btn vic-btn-add" class="vic-btn vic-btn-add add-request-block">{{ 'widget.form.WidgetListingItemType.addItem.label'|trans({}, 'victoire') }}</a>
+    {# It could be simpler here but this is done in order to give an example to implementations with more complicated forms #}
+    <ul class="vic-row vic-items" data-prototype="{% filter escape %}{% include 'VictoireWidgetListingBundle::_itemForm.html.twig' with { 'item': form.items.vars.prototype } %}{% endfilter %}">
+        {% for item in form.items %}
+            {% include 'VictoireWidgetListingBundle::_itemForm.html.twig' %}
+        {% endfor %}
+    </ul>
+    {% do form.items.setRendered %}
+    {{form_rest(form)}}
+    {{ form_end(form) }}
 {% endblock form_static %}
 
 {% block form %}

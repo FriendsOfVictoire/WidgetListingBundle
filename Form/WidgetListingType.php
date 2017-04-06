@@ -25,11 +25,8 @@ class WidgetListingType extends WidgetType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($options['businessEntityId'] !== null) {
-            if ($options['namespace'] === null) {
-                throw new \Exception('The namespace is mandatory if the business_entity_id is given.');
-            }
-        }
+
+        parent::buildForm($builder, $options);
 
         if ($options['mode'] === Widget::MODE_STATIC) {
             //if no entity is given, we generate the static form
@@ -42,7 +39,6 @@ class WidgetListingType extends WidgetType
                 'options'               => [
                     'vic_widget_remove_btn' => null,
                     'label'                 => false,
-                    'namespace'             => $options['namespace'],
                     'businessEntityId'      => $options['businessEntityId'],
                     'widget'                => $options['widget'],
                 ],
@@ -63,14 +59,13 @@ class WidgetListingType extends WidgetType
                         'by_reference'       => false,
                         'attr'               => ['id' => $options['businessEntityId']],
                         'options'            => [
-                            'namespace'        => $options['namespace'],
                             'businessEntityId' => $options['businessEntityId'],
                             'mode'             => $options['mode'],
                             'widget'           => $options['widget'],
                         ],
                     ]);
 
-            $this->addEntityFields($builder, $options);
+            $this->addEntityFields($builder, $options, $options['mode']);
         }
 
         if ($options['mode'] === Widget::MODE_QUERY) {
