@@ -22,23 +22,23 @@
         <source>widget.listing.new.action.label</source>
         <target>Liste</target>
       </trans-unit>
-      <trans-unit resname="widget.form.WidgetListingItemType.removeButton.label">
+      <trans-unit id="7795f1ac8680b91327a4a2a23b71cda8abc53bbb" resname="widget.form.WidgetListingItemType.removeButton.label">
         <source>widget.form.WidgetListingItemType.removeButton.label</source>
         <target><![CDATA[<i class="fa fa-trash-o"></i>]]></target>
       </trans-unit>
-      <trans-unit resname="widget.form.WidgetListingItemType.moveButton.label">
+      <trans-unit id="7795f1ac8680b91327a4a2a23b71cda8abc53bbc" resname="widget.form.WidgetListingItemType.moveButton.label">
         <source>widget.form.WidgetListingItemType.moveButton.label</source>
         <target><![CDATA[<i class="fa fa-arrows"></i>]]></target>
       </trans-unit>
-      <trans-unit resname="widget.form.WidgetListingItemType.addItem.label">
+      <trans-unit id="7795f1ac8680b91327a4a2a23b71cda8abc53bbd" resname="widget.form.WidgetListingItemType.addItem.label">
         <source>widget.form.WidgetListingItemType.addItem.label</source>
         <target>Ajouter un nouvel élément</target>
       </trans-unit>
-      <trans-unit resname="widget_listingitem.form.title.label">
+      <trans-unit id="7795f1ac8680b91327a4a2a23b71cda8abc53bbe" resname="widget_listingitem.form.title.label">
         <source>widget_listingitem.form.title.label </source>
         <target>Titre</target>
       </trans-unit>
-      <trans-unit resname="widget_listingitem.info.slot">
+      <trans-unit id="7795f1ac8680b91327a4a2a23b71cda8abc53bbf" resname="widget_listingitem.info.slot">
         <source>widget_listingitem.info.slot</source>
         <target>
           <![CDATA[
