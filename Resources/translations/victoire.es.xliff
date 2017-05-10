@@ -6,39 +6,39 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="77ff90fd1a56d5dee1b0d3e83155d275172b73a8" resname="modal.form.widget.type.listing.label">
+      <trans-unit id="591331b82bb36" resname="modal.form.widget.type.listing.label">
         <source>modal.form.widget.type.listing.label</source>
         <target>Widget Lista</target>
       </trans-unit>
-      <trans-unit id="83c40c3c50480013678086b0b9a8bdcafeff3348" resname="widget.form.collection.remove">
+      <trans-unit id="591331b82bb46" resname="widget.form.collection.remove">
         <source>widget.form.collection.remove</source>
         <target>Borrar</target>
       </trans-unit>
-      <trans-unit id="e73f4ed23832568330c963f0e40ac22daa9ab2c9" resname="widget.form.entity.fields.label">
+      <trans-unit id="591331b82bb52" resname="widget.form.entity.fields.label">
         <source>widget.form.entity.fields.label</source>
         <target state="new">Campos</target>
       </trans-unit>
-      <trans-unit id="7795f1ac8680b91327a4a2a23b71cda8abc53bba" resname="widget.listing.new.action.label">
+      <trans-unit id="591331b82bb65" resname="widget.listing.new.action.label">
         <source>widget.listing.new.action.label</source>
         <target>Lista</target>
       </trans-unit>
-      <trans-unit resname="widget.form.WidgetListingItemType.removeButton.label">
+      <trans-unit resname="widget.form.WidgetListingItemType.removeButton.label" id="591331b82bb98">
         <source>widget.form.WidgetListingItemType.removeButton.label</source>
         <target><![CDATA[<i class="fa fa-trash-o"></i>]]></target>
       </trans-unit>
-      <trans-unit resname="widget.form.WidgetListingItemType.moveButton.label">
+      <trans-unit resname="widget.form.WidgetListingItemType.moveButton.label" id="591331b82bbb4">
         <source>widget.form.WidgetListingItemType.moveButton.label</source>
         <target><![CDATA[<i class="fa fa-arrows"></i>]]></target>
       </trans-unit>
-      <trans-unit resname="widget.form.WidgetListingItemType.addItem.label">
+      <trans-unit resname="widget.form.WidgetListingItemType.addItem.label" id="591331b82bbdd">
         <source>widget.form.WidgetListingItemType.addItem.label</source>
         <target>Añadir un nuevo elemento</target>
       </trans-unit>
-      <trans-unit resname="widget_listingitem.form.title.label">
+      <trans-unit resname="widget_listingitem.form.title.label" id="591331b82bbfe">
         <source>widget_listingitem.form.title.label </source>
         <target>Título</target>
       </trans-unit>
-      <trans-unit resname="widget_listingitem.info.slot">
+      <trans-unit resname="widget_listingitem.info.slot" id="591331b82bc18">
         <source>widget_listingitem.info.slot</source>
         <target>
           <![CDATA[
