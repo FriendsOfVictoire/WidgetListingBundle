@@ -22,8 +22,14 @@ class WidgetListingItemType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $namespace = $options['namespace'];
         $businessEntityId = $options['businessEntityId'];
 
+        if ($businessEntityId !== null) {
+            if ($namespace === null) {
+                throw new \Exception('The namespace is mandatory if the business_entity_id is given.');
+            }
+        }
 
         //choose form businessEntityId
         if ($businessEntityId === null) {
@@ -41,6 +47,7 @@ class WidgetListingItemType extends AbstractType
             $builder
                 ->add('entity_proxy', EntityProxyFormType::class, [
                     'business_entity_id' => $businessEntityId,
+                    'namespace'          => $namespace,
                     'widget'             => $options['widget'],
                     'mapped'             => false
                 ]);
@@ -87,6 +94,7 @@ class WidgetListingItemType extends AbstractType
             'widget',
             'filters',
             'slot',
+            'namespace',
             'businessEntityId',
             'mode',
         ]);
