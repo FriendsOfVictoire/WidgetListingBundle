@@ -23,7 +23,7 @@
     "require": {
         "php": ">=5.5.9",
         "symfony/framework-bundle": "~2.8|~3.0",
-        "victoire/victoire": ">=2.2.10|~3.0",
+        "victoire/victoire": "~3.0",
         "pagerfanta/pagerfanta": "^1.0@dev"
     },
     "autoload": {
