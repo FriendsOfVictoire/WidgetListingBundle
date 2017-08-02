@@ -1,31 +1,34 @@
-Victoire DCMS Listing Bundle
-============
+# Victoire DCMS Listing Bundle
 
-##What is the purpose of this bundle
+## What is the purpose of this bundle
 
 This bundles gives you access to the *List Widget*.
 
-##Set Up Victoire
+## Set Up Victoire
 
 If you haven't already, you can follow the steps to set up Victoire *[here](https://github.com/Victoire/victoire/blob/master/setup.md)*
 
-##Install the bundle
+## Install the bundle
 
     php composer.phar require friendsofvictoire/listing-widget
 
-###Reminder
+### Reminder
 
 Do not forget to add the bundle in your AppKernel !
 
-    class AppKernel extends Kernel
+```php
+<?php
+//...
+class AppKernel extends Kernel
+{
+    public function registerBundles()
     {
-        public function registerBundles()
-        {
-            $bundles = array(
-                ...
-                new Victoire\Widget\ListingBundle\VictoireWidgetListingBundle(),
-            );
+        $bundles = array(
+            ...
+            new Victoire\Widget\ListingBundle\VictoireWidgetListingBundle(),
+        );
 
-            return $bundles;
-        }
+        return $bundles;
     }
+}
+```
