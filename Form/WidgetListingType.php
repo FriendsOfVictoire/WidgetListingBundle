@@ -9,6 +9,8 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Victoire\Bundle\CoreBundle\Form\AsynchronousType;
+use Victoire\Bundle\CoreBundle\Form\QuantumType;
 use Victoire\Bundle\CoreBundle\Form\WidgetType;
 use Victoire\Bundle\WidgetBundle\Entity\Widget;
 
@@ -84,6 +86,19 @@ class WidgetListingType extends WidgetType
         //add the mode to the form
         $builder->add('mode', HiddenType::class, [
             'data' => $options['mode'],
+        ]);
+        $builder->add('quantum', QuantumType::class, [
+            'label'    => 'victoire.widget.type.quantum.label',
+            'attr'     => [
+                'data-flag' => 'v-quantum-name',
+            ],
+        ]);
+        $builder->add('asynchronous', AsynchronousType::class, [
+            'label'    => 'victoire.widget.type.asynchronous.label',
+            'required' => false,
+            'attr'     => [
+                'class' => 'vic-col-xs-12',
+            ],
         ]);
 
         //add the slot to the form
