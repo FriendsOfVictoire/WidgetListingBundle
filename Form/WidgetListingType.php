@@ -36,7 +36,7 @@ class WidgetListingType extends WidgetType
                 'allow_delete'          => true,
                 'vic_widget_add_btn'    => null,
                 'by_reference'          => false,
-                'options'               => [
+                'entry_options'         => [
                     'vic_widget_remove_btn' => null,
                     'label'                 => false,
                     'businessEntityId'      => $options['businessEntityId'],
@@ -58,7 +58,7 @@ class WidgetListingType extends WidgetType
                         'allow_delete'       => true,
                         'by_reference'       => false,
                         'attr'               => ['id' => $options['businessEntityId']],
-                        'options'            => [
+                        'entry_options'      => [
                             'businessEntityId' => $options['businessEntityId'],
                             'mode'             => $options['mode'],
                             'widget'           => $options['widget'],
