@@ -22,17 +22,10 @@ class WidgetListingItemType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $namespace = $options['namespace'];
         $businessEntityId = $options['businessEntityId'];
 
-        if ($businessEntityId !== null) {
-            if ($namespace === null) {
-                throw new \Exception('The namespace is mandatory if the business_entity_id is given.');
-            }
-        }
-
         //choose form businessEntityId
-        if ($businessEntityId === null) {
+        if (null === $businessEntityId) {
             //if no entity is given, we generate the static form that contains only title and description
             $builder
                 ->add('title', TextType::class, [
@@ -42,12 +35,15 @@ class WidgetListingItemType extends AbstractType
             //add the remove button
             $this->addRemoveButton($builder);
         } else {
-
             //else, WidgetType class will embed a EntityProxyType for given entity
+            if (null === $options['namespace']) {
+                throw new \Exception('The namespace is mandatory if the business_entity_id is given.');
+            }
+
             $builder
                 ->add('entity_proxy', EntityProxyFormType::class, [
                     'business_entity_id' => $businessEntityId,
-                    'namespace'          => $namespace,
+                    'namespace'          => $options['namespace'],
                     'widget'             => $options['widget'],
                     'mapped'             => false
                 ]);
@@ -88,6 +84,8 @@ class WidgetListingItemType extends AbstractType
         $resolver->setDefaults([
             'data_class'         => 'Victoire\Widget\ListingBundle\Entity\WidgetListingItem',
             'translation_domain' => 'victoire',
+            'businessEntityId'   => null,
+            'namespace'          => null,
         ]);
 
         $resolver->setDefined([
