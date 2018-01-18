@@ -93,13 +93,6 @@ class WidgetListingType extends WidgetType
                 'data-flag' => 'v-quantum-name',
             ],
         ]);
-        $builder->add('asynchronous', AsynchronousType::class, [
-            'label'    => 'victoire.widget.type.asynchronous.label',
-            'required' => false,
-            'attr'     => [
-                'class' => 'vic-col-xs-12',
-            ],
-        ]);
 
         //add the slot to the form
         $builder->add('slot', HiddenType::class);
