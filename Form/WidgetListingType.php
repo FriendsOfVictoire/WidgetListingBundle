@@ -86,8 +86,8 @@ class WidgetListingType extends WidgetType
         $builder->add('mode', HiddenType::class, [
             'data' => $options['mode'],
         ]);
-        if (class_exists('Victoire\Bundle\CoreBundle\Form\QuantumType')) {
-            $builder->add('quantum', Victoire\Bundle\CoreBundle\Form\QuantumType::class, [
+        if (class_exists('\Victoire\Bundle\CoreBundle\Form\QuantumType')) {
+            $builder->add('quantum', \Victoire\Bundle\CoreBundle\Form\QuantumType::class, [
                 'label'    => 'victoire.widget.type.quantum.label',
                 'attr'     => [
                     'data-flag' => 'v-quantum-name',
