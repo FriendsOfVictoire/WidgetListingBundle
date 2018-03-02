@@ -30,7 +30,7 @@ class WidgetListingItemType extends AbstractType
             //if no entity is given, we generate the static form that contains only title and description
             $builder
                 ->add('title', TextType::class, [
-                    'label' => 'widget_listing.form.listing_item.title.label'
+                    'label' => 'widget_listingitem.form.title.label'
                 ]);
 
             //add the remove button
