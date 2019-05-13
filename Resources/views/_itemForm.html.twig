@@ -1,4 +1,16 @@
 {# It could be simpler here but this is done in order to give an example to implementations with more complicated forms #}
 <li>
-    {{ form_row(item) }}
+    <div class="vic-row">
+        {% if form.mode.vars.data == 'static' %}
+            <div class="vic-col-md-6">
+                {{ form_row(item.children.title) }}
+            </div>
+        {% endif %}
+        <div class="vic-col-md-5">
+            {{ form_row(item.children.position) }}
+        </div>
+        <div class="vic-col-md-1">
+          {{ form_rest(item) }}
+        </div>
+    </div>
 </li>

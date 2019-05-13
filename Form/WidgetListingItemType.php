@@ -52,8 +52,7 @@ class WidgetListingItemType extends AbstractType
             $this->addRemoveButton($builder);
         }
 
-        $builder->add('position', HiddenType::class, [
-                'data' => 0,
+        $builder->add('position', TextType::class, [
                 'attr' => [
                     'data-type' => 'position',
                 ],
