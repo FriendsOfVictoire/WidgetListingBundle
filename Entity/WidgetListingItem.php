@@ -28,7 +28,7 @@ class WidgetListingItem implements WidgetItemInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255, nullable=true)
+     * @ORM\Column(name="title", type="text", nullable=true)
      * @VIC\ReceiverProperty("textable")
      */
     protected $title;
